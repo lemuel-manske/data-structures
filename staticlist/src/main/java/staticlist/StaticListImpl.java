@@ -2,13 +2,14 @@ package staticlist;
 
 public class StaticListImpl implements StaticList {
 
-	private int DEFAULT_LIST_SIZE = 10;
+	private final int SIZE_TO_INCREASE = 10;
+	private final int DEFAULT_LIST_SIZE = 10;
 	
 	private int[] list = new int[DEFAULT_LIST_SIZE];
 	private int currentPosition = 0;
-	
+
 	public boolean isEmpty() {
-		return true;
+		return size() == 0;
 	}
 	
 	public int size() {
@@ -31,12 +32,35 @@ public class StaticListImpl implements StaticList {
 	}
 	
 	public void add(int element) {
+		if (currentPosition == list.length)
+			resizeList();
+
 		list[currentPosition++] = element;
 	}
-	
+
+	private void resizeList() {
+		int[] newList = new int[list.length + SIZE_TO_INCREASE];
+
+		for (int i = 0; i < list.length; i++) // we could use System.arrayCopy as well
+			newList[i] = list[i];
+
+		list = newList;
+	}
+
 	public void free() {
-		list = new int[DEFAULT_LIST_SIZE];
 		currentPosition = 0;
+		list = new int[DEFAULT_LIST_SIZE];
+	}
+
+	public void remove(int element) {
+		int index = find(element);
+
+		if (index == -1) return;
+
+		for (int i = index; i < size() - 1; i++)
+			list[i] = list[i + 1];
+
+		currentPosition--;
 	}
 
 	public String toString() {

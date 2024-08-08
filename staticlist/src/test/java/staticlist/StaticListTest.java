@@ -32,9 +32,9 @@ class StaticListTest {
 		assertEquals(ELEMENT_NOT_FOUND, staticList.find(0));
 		assertEquals(ELEMENT_NOT_FOUND, staticList.find(15));
 	}
-	
+
 	@Test
-	void whenGetElementThatNotExistsThrowsException() {
+	void whenGetElementThatNotExistsThrowException() {
 		assertThrows(IndexOutOfBoundsException.class,
 				() -> staticList.get(15));
 		assertThrows(IndexOutOfBoundsException.class,
@@ -46,14 +46,16 @@ class StaticListTest {
 	@Test
 	void mustAddElementsToTheList() {	
 		addMultipleElements(15, 42, 23);
-		
+
+		assertFalse(staticList.isEmpty());
+
 		assertEquals(15, staticList.get(0));
 		assertEquals(42, staticList.get(1));
 		assertEquals(23, staticList.get(2));
 	}
 	
 	@Test
-	void whenFreeThenResetListToItsOriginalState() {
+	void whenFreeThenResetListOriginalState() {
 		addMultipleElements(661, 422);
 		
 		staticList.free();
@@ -72,10 +74,37 @@ class StaticListTest {
 	}
 
 	@Test
-	void testSizeToBeAllListElements() {
+	void testListSize() {
 		addMultipleElements(15, 61, 22, 18);
 
 		assertEquals(4, staticList.size());
+	}
+
+	@Test
+	void testRemoveItemThatNotExist() {
+		addMultipleElements(22, 18);
+
+        staticList.remove(61);
+
+        assertEquals(2, staticList.size());
+	}
+
+	@Test
+	void testRemoveItem() {
+		addMultipleElements(61, 15, 22, 18);
+
+		staticList.remove(61);
+
+        assertEquals(3, staticList.size());
+		assertEquals(15, staticList.get(0)); // fifty is the new element at 0
+		assertEquals(ELEMENT_NOT_FOUND, staticList.find(61));
+	}
+
+	@Test
+	void testResizeWhenAddingMultipleElements() {
+		addMultipleElements(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13);
+
+		assertEquals(13, staticList.size());
 	}
 
 	private void addMultipleElements(int... elements) {
