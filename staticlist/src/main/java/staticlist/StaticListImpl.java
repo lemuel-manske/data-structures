@@ -5,18 +5,18 @@ public class StaticListImpl implements StaticList {
 	private int DEFAULT_LIST_SIZE = 10;
 	
 	private int[] list = new int[DEFAULT_LIST_SIZE];
-	private int current_position = 0;
+	private int currentPosition = 0;
 	
 	public boolean isEmpty() {
 		return true;
 	}
 	
 	public int size() {
-		return 0;
+		return currentPosition;
 	}
 	
 	public int find(int element) {
-		for (int i = 0; i < list.length; i++)
+		for (int i = 0; i < size(); i++)
 			if (list[i] == element)
 				return i;
 		
@@ -24,17 +24,29 @@ public class StaticListImpl implements StaticList {
 	}
 	
 	public int get(int index) {
-		if (index > list.length -1) 
+		if (size() == 0 || index > size())
 			throw new IndexOutOfBoundsException();
 		
 		return list[index];
 	}
 	
 	public void add(int element) {
-		list[current_position++] = element;
+		list[currentPosition++] = element;
 	}
 	
 	public void free() {
 		list = new int[DEFAULT_LIST_SIZE];
+		currentPosition = 0;
+	}
+
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+
+		for (int i = 0; i < currentPosition; i++) {
+			builder.append(list[i]);
+			if (i < currentPosition - 1) builder.append(" ");
+		}
+
+		return builder.toString();
 	}
 }

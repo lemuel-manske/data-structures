@@ -22,19 +22,25 @@ class StaticListTest {
 	}
 	
 	@Test
-	void whenCreatedShouldHaveDefaultSizeTen() {
+	void whenCreatedShouldHaveSizeZero() {
 		assertEquals(0, staticList.size());
 	}
 	
 	@Test
 	void whenCreatedShouldNotHaveElements() {
 		assertEquals(ELEMENT_NOT_FOUND, staticList.find(3));
+		assertEquals(ELEMENT_NOT_FOUND, staticList.find(0));
+		assertEquals(ELEMENT_NOT_FOUND, staticList.find(15));
 	}
 	
 	@Test
-	void whenGetNotExistantElementThrowsException() {
+	void whenGetElementThatNotExistsThrowsException() {
 		assertThrows(IndexOutOfBoundsException.class,
 				() -> staticList.get(15));
+		assertThrows(IndexOutOfBoundsException.class,
+				() -> staticList.get(3));
+		assertThrows(IndexOutOfBoundsException.class,
+				() -> staticList.get(0));
 	}
 	
 	@Test
@@ -54,6 +60,22 @@ class StaticListTest {
 
 		assertEquals(0, staticList.size());
 		assertTrue(staticList.isEmpty());
+	}
+
+	@Test
+	void testOutput() {
+	    addMultipleElements(15, 2, 162);
+
+		String asString = staticList.toString();
+
+		assertEquals("15 2 162", asString);
+	}
+
+	@Test
+	void testSizeToBeAllListElements() {
+		addMultipleElements(15, 61, 22, 18);
+
+		assertEquals(4, staticList.size());
 	}
 
 	private void addMultipleElements(int... elements) {
