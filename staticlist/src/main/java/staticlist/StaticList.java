@@ -42,4 +42,6 @@ public interface StaticList {
 	 * Removes an element from the list by matching its value.
 	 */
     void remove(int elementToRemove);
+
+    void reverseOrder();
 }

@@ -63,6 +63,17 @@ public class StaticListImpl implements StaticList {
 		currentPosition--;
 	}
 
+	public void reverseOrder() {
+		int midIndex = size() / 2 -1;
+
+		for (int i = midIndex; i >= 0; i--) {
+			int oppositeSideIndex = size() - i -1;
+			int temp = list[oppositeSideIndex];
+			list[oppositeSideIndex] = list[i];
+			list[i] = temp;
+		}
+	}
+
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 

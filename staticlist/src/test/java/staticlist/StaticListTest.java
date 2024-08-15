@@ -107,6 +107,29 @@ class StaticListTest {
 		assertEquals(13, staticList.size());
 	}
 
+	@Test
+	void testReverseOrderOdd() {
+	    addMultipleElements(12, 23, 51, 69, 40);
+
+		staticList.reverseOrder();
+
+		assertItems(40, 69, 51, 23, 12);
+	}
+
+	@Test
+	void testReverseOrderEven() {
+		addMultipleElements(12, 23, 51, 69, 40, 29);
+
+		staticList.reverseOrder();
+
+		assertItems(29, 40, 69, 51, 23, 12);
+	}
+
+	private void assertItems(int... expectedItems) {
+		for (int i = 0; i < expectedItems.length; i++)
+			assertEquals(expectedItems[i], staticList.get(i));
+	}
+
 	private void addMultipleElements(int... elements) {
 		for (int element : elements)
 			staticList.add(element);
