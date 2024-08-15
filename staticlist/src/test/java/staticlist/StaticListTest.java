@@ -9,11 +9,11 @@ class StaticListTest {
 	
 	private static final int ELEMENT_NOT_FOUND = -1;
 	
-	private StaticList staticList;
+	private StaticList<Integer> staticList;
 	
 	@BeforeEach
 	void createStaticList() {
-		staticList = new StaticListImpl();
+		staticList = new StaticListImpl<>();
 	}
 	
 	@Test

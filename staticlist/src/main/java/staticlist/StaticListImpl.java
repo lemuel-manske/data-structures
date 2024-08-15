@@ -1,11 +1,11 @@
 package staticlist;
 
-public class StaticListImpl implements StaticList {
+public class StaticListImpl<T> implements StaticList<T> {
 
 	private final int SIZE_TO_INCREASE = 10;
 	private final int DEFAULT_LIST_SIZE = 10;
 	
-	private int[] list = new int[DEFAULT_LIST_SIZE];
+	private Object[] list = new Object[DEFAULT_LIST_SIZE];
 	private int currentPosition = 0;
 
 	public boolean isEmpty() {
@@ -16,22 +16,23 @@ public class StaticListImpl implements StaticList {
 		return currentPosition;
 	}
 	
-	public int find(int element) {
+	public int find(T element) {
 		for (int i = 0; i < size(); i++)
 			if (list[i] == element)
 				return i;
 		
 		return -1;
 	}
-	
-	public int get(int index) {
+
+	@SuppressWarnings("unchecked")
+	public T get(int index) {
 		if (size() == 0 || index > size())
 			throw new IndexOutOfBoundsException();
 		
-		return list[index];
+		return (T) list[index];
 	}
-	
-	public void add(int element) {
+
+	public void add(T element) {
 		if (currentPosition == list.length)
 			resizeList();
 
@@ -39,7 +40,7 @@ public class StaticListImpl implements StaticList {
 	}
 
 	private void resizeList() {
-		int[] newList = new int[list.length + SIZE_TO_INCREASE];
+		Object[] newList = new Object[list.length + SIZE_TO_INCREASE];
 
 		for (int i = 0; i < list.length; i++) // we could use System.arrayCopy as well
 			newList[i] = list[i];
@@ -49,10 +50,10 @@ public class StaticListImpl implements StaticList {
 
 	public void free() {
 		currentPosition = 0;
-		list = new int[DEFAULT_LIST_SIZE];
+		list = new Object[DEFAULT_LIST_SIZE];
 	}
 
-	public void remove(int element) {
+	public void remove(T element) {
 		int index = find(element);
 
 		if (index == -1) return;
@@ -68,7 +69,7 @@ public class StaticListImpl implements StaticList {
 
 		for (int i = midIndex; i >= 0; i--) {
 			int oppositeSideIndex = size() - i -1;
-			int temp = list[oppositeSideIndex];
+			Object temp = list[oppositeSideIndex];
 			list[oppositeSideIndex] = list[i];
 			list[i] = temp;
 		}

@@ -15,15 +15,15 @@ package staticlist;
  *
  * @see StaticList
  */
-public class ListaEstaticaAdapter {
+public class ListaEstaticaGenericaAdapter<T> {
 
-    private final StaticList adapted;
+    private final StaticList<T> adapted;
 
-    public ListaEstaticaAdapter() {
-        this.adapted = new StaticListImpl();
+    public ListaEstaticaGenericaAdapter() {
+        this.adapted = new StaticListImpl<>();
     }
 
-    public void inserir(int elemento) {
+    public void inserir(T elemento) {
         adapted.add(elemento);
     }
 
@@ -31,11 +31,11 @@ public class ListaEstaticaAdapter {
         System.out.println(adapted.toString());
     }
 
-    public int buscar(int elemento) {
+    public int buscar(T elemento) {
         return adapted.find(elemento);
     }
 
-    public void retirar(int elemento) {
+    public void retirar(T elemento) {
         adapted.remove(elemento);
     }
 
@@ -43,7 +43,7 @@ public class ListaEstaticaAdapter {
         adapted.free();
     }
 
-    public int obterElemento(int indice) {
+    public T obterElemento(int indice) {
         return adapted.get(indice);
     }
 

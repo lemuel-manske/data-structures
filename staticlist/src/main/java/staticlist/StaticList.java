@@ -3,7 +3,7 @@ package staticlist;
 /**
  * Defines the contract for a static list.
  */
-public interface StaticList {
+public interface StaticList<T> {
 	
 	/**
 	 * Returns <code>true</code> if the list is empty, else <code>false</code>.
@@ -19,19 +19,19 @@ public interface StaticList {
 	 * Returns whether exists an element 
 	 * that matches <code>elementToFind</code> argument
 	 */
-	int find(int elementToFind);
+	int find(T elementToFind);
 	
 	/**
 	 * Returns an element if it is found
 	 * by the <code>elementIndex</code> argument, if not found
 	 * returns -1.
 	 */
-	int get(int elementIndex);
+	T get(int elementIndex);
 	
 	/**
 	 * Adds an element to the list.
 	 */
-	void add(int elementToAdd);
+	void add(T elementToAdd);
 	
 	/**
 	 * Reset the list to its original state of size 0 without any elements.
@@ -41,7 +41,7 @@ public interface StaticList {
 	/**
 	 * Removes an element from the list by matching its value.
 	 */
-    void remove(int elementToRemove);
+    void remove(T elementToRemove);
 
     void reverseOrder();
 }
