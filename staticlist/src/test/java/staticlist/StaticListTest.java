@@ -13,7 +13,7 @@ class StaticListTest {
 	
 	@BeforeEach
 	void createStaticList() {
-		staticList = new StaticListImpl<>();
+		staticList = new StaticList<>();
 	}
 	
 	@Test
