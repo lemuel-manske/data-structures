@@ -1,11 +1,13 @@
 package linkedlist;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 import java.util.Optional;
 
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.BeforeEach;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class LinkedListTest {
 	
@@ -13,7 +15,7 @@ class LinkedListTest {
 	
 	@BeforeEach
 	void createLinkedList() {
-		linkedList = new LinkedListImpl<>();
+		linkedList = new LinkedList<>();
 	}
 	
 	@Test
@@ -30,7 +32,7 @@ class LinkedListTest {
 	void whenCreatedShouldNotFindByIndex() {
 		linkedList.add(15);
 		
-		assertTrue(linkedList.find(3).isEmpty());
+		assertTrue(linkedList.findByIdx(3).isEmpty());
 	}
 	
 	@Test
@@ -58,10 +60,10 @@ class LinkedListTest {
 	void mustAddAnElementToTheList() {	
 		linkedList.add(15);
 
-		Optional<Node<Integer>> firstNode = linkedList.find(0);
+		Optional<LinkedList.Node<Integer>> firstNode = linkedList.findByIdx(0);
 		
 		assertTrue(firstNode.isPresent());
-		
+
 		assertEquals(15, firstNode.get().value());
 	}
 	
@@ -69,7 +71,7 @@ class LinkedListTest {
 	void mustAddMultipleElementsToTheList() {	
 		addMultipleElements(15, 42, 65, 32, 62, 24);
 
-		assertItems(15, 42, 65, 32, 62, 24);
+		assertItems(24, 62, 32, 65, 42, 15);
 	}
 	
 	@Test
@@ -83,11 +85,11 @@ class LinkedListTest {
 	void mustFindElementByItsValue() {
 		linkedList.add(15);
 
-		Optional<Node<Integer>> firstNode = 
+		Optional<LinkedList.Node<Integer>> firstNode =
 				linkedList.findByValue(15);
 		
 		assertTrue(firstNode.isPresent());
-		
+
 		assertEquals(15, firstNode.get().value());
 	}
 
@@ -101,18 +103,35 @@ class LinkedListTest {
 	}
 
 	@Test
-	void testRemoveItem() {
+	void testRemoveItemReducesSize() {
 		addMultipleElements(61, 15, 22, 18);
 
 		linkedList.remove(22);
 
         assertEquals(3, linkedList.size());
-		assertTrue(linkedList.findByValue(22).isEmpty());
+	}
+
+	@Test
+	void testRemoveItemRemovesTheItem() {
+		addMultipleElements(61, 15, 22, 18);
+
+		linkedList.remove(22);
+
+		assertItems(18, 15, 61);
+	}
+
+	@Test
+	void testRemoveFirstNode() {
+		addMultipleElements(61, 15, 22, 18);
+
+		linkedList.remove(61);
+
+		assertItems(18, 22, 15);
 	}
 	
 	private void assertItems(int... expectedItems) {
 		for (int i = 0; i < expectedItems.length; i++) {
-			Optional<Node<Integer>> aNode = linkedList.find(i);
+			Optional<LinkedList.Node<Integer>> aNode = linkedList.findByIdx(i);
 			assertTrue(aNode.isPresent());
 			assertEquals(expectedItems[i], aNode.get().value());
 		}
