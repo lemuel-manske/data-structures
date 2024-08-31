@@ -34,7 +34,7 @@ public class LinkedList<T> {
 	}
 
 	/**
-	 * Returns the node at the given index.
+	 * Returns the node at the given index, or else {@link Optional#empty()}
 	 */
 	public Optional<Node<T>> findByIdx(int index) {
 		if (isEmpty()) return Optional.empty();
@@ -54,7 +54,7 @@ public class LinkedList<T> {
 	}
 
 	/**
-	 * Returns the node with the given value.
+	 * Returns the node with the given value, or else {@link Optional#empty()}
 	 */
 	public Optional<Node<T>> findByValue(T value) {
 		if (isEmpty()) return Optional.empty();
