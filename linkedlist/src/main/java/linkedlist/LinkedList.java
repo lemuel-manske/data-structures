@@ -2,8 +2,8 @@ package linkedlist;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
-import java.util.Objects;
 import java.util.Optional;
+import java.util.function.Predicate;
 
 public class LinkedList<T> {
 
@@ -37,38 +37,14 @@ public class LinkedList<T> {
 	 * Returns the node at the given index, or else {@link Optional#empty()}
 	 */
 	public Optional<Node<T>> findByIdx(int index) {
-		if (isEmpty()) return Optional.empty();
-
-		if (index == 0) return firstNode();
-
-		Iterator<Node<T>> it = firstNode.iterator();
-
-		while (it.hasNext()) {
-			Node<T> node = it.next();
-
-			if (index-- == 0)
-				return Optional.of(node);
-		}
-
-		return Optional.empty();
+		return findNode(byIndex(index));
 	}
 
 	/**
 	 * Returns the node with the given value, or else {@link Optional#empty()}
 	 */
 	public Optional<Node<T>> findByValue(T value) {
-		if (isEmpty()) return Optional.empty();
-				
-		Iterator<Node<T>> it = firstNode.iterator();
-
-		while (it.hasNext()) {
-			Node<T> node = it.next();
-
-			if (node.value.equals(value))
-				return Optional.of(node);
-		}
-
-		return Optional.empty();
+		return findNode(node -> node.value().equals(value));
 	}
 
 	/**
@@ -87,20 +63,43 @@ public class LinkedList<T> {
 	public void remove(T value) {
 		if (isEmpty()) return;
 
-		Node<T> prev = firstNode;
+		Node<T> previousNode = firstNode;
+		Iterator<Node<T>> it = firstNode.iterator();
+
+		while (it.hasNext()) {
+			Node<T> thatNode = it.next();
+
+			if (thatNode.value.equals(value)) {
+                previousNode.nextNode = thatNode.nextNode;
+				size--;
+				return;
+			}
+
+			previousNode = thatNode;
+		}
+	}
+
+	private Predicate<Node<T>> byIndex(int index) {
+		return new Predicate<>() {
+			private int currentIndex = index;
+
+			@Override
+			public boolean test(Node<T> node) {
+				return currentIndex-- == 0;
+			}
+		};
+	}
+
+	private Optional<Node<T>> findNode(Predicate<Node<T>> predicate) {
 		Iterator<Node<T>> it = firstNode.iterator();
 
 		while (it.hasNext()) {
 			Node<T> node = it.next();
 
-			if (node.value.equals(value)) {
-                prev.nextNode = node.nextNode;
-				size--;
-				return;
-			}
-
-			prev = node;
+			if (predicate.test(node)) return Optional.of(node);
 		}
+
+		return Optional.empty();
 	}
 
 	public static class Node<T> {
@@ -117,33 +116,27 @@ public class LinkedList<T> {
 		}
 
 		public Iterator<Node<T>> iterator() {
-			return new NodeIterator();
+			return createNodeIterator();
 		}
 
-		@Override
-		public boolean equals(Object o) {
-			if (this == o) return true;
-			if (o == null || getClass() != o.getClass()) return false;
-			Node<?> node = (Node<?>) o;
-			return Objects.equals(value, node.value);
-		}
+		private Iterator<Node<T>> createNodeIterator() {
+			return new Iterator<>() {
 
-		private class NodeIterator implements Iterator<Node<T>> {
+				private Node<T> current = Node.this;
 
-			private Node<T> current = Node.this;
+				@Override
+				public boolean hasNext() {
+					return current != null;
+				}
 
-			@Override
-			public boolean hasNext() {
-				return current != null;
-			}
-
-			@Override
-			public Node<T> next() {
-				if (!hasNext()) throw new NoSuchElementException();
-				Node<T> next = current;
-				current = current.nextNode;
-				return next;
-			}
+				@Override
+				public Node<T> next() {
+					if (!hasNext()) throw new NoSuchElementException();
+					Node<T> next = current;
+					current = current.nextNode;
+					return next;
+				}
+			};
 		}
 	}
 }
