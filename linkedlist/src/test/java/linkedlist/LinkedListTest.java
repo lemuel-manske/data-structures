@@ -128,7 +128,15 @@ class LinkedListTest {
 
 		assertItems(18, 22, 15);
 	}
-	
+
+	@Test
+	void testRemoveLast() {
+		addMultipleElements(61, 15, 22);
+
+		linkedList.remove(22);
+
+		assertItems(15, 61);
+	}
 	private void assertItems(int... expectedItems) {
 		for (int i = 0; i < expectedItems.length; i++) {
 			Optional<LinkedList.Node<Integer>> aNode = linkedList.findByIdx(i);

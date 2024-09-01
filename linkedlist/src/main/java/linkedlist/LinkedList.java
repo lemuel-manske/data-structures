@@ -51,10 +51,18 @@ public class LinkedList<T> {
 	 * Adds a new element to the list.
 	 */
 	public void add(T e) {
-		Node<T> newNode = new Node<>(e);
-		newNode.nextNode = firstNode;
-		firstNode = newNode;
 		size++;
+
+		Node<T> newNode = new Node<>(e);
+
+		if (isEmpty()) {
+			firstNode = newNode;
+			return;
+		}
+
+		newNode.nextNode = firstNode;
+		firstNode.previousNode = newNode;
+		firstNode = newNode;
 	}
 
 	/**
@@ -63,20 +71,22 @@ public class LinkedList<T> {
 	public void remove(T value) {
 		if (isEmpty()) return;
 
-		Node<T> previousNode = firstNode;
-		Iterator<Node<T>> it = firstNode.iterator();
+		Optional<Node<T>> maybeNode = findByValue(value);
 
-		while (it.hasNext()) {
-			Node<T> thatNode = it.next();
+		if (maybeNode.isEmpty())
+			return;
 
-			if (thatNode.value.equals(value)) {
-                previousNode.nextNode = thatNode.nextNode;
-				size--;
-				return;
-			}
+		Node<T> nodeToRemove = maybeNode.get();
 
-			previousNode = thatNode;
-		}
+		if (nodeToRemove.equals(firstNode))
+			firstNode = nodeToRemove.nextNode;
+		else
+			nodeToRemove.previousNode.nextNode = nodeToRemove.nextNode;
+
+		if (nodeToRemove.nextNode != null)
+			nodeToRemove.previousNode = nodeToRemove.nextNode;
+
+		size--;
 	}
 
 	private Predicate<Node<T>> byIndex(int index) {
@@ -104,6 +114,7 @@ public class LinkedList<T> {
 
 	public static class Node<T> {
 
+		private Node<T> previousNode;
 		private final T value;
 		private Node<T> nextNode;
 
