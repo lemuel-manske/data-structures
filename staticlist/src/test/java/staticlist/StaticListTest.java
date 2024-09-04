@@ -124,7 +124,38 @@ class StaticListTest {
 
 		assertItems(29, 40, 69, 51, 23, 12);
 	}
+	
+	@Test
+	void testRemoveInBetween() {
+		addMultipleElements(10, 20, 30, 40, 50, 60);
+		
+		staticList.removeInRange(2, 4);
+		
+		assertItems(10, 20, 60);
+		assertEquals(staticList.size(), 3);
+	}
 
+	@Test
+	void testRemoveAtStart() {
+		addMultipleElements(10, 20, 30, 40, 50, 60);
+		
+		staticList.removeInRange(0, 2);
+		
+		assertItems(40, 50, 60);
+		assertEquals(staticList.size(), 3);
+	}
+	
+	@Test
+	void testRemoveAtEnd() {
+		addMultipleElements(10, 20, 30, 40, 50, 60);
+		
+		staticList.removeInRange(2, 5);
+		
+		assertItems(10, 20);
+		assertEquals(staticList.size(), 2);
+	}
+
+	
 	private void assertItems(int... expectedItems) {
 		for (int i = 0; i < expectedItems.length; i++)
 			assertEquals(expectedItems[i], staticList.get(i));

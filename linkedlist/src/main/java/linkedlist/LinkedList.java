@@ -5,6 +5,7 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.function.Predicate;
 
+
 public class LinkedList<T> {
 
 	private int size;
@@ -87,6 +88,72 @@ public class LinkedList<T> {
 			nodeToRemove.previousNode = nodeToRemove.nextNode;
 
 		size--;
+	}
+	
+	/**
+	 * Returns the string version of an array of the reversed items.
+	 */
+	public String reverseOrder() {
+		Object[] reversed = allElements();
+		
+		StringBuilder builder = new StringBuilder();
+		
+		for (int i = size() - 1; i >= 0; i--) {
+			builder.append(reversed[i]);
+			
+			if (i != 0) builder.append(", ");
+		}
+		
+		return builder.toString();
+	}
+	
+	@Override
+	public String toString() {
+		Object[] elements = allElements();
+		
+		StringBuilder builder = new StringBuilder();
+		
+		for (int i = 0; i <= size() -1; i++) {
+			builder.append(elements[i]);
+			
+			if (i < size() - 1) builder.append(", ");
+		}
+		
+		return builder.toString();
+	}
+	
+	public LinkedList<T> subList(int startIndex, int endIndex) {
+		boolean invalidIndex = startIndex > endIndex 
+				            || endIndex > size()
+				            || startIndex < 0
+				            || endIndex < 0;
+		
+		if (invalidIndex) throw new IndexOutOfBoundsException();
+		
+		LinkedList<T> newList = new LinkedList<>();
+		
+		for (int i = endIndex; i >= startIndex; i--) {
+			newList.add(findByIdx(i).get().value());
+		}
+		
+		return newList;
+	}
+
+	@SuppressWarnings("unchecked")
+	private Object[] allElements() {
+		Object[] elements = new Object[size];
+
+		int reversedLength = 0;
+		
+		Iterator<Node<T>> it = firstNode.iterator();
+
+		while (it.hasNext()) {
+			Node<T> node = it.next();
+
+			elements[reversedLength++] = node.value;
+		}
+		
+		return elements;
 	}
 
 	private Predicate<Node<T>> byIndex(int index) {

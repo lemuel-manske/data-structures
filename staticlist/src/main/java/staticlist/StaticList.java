@@ -93,6 +93,17 @@ public class StaticList<T> {
 			list[i] = temp;
 		}
 	}
+	
+	
+	public void removeInRange(int startIndex, int endIndex) {
+		int nextToRemove = endIndex + 1;
+		for (int i = startIndex; i <= endIndex; i++) {
+			if (nextToRemove <= list.length) list[i] = list[nextToRemove];
+			else list[i] = null;
+			size--;
+			nextToRemove++;
+		}
+	}
 
 	public String toString() {
 		StringBuilder builder = new StringBuilder();

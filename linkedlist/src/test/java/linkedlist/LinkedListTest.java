@@ -8,6 +8,7 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class LinkedListTest {
 	
@@ -137,6 +138,70 @@ class LinkedListTest {
 
 		assertItems(15, 61);
 	}
+	
+	@Test
+	void testReverseOrder() {
+		addMultipleElements(15, 42, 65, 32, 62, 24);
+		
+		String reversed = linkedList.reverseOrder();
+
+		assertEquals("15, 42, 65, 32, 62, 24", reversed);	
+	}
+	
+	@Test
+	void testString() {
+		addMultipleElements(15, 42, 65, 32, 62, 24);
+		
+		String toString = linkedList.toString();
+
+		assertEquals("24, 62, 32, 65, 42, 15", toString);	
+	}
+	
+	@Test
+	void testSubList() {
+		addMultipleElements(70, 60, 50, 40, 30, 20, 10);
+		
+		LinkedList<Integer> newList = linkedList.subList(2, 5);
+
+		assertEquals("30, 40, 50, 60", newList.toString());	
+	}
+	
+	@Test
+	void testSubListAtEnd() {
+		addMultipleElements(70, 60, 50, 40, 30, 20, 10);
+		
+		LinkedList<Integer> newList = linkedList.subList(4, 6);
+
+		assertEquals("50, 60, 70", newList.toString());	
+	}
+
+	
+	@Test
+	void testSubListAtStart() {
+		addMultipleElements(70, 60, 50, 40, 30, 20, 10);
+		
+		LinkedList<Integer> newList = linkedList.subList(0, 2);
+
+		assertEquals("10, 20, 30", newList.toString());	
+	}
+	
+	@Test
+	void testInvalidSubList() {
+		addMultipleElements(70, 60, 50, 40, 30, 20, 10);
+
+		assertThrows(IndexOutOfBoundsException.class, 
+				() -> linkedList.subList(5, 1));
+		
+		assertThrows(IndexOutOfBoundsException.class, 
+				() -> linkedList.subList(10, 12));
+		
+		assertThrows(IndexOutOfBoundsException.class, 
+				() -> linkedList.subList(-1, 2));
+
+		assertThrows(IndexOutOfBoundsException.class, 
+				() -> linkedList.subList(2, -1));
+	}
+	
 	private void assertItems(int... expectedItems) {
 		for (int i = 0; i < expectedItems.length; i++) {
 			Optional<LinkedList.Node<Integer>> aNode = linkedList.findByIdx(i);
