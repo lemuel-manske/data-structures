@@ -127,17 +127,21 @@ public class LinkedList<T> {
 	 * Returns a new list of the items in range.
 	 */
 	public LinkedList<T> subList(int startIndex, int endIndex) {
-		boolean invalidIndex = startIndex > endIndex 
-				            || endIndex > size()
-				            || startIndex < 0
-				            || endIndex < 0;
+		boolean invalidIndexes = startIndex > endIndex || startIndex < 0 || endIndex < 0;
 		
-		if (invalidIndex) throw new IndexOutOfBoundsException();
+		if (invalidIndexes) throw new IndexOutOfBoundsException();
+		
+		Optional<Node<T>> maybeNode = findByIdx(endIndex);
+		
+		if (maybeNode.isEmpty()) throw new IndexOutOfBoundsException();
 		
 		LinkedList<T> newList = new LinkedList<>();
 		
-		for (int i = endIndex; i >= startIndex; i--) {
-			newList.add(findByIdx(i).get().value());
+		Node<T> node = maybeNode.get();
+		
+		for (int i = startIndex;  i <= endIndex; i++) {
+			newList.add(node.value());
+			node = node.previousNode;
 		}
 		
 		return newList;
