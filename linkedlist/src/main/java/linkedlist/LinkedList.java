@@ -147,7 +147,6 @@ public class LinkedList<T> {
 		return newList;
 	}
 
-	@SuppressWarnings("unchecked")
 	private Object[] allElements() {
 		Object[] elements = new Object[size];
 
