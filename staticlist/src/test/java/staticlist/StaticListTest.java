@@ -154,7 +154,15 @@ class StaticListTest {
 		assertItems(10, 20);
 		assertEquals(staticList.size(), 2);
 	}
-
+	
+	@Test
+	void testRemoveAllElements() {
+		addMultipleElements(10, 20, 30, 40, 50, 60);
+	
+		staticList.removeInRange(0, 5);
+		
+		assertEquals(staticList.size(), 0);
+	}
 	
 	private void assertItems(int... expectedItems) {
 		for (int i = 0; i < expectedItems.length; i++)

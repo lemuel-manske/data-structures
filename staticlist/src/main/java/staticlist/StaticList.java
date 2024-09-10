@@ -102,12 +102,18 @@ public class StaticList<T> {
 	 * 
 	 * <p>For a list of: 10, 20, 30, 40, 50, 60
 	 * When removed in range of 2 to 5 will remain 10, 20.
+	 * 
+	 * O(n)
 	 */
 	public void removeInRange(int startIndex, int endIndex) {
 		int nextToRemove = endIndex + 1;
 		for (int i = startIndex; i <= endIndex; i++) {
-			if (nextToRemove <= list.length) list[i] = list[nextToRemove];
-			list[nextToRemove] = null;
+			if (nextToRemove < list.length) {
+				list[i] = list[nextToRemove];
+				list[nextToRemove] = null;
+			} else {
+				list[i] = null;
+			}
 			size--;
 			nextToRemove++;
 		}
