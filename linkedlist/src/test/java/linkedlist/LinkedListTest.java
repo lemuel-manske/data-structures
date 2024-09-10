@@ -140,13 +140,14 @@ class LinkedListTest {
 	}
 	
 	@Test
-	void testReverseOrder() {
+	void testReverseOrderAsList() {
 		addMultipleElements(15, 42, 65, 32, 62, 24);
 		
-		String reversed = linkedList.reverseOrder();
+		LinkedList<Integer> reversed = linkedList.reverseOrder();
 
-		assertEquals("15, 42, 65, 32, 62, 24", reversed);	
+		assertItems(reversed, 15, 42, 65, 32, 62, 24);	
 	}
+	
 	
 	@Test
 	void testString() {
@@ -163,7 +164,7 @@ class LinkedListTest {
 		
 		LinkedList<Integer> newList = linkedList.subList(2, 5);
 
-		assertEquals("30, 40, 50, 60", newList.toString());	
+		assertItems(newList, 30, 40, 50, 60);	
 	}
 	
 	@Test
@@ -172,7 +173,7 @@ class LinkedListTest {
 		
 		LinkedList<Integer> newList = linkedList.subList(4, 6);
 
-		assertEquals("50, 60, 70", newList.toString());	
+		assertItems(newList, 50, 60, 70);	
 	}
 
 	
@@ -182,7 +183,7 @@ class LinkedListTest {
 		
 		LinkedList<Integer> newList = linkedList.subList(0, 2);
 
-		assertEquals("10, 20, 30", newList.toString());	
+		assertItems(newList, 10, 20, 30);
 	}
 	
 	@Test
@@ -205,6 +206,14 @@ class LinkedListTest {
 	private void assertItems(int... expectedItems) {
 		for (int i = 0; i < expectedItems.length; i++) {
 			Optional<LinkedList.Node<Integer>> aNode = linkedList.findByIdx(i);
+			assertTrue(aNode.isPresent());
+			assertEquals(expectedItems[i], aNode.get().value());
+		}
+	}
+	
+	private void assertItems(LinkedList<Integer> list, int... expectedItems) {
+		for (int i = 0; i < expectedItems.length; i++) {
+			Optional<LinkedList.Node<Integer>> aNode = list.findByIdx(i);
 			assertTrue(aNode.isPresent());
 			assertEquals(expectedItems[i], aNode.get().value());
 		}

@@ -91,21 +91,22 @@ public class LinkedList<T> {
 	}
 	
 	/**
-	 * Returns the string version of an array of the reversed items.
+	 * Returns a new list of the reversed items in this.
 	 */
-	public String reverseOrder() {
-		Object[] reversed = allElements();
+	public LinkedList<T> reverseOrder() {
+		Iterator<Node<T>> it = firstNode.iterator();
 		
-		StringBuilder builder = new StringBuilder();
+		LinkedList<T> newList = new LinkedList<>();
 		
-		for (int i = size() - 1; i >= 0; i--) {
-			builder.append(reversed[i]);
-			
-			if (i != 0) builder.append(", ");
+		while (it.hasNext()) {
+			Node<T> node = it.next();
+
+			newList.add(node.value());
 		}
 		
-		return builder.toString();
+		return newList;
 	}
+	
 	
 	@Override
 	public String toString() {
@@ -122,6 +123,9 @@ public class LinkedList<T> {
 		return builder.toString();
 	}
 	
+	/**
+	 * Returns a new list of the items in range.
+	 */
 	public LinkedList<T> subList(int startIndex, int endIndex) {
 		boolean invalidIndex = startIndex > endIndex 
 				            || endIndex > size()
