@@ -94,12 +94,20 @@ public class StaticList<T> {
 		}
 	}
 	
-	
+	/**
+	 * Given a valid range, will remove the items in this range
+	 * and keep the remaining items in the freed positions.
+	 * 
+	 * <p>Example:
+	 * 
+	 * <p>For a list of: 10, 20, 30, 40, 50, 60
+	 * When removed in range of 2 to 5 will remain 10, 20.
+	 */
 	public void removeInRange(int startIndex, int endIndex) {
 		int nextToRemove = endIndex + 1;
 		for (int i = startIndex; i <= endIndex; i++) {
 			if (nextToRemove <= list.length) list[i] = list[nextToRemove];
-			else list[i] = null;
+			list[nextToRemove] = null;
 			size--;
 			nextToRemove++;
 		}
