@@ -2,6 +2,8 @@
 
 That repository intends to keep the exercises implementations.
 
+# Lists
+
 ## Static list
 
 The first version tagged as [static-list](https://github.com/lemuel-manske/data-structures/tree/static-list) allows creating 
@@ -16,8 +18,14 @@ The first version tagged as [linked-list](https://github.com/lemuel-manske/data-
 
 The version tagged as [linked-list-refactored](https://github.com/lemuel-manske/data-structures/tree/linked-list-refactored) was refactored in order to implement the `remove()` method differently, as the nodes keeps both reference to the previous and to the next node as well.
 
-## First test
+## [First test](https://github.com/lemuel-manske/data-structures/tree/first-test)
 
 Added `subList(startIdx, endIdx)` to `LinkedList` implementation, so it return a reversed sub list of the input range.
 
 Added `removeInRange(startIdx, endIdx)` to `StaticList` implementation, so it remove all the elements in range and set them free.
+
+# Stack
+
+FIFO data structure which allows the client to either add an element to the top and pops the element at the top.
+
+The implementations are `VectorStack` - depends upon a vector and has capacity limits - and `ListStack` - which has no capacity limit and depend upon a linked list implementation.
