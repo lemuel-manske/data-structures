@@ -8,13 +8,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class VectorStackTest {
+
+public class ListStackTest {
 	
 	private Stack<Integer> stack;
 	
 	@BeforeEach
 	void setup() {
-		stack = new VectorStack<>(10);
+		stack = new ListStack<>();
 	}
 	
 	@Test
@@ -83,14 +84,6 @@ public class VectorStackTest {
 		Integer peeked = stack.peek();
 		
 		assertEquals(1, peeked);
-	}
-	
-	
-	@Test
-	void testPushToOutOfBounds() {
-		pushMultiple(1, 9);
-		
-		assertThrows(Stack.MaximumCapacity.class, () -> stack.push(1));
 	}
 	
 	@Test
