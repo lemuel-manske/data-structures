@@ -203,6 +203,28 @@ class LinkedListTest {
 				() -> linkedList.subList(2, -1));
 	}
 	
+	@Test
+	void testWhenFreeHasNoItems() {
+		linkedList.add(13);
+		linkedList.add(22);
+		linkedList.add(30);
+		
+		linkedList.free();
+		
+		assertTrue(linkedList.isEmpty());
+	}
+
+	@Test
+	void testWhenFreeHasSizeZero() {
+		linkedList.add(13);
+		linkedList.add(22);
+		linkedList.add(30);
+		
+		linkedList.free();
+		
+		assertEquals(0, linkedList.size());
+	}
+	
 	private void assertItems(int... expectedItems) {
 		for (int i = 0; i < expectedItems.length; i++) {
 			Optional<LinkedList.Node<Integer>> aNode = linkedList.findByIdx(i);

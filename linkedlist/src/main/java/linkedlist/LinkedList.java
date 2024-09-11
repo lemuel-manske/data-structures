@@ -146,6 +146,20 @@ public class LinkedList<T> {
 		
 		return newList;
 	}
+	
+	public void free() {
+		Iterator<Node<T>> it = firstNode.iterator();
+
+		firstNode = null;
+		
+		while (it.hasNext()) {
+			Node<T> node = it.next();
+			
+			size--;
+
+			node.previousNode = null;
+		}
+	}
 
 	private Object[] allElements() {
 		Object[] elements = new Object[size];
