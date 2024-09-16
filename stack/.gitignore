@@ -1,9 +1,0 @@
-# bin
-/target/
-
-# intellij
-.idea
-staticlist.iml
-
-# eclipse
-.settings

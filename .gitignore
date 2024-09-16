@@ -1,4 +1,8 @@
+# bin
+/target/
+
 # intellij
 .idea
 
-/.metadata/
+# bin
+**/target
