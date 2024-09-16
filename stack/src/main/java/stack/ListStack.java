@@ -4,7 +4,7 @@ import linkedlist.LinkedList;
 
 public class ListStack<T> implements Stack<T> {
 
-	private LinkedList<T> list;
+	private final LinkedList<T> list;
 	
 	public ListStack() {
 		list = new LinkedList<T>();

@@ -127,7 +127,7 @@ public class LinkedList<T> {
 	 * Returns a new list of the items in range.
 	 */
 	public LinkedList<T> subList(int startIndex, int endIndex) {
-		boolean invalidIndexes = startIndex > endIndex || startIndex < 0 || endIndex < 0;
+		boolean invalidIndexes = startIndex > endIndex || startIndex < 0;
 		
 		if (invalidIndexes) throw new IndexOutOfBoundsException();
 		

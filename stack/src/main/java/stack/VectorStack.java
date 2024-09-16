@@ -2,7 +2,7 @@ package stack;
 
 public class VectorStack<T> implements Stack<T> {
 
-	private Object[] list;
+	private final Object[] list;
 	private int size;
 	
 	public VectorStack (int initialCapacity) {
@@ -46,7 +46,7 @@ public class VectorStack<T> implements Stack<T> {
 		StringBuilder sb = new StringBuilder();
 		
 		for (int i = 0; i < size; i++)
-			sb.append(pop() + ", ");
+			sb.append(pop()).append(", ");
 		
 		sb.append(pop());
 		
