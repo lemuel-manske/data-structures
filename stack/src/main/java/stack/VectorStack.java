@@ -2,18 +2,14 @@ package stack;
 
 public class VectorStack<T> implements Stack<T> {
 
-	private final Object[] list;
+	private final Object[] innerList; // innerList.length is the limit
 	private int size;
 	
 	public VectorStack (int initialCapacity) {
-		list  = new Object[initialCapacity];
+		innerList = new Object[initialCapacity];
 		size = 0;
 	}
-	
-	public int size() {
-		return size;
-	}
-	
+
 	public boolean isEmpty() {
 		return size == 0;
 	}
@@ -31,31 +27,42 @@ public class VectorStack<T> implements Stack<T> {
 		if (isEmpty()) 
 			throw new Stack.Empty();
 		
-		return (T) list[size-1];
+		return (T) innerList[size-1];
 	}
 	
 	public void push(T e) {
-		if (size == list.length)
+		if (size == innerList.length)
 			throw new Stack.MaximumCapacity();
 		
-		list[size++] = e;
-	}
-	
-	@Override
-	public String toString() {	
-		StringBuilder sb = new StringBuilder();
-		
-		for (int i = 0; i < size; i++)
-			sb.append(pop()).append(", ");
-		
-		sb.append(pop());
-		
-		return sb.toString();
+		innerList[size++] = e;
 	}
 
 	public void free() {
 		if (isEmpty()) return;
 		
 		for (int i = 0; i <= size; i++) pop();
+	}
+
+	@SuppressWarnings("unchecked")
+	public void concat(VectorStack<T> stackToConcat) {
+		if (size + stackToConcat.size > innerList.length)
+			throw new Stack.MaximumCapacity();
+
+		for (int i = 0; i < stackToConcat.size; i++)
+			push((T) stackToConcat.innerList[i]);
+	}
+
+	@Override
+	public String toString() {
+		if (isEmpty()) return "";
+
+		StringBuilder sb = new StringBuilder();
+
+		for (int i = size - 1; i  > 0; i--)
+			sb.append(innerList[i]).append(", ");
+
+		sb.append(innerList[0]);
+
+		return sb.toString();
 	}
 }

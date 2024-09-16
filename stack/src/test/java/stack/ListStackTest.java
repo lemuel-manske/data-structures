@@ -17,12 +17,7 @@ public class ListStackTest {
 	void setup() {
 		stack = new ListStack<>();
 	}
-	
-	@Test
-	void testWhenCreatedHasSizeZero() {
-		assertEquals(0, stack.size());
-	}
-	
+
 	@Test
 	void testWhenCreatedIsEmpty() {
 		assertTrue(stack.isEmpty());
@@ -32,14 +27,7 @@ public class ListStackTest {
 	void testPopWithNoItems() {
 		assertThrows(Stack.Empty.class, () -> stack.pop());
 	}
-	
-	@Test
-	void testPushIncreasesSize() {
-		stack.push(1);
-		
-		assertEquals(1, stack.size());
-	}
-	
+
 	@Test
 	void testPushThenIsNotEmpty() {
 		stack.push(1);
@@ -60,24 +48,6 @@ public class ListStackTest {
 	}
 
 	@Test
-	void testPushOneWhenPopOneThenSizeDecreases() {
-		stack.push(1);
-		
-		stack.pop();
-		
-		assertEquals(0, stack.size());
-	}
-	
-	@Test
-	void testPeekKeepsSize() {
-		stack.push(1);
-		
-		stack.peek();
-		
-		assertEquals(1, stack.size());
-	}
-	
-	@Test
 	void testPeek() {
 		stack.push(1);
 		
@@ -93,8 +63,7 @@ public class ListStackTest {
 		
 		stack.free();
 		
-		assertThrows(Stack.Empty.class, () -> stack.pop());
-		assertEquals(0, stack.size());
+		assertTrue(stack.isEmpty());
 	}
 	
 	@Test

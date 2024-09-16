@@ -31,7 +31,7 @@ public class ListStack<T> implements Stack<T> {
 	public T peek() {
 		Optional<LinkedList.Node<T>> maybeFirstNode = list.firstNode();
 
-		if (!maybeFirstNode.isPresent()) throw new Stack.Empty();
+		if (maybeFirstNode.isEmpty()) throw new Stack.Empty();
 
 		return maybeFirstNode.get().value();
 	}
@@ -39,14 +39,14 @@ public class ListStack<T> implements Stack<T> {
 	public void push(T e) {
 		list.add(e);
 	}
-	
-	@Override
-	public String toString() {	
-		return list.toString();
-	}
 
 	public void free() {
 		list.free();
+	}
+
+	@Override
+	public String toString() {
+		return list.toString();
 	}
 }
 

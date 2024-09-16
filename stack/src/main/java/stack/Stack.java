@@ -3,11 +3,6 @@ package stack;
 public interface Stack<T> {
 
 	/**
-	 * Returns the current stack size. 
-	 */
-	int size();
-	
-	/**
 	 * Pushes an element to the stack top.
 	 * 
 	 * <p>Throws {@link MaximumCapacity} when no more elements can be pushed.
