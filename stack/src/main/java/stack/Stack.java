@@ -1,5 +1,7 @@
 package stack;
 
+import java.io.Serial;
+
 public interface Stack<T> {
 
 	/**
@@ -37,10 +39,14 @@ public interface Stack<T> {
 	void concat(Stack<T> stackToConcat);
 	
 	class MaximumCapacity extends RuntimeException {
+
+		@Serial
 		private static final long serialVersionUID = 5875002575184536190L;
 	}
 	
 	class Empty extends RuntimeException {
+
+		@Serial
 		private static final long serialVersionUID = 1651844929494254362L;
 	}
 }

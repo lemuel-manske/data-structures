@@ -1,8 +1,5 @@
 package stack;
 
-import java.util.Collection;
-import java.util.Collections;
-
 public class VectorStack<T> implements Stack<T> {
 
 	private final Object[] innerList; // innerList.length is the limit

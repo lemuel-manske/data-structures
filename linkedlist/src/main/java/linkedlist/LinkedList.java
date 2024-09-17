@@ -106,23 +106,7 @@ public class LinkedList<T> {
 		
 		return newList;
 	}
-	
-	
-	@Override
-	public String toString() {
-		Object[] elements = allElements();
-		
-		StringBuilder builder = new StringBuilder();
-		
-		for (int i = 0; i <= size() -1; i++) {
-			builder.append(elements[i]);
-			
-			if (i < size() - 1) builder.append(", ");
-		}
-		
-		return builder.toString();
-	}
-	
+
 	/**
 	 * Returns a new list of the items in range.
 	 */
@@ -160,6 +144,23 @@ public class LinkedList<T> {
 			node.previousNode = null;
 		}
 	}
+
+
+	@Override
+	public String toString() {
+		Object[] elements = allElements();
+
+		StringBuilder builder = new StringBuilder();
+
+		for (int i = 0; i <= size() -1; i++) {
+			builder.append(elements[i]);
+
+			if (i < size() - 1) builder.append(", ");
+		}
+
+		return builder.toString();
+	}
+
 
 	private Object[] allElements() {
 		Object[] elements = new Object[size];
