@@ -6,21 +6,30 @@ That repository intends to keep the exercises implementations.
 
 ## Static list
 
-The first version tagged as [static-list](https://github.com/lemuel-manske/data-structures/tree/static-list) allows creating 
-static lists *only* for primitive integers and provides basic operations
+Vector manipulation based on basic operations.
 
-The second version tagged as [generic-static-list](https://github.com/lemuel-manske/data-structures/tree/generic-static-list) allows creating
-static list for *any* object and also provides the additional `reverseOrder()` operation.
+### 1st version
+Allows creating static lists *only* for primitive integers and provides basic operations
+
+### 2nd version
+Allows creating static list for *any* object and also provides the additional `reverseOrder()` operation.
 
 ## Linked list
 
-The first version tagged as [linked-list](https://github.com/lemuel-manske/data-structures/tree/linked-list) was implementing with simple nodes: they just stores a reference to the next node.
+List implementation through a link from node to node, in which each node keeps the element value.
 
-The version tagged as [linked-list-refactored](https://github.com/lemuel-manske/data-structures/tree/linked-list-refactored) was refactored in order to implement the `remove()` method differently, as the nodes keeps both reference to the previous and to the next node as well.
+### 1st version
 
-## [First test](https://github.com/lemuel-manske/data-structures/tree/first-test)
+Was implemented with simple nodes: they just stores a reference to the next node.
 
-Added `subList(startIdx, endIdx)` to `LinkedList` implementation, so it return a reversed sub list of the input range.
+### 2nd version
+
+Was refactored in order to implement the `remove()` method differently, 
+as the nodes keeps both reference to the previous and to the next node as well.
+
+## First test
+
+Added `subList(startIdx, endIdx)` to `LinkedList` implementation, so it returns a reversed sub list of the input range.
 
 Added `removeInRange(startIdx, endIdx)` to `StaticList` implementation, so it remove all the elements in range and set them free.
 
@@ -28,4 +37,10 @@ Added `removeInRange(startIdx, endIdx)` to `StaticList` implementation, so it re
 
 FIFO data structure which allows the client to either add an element to the top and pops the element at the top.
 
-The implementations are `VectorStack` - depends upon a vector and has capacity limits - and `ListStack` - which has no capacity limit and depend upon a linked list implementation.
+## Vector Stack
+
+Depends upon a vector and has capacity limits.
+
+## ListStack
+
+Has no capacity limitation and depend upon a `LinkedList` implementation.
