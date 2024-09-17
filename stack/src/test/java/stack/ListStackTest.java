@@ -74,9 +74,67 @@ public class ListStackTest {
 		
 		assertEquals("32, 52, 12", stack.toString());
 	}
-	
-	private void pushMultiple(Integer value, int times) {
-		for (int i = 0; i <= times; i++)
-			stack.push(value);
+
+	@Test
+	void testConcatPushesStackIntoStack() {
+		stack.push(1);
+		stack.push(2);
+		stack.push(3);
+
+		Stack<Integer> other = new VectorStack<>(2);
+		other.push(4);
+		other.push(5);
+
+		stack.concat(other);
+
+		assertItems(5, 4, 3, 2, 1);
+	}
+
+	@Test
+	void testConcatListStack() {
+		stack.push(1);
+		stack.push(2);
+		stack.push(3);
+
+		Stack<Integer> other = new ListStack<>();
+		other.push(4);
+		other.push(5);
+
+		stack.concat(other);
+
+		assertItems(5, 4, 3, 2, 1);
+	}
+
+
+	@Test
+	void concatEmptyStackKeepsTheSame() {
+		stack.push(1);
+		stack.push(2);
+		stack.push(3);
+
+		Stack<Integer> other = new VectorStack<>(2);
+
+		stack.concat(other);
+
+		assertItems(3, 2, 1);
+	}
+
+	@Test
+	void concatStackToMaximumCapacity() {
+		VectorStack<Integer> stack = new VectorStack<>(3);
+		stack.push(1);
+		stack.push(2);
+		stack.push(3);
+
+		VectorStack<Integer> other = new VectorStack<>(2);
+		other.push(4);
+		other.push(5);
+
+		assertThrows(Stack.MaximumCapacity.class, () -> stack.concat(other));
+	}
+
+	private void assertItems(int... expectedItems) {
+		for (int expectedItem : expectedItems)
+			assertEquals(expectedItem, stack.pop());
 	}
 }

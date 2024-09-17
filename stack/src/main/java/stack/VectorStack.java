@@ -1,5 +1,8 @@
 package stack;
 
+import java.util.Collection;
+import java.util.Collections;
+
 public class VectorStack<T> implements Stack<T> {
 
 	private final Object[] innerList; // innerList.length is the limit
@@ -43,13 +46,13 @@ public class VectorStack<T> implements Stack<T> {
 		for (int i = 0; i <= size; i++) pop();
 	}
 
-	@SuppressWarnings("unchecked")
-	public void concat(VectorStack<T> stackToConcat) {
-		if (size + stackToConcat.size > innerList.length)
-			throw new Stack.MaximumCapacity();
+	public void concat(Stack<T> stackToConcat) {
+		if (stackToConcat.isEmpty())
+			return;
 
-		for (int i = 0; i < stackToConcat.size; i++)
-			push((T) stackToConcat.innerList[i]);
+		T elementToPush = stackToConcat.pop();
+		concat(stackToConcat);
+		push(elementToPush);
 	}
 
 	@Override

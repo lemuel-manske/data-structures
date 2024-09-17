@@ -44,6 +44,15 @@ public class ListStack<T> implements Stack<T> {
 		list.free();
 	}
 
+	public void concat(Stack<T> stackToConcat) {
+		if (stackToConcat.isEmpty())
+			return;
+
+		T elementToPush = stackToConcat.pop();
+		concat(stackToConcat);
+		push(elementToPush);
+	}
+
 	@Override
 	public String toString() {
 		return list.toString();

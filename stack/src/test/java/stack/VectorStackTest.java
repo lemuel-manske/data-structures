@@ -89,26 +89,37 @@ public class VectorStackTest {
 	}
 
 	@Test
-	@Tag("only-for-vector-stacks")
 	void testConcatPushesStackIntoStack() {
-		VectorStack<Integer> stack = new VectorStack<>(10);
 		stack.push(1);
 		stack.push(2);
 		stack.push(3);
 
-		VectorStack<Integer> other = new VectorStack<>(2);
+		Stack<Integer> other = new VectorStack<>(2);
 		other.push(4);
 		other.push(5);
 
 		stack.concat(other);
 
-		assertItems(stack, 5, 4, 3, 2, 1);
+		assertItems(5, 4, 3, 2, 1);
 	}
 
 	@Test
-	@Tag("only-for-vector-stacks")
+	void testConcatListStack() {
+		stack.push(1);
+		stack.push(2);
+		stack.push(3);
+
+		Stack<Integer> other = new ListStack<>();
+		other.push(4);
+		other.push(5);
+
+		stack.concat(other);
+
+		assertItems(5, 4, 3, 2, 1);
+	}
+
+	@Test
 	void concatEmptyStackKeepsTheSame() {
-		VectorStack<Integer> stack = new VectorStack<>(10);
 		stack.push(1);
 		stack.push(2);
 		stack.push(3);
@@ -117,11 +128,10 @@ public class VectorStackTest {
 
 		stack.concat(other);
 
-		assertItems(stack, 3, 2, 1);
+		assertItems(3, 2, 1);
 	}
 
 	@Test
-	@Tag("only-for-vector-stacks")
 	void concatStackToMaximumCapacity() {
 		VectorStack<Integer> stack = new VectorStack<>(3);
 		stack.push(1);
@@ -136,10 +146,6 @@ public class VectorStackTest {
 	}
 
 	private void assertItems(int... expectedItems) {
-		assertItems(stack, expectedItems);
-	}
-
-	private void assertItems(Stack<Integer> stack, int... expectedItems) {
 		for (int expectedItem : expectedItems)
 			assertEquals(expectedItem, stack.pop());
 	}

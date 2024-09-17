@@ -30,6 +30,11 @@ public interface Stack<T> {
 	 * Sets free all the stack's elements. 
 	 */
 	void free();
+
+	/**
+	 * Concatenate another stack into that stack.
+	 */
+	void concat(Stack<T> stackToConcat);
 	
 	class MaximumCapacity extends RuntimeException {
 		private static final long serialVersionUID = 5875002575184536190L;
