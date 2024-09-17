@@ -1,6 +1,6 @@
 package stack;
 
-import linkedlist.LinkedList;
+import list.LinkedList;
 
 import java.util.Optional;
 

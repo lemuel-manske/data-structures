@@ -1,4 +1,4 @@
-package staticlist;
+package list;
 
 public class StaticList<T> {
 
