@@ -10,21 +10,21 @@ public class StaticList<T> {
 	private Object[] list = new Object[DEFAULT_LIST_SIZE];
 
 	/**
-	 * Returns the current list size.
+	 * Returns the current size of the list.
 	 */
 	public int size() {
 		return size;
 	}
 
 	/**
-	 * Returns <code>true</code> if the list is empty, else <code>false</code>.
+	 * Returns whether the list is empty.
 	 */
 	public boolean isEmpty() {
 		return size() == 0;
 	}
 
 	/**
-	 * Returns whether the given element exists.
+	 * Returns the index for the given element if it exists or else returns -1.
 	 */
 	public int find(T element) {
 		for (int i = 0; i < size(); i++)
@@ -35,9 +35,7 @@ public class StaticList<T> {
 	}
 
 	/**
-	 * Returns an element if it is found by its index.
-	 *
-	 * <p>When no element is found returns -1.
+	 * Returns an element if it is found by its index or else throws <code>IndexOutOfBoundsException</code>
 	 */
 	@SuppressWarnings("unchecked")
 	public T get(int index) {
@@ -58,7 +56,9 @@ public class StaticList<T> {
 	}
 
 	/**
-	 * Reset the list to its original state of size 0 without any elements.
+	 * Reset the list to its original state.
+	 *
+	 * <p><strong>Careful</strong>, it will remove all the elements of the list.
 	 */
 	public void free() {
 		size = 0;
@@ -80,8 +80,11 @@ public class StaticList<T> {
 	}
 
 	/**
-	 * Given the addition order of elements in the list,
+	 * Given the original order of elements in the list,
 	 * this will reorganize the list to the opposite order.
+	 *
+	 * <p>In example, given that the list is 3, 2 and 1, <code>reverseOrder</code>
+	 * will set reorganize the list to 1, 2 and 3.
 	 */
 	public void reverseOrder() {
 		int midIndex = size() / 2 -1;
@@ -97,13 +100,9 @@ public class StaticList<T> {
 	/**
 	 * Given a valid range, will remove the items in this range
 	 * and keep the remaining items in the freed positions.
-	 * 
-	 * <p>Example:
-	 * 
-	 * <p>For a list of: 10, 20, 30, 40, 50, 60
-	 * When removed in range of 2 to 5 will remain 10, 20.
-	 * 
-	 * O(n)
+	 *
+	 * <p>In example, for the given list: 10, 20, 30, 40, 50, 60
+	 * we call <code>removeInRange(2, 5)</code> just the elements 10 and 20 will remain.
 	 */
 	public void removeInRange(int startIndex, int endIndex) {
 		int nextToRemove = endIndex + 1;
@@ -119,6 +118,7 @@ public class StaticList<T> {
 		}
 	}
 
+	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 

@@ -11,16 +11,14 @@ public class LinkedList<T> {
 	private Node<T> firstNode;
 
 	/**
-	 * Gets the first node in the list.
-	 *
-	 * @return the first node or an {@link Optional#empty()} if the list is empty.
+	 * Gets either the first node or an {@link Optional#empty()} if the list is empty.
 	 */
 	public Optional<Node<T>> firstNode() {
 		return Optional.ofNullable(firstNode);
 	}
 
 	/**
-	 * Returns whether the list is empty or not.
+	 * Returns whether the list is empty.
 	 */
 	public boolean isEmpty() {
 		return firstNode().isEmpty();
@@ -34,14 +32,14 @@ public class LinkedList<T> {
 	}
 
 	/**
-	 * Returns the node at the given index, or else {@link Optional#empty()}
+	 * Returns the node at the given index or else {@link Optional#empty()}
 	 */
 	public Optional<Node<T>> findByIdx(int index) {
 		return findNode(byIndex(index));
 	}
 
 	/**
-	 * Returns the node with the given value, or else {@link Optional#empty()}
+	 * Returns the node with the given value or else {@link Optional#empty()}
 	 */
 	public Optional<Node<T>> findByValue(T value) {
 		return findNode(node -> node.value().equals(value));
@@ -90,7 +88,7 @@ public class LinkedList<T> {
 	}
 	
 	/**
-	 * Returns a new list of the reversed items in this.
+	 * Returns a new list of the reversed items in this list.
 	 */
 	public LinkedList<T> reverseOrder() {
 		Iterator<Node<T>> it = firstNode.iterator();
@@ -129,7 +127,12 @@ public class LinkedList<T> {
 		
 		return newList;
 	}
-	
+
+	/**
+	 * Reset the list to its original state.
+	 *
+	 * <p><strong>Careful</strong>, it will remove all the elements of the list.
+	 */
 	public void free() {
 		Iterator<Node<T>> it = firstNode.iterator();
 
@@ -147,7 +150,7 @@ public class LinkedList<T> {
 
 	@Override
 	public String toString() {
-		Object[] elements = allElements();
+		Object[] elements = getListValues();
 
 		StringBuilder builder = new StringBuilder();
 
@@ -161,7 +164,7 @@ public class LinkedList<T> {
 	}
 
 
-	private Object[] allElements() {
+	private Object[] getListValues() {
 		Object[] elements = new Object[size];
 
 		int reversedLength = 0;
@@ -215,10 +218,6 @@ public class LinkedList<T> {
 		}
 
 		public Iterator<Node<T>> iterator() {
-			return createNodeIterator();
-		}
-
-		private Iterator<Node<T>> createNodeIterator() {
 			return new Iterator<>() {
 
 				private Node<T> current = Node.this;

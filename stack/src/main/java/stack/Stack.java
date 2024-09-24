@@ -5,9 +5,7 @@ import java.io.Serial;
 public interface Stack<T> {
 
 	/**
-	 * Pushes an element to the stack top.
-	 * 
-	 * <p>Throws {@link MaximumCapacity} when no more elements can be pushed.
+	 * Pushes an element to top of the stack.
 	 */
 	void push(T e);
 	
@@ -37,12 +35,6 @@ public interface Stack<T> {
 	 * Concatenate another stack into that stack.
 	 */
 	void concat(Stack<T> stackToConcat);
-	
-	class MaximumCapacity extends RuntimeException {
-
-		@Serial
-		private static final long serialVersionUID = 5875002575184536190L;
-	}
 	
 	class Empty extends RuntimeException {
 

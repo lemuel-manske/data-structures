@@ -7,7 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-
 public abstract class StackTest {
 	
 	protected Stack<Integer> stack;
@@ -115,16 +114,16 @@ public abstract class StackTest {
 
 	@Test
 	void concatStackToMaximumCapacity() {
-		VectorStack<Integer> stack = new VectorStack<>(3);
-		stack.push(1);
-		stack.push(2);
-		stack.push(3);
+		VectorStack<Integer> vectorStack = new VectorStack<>(3);
+		vectorStack.push(1);
+		vectorStack.push(2);
+		vectorStack.push(3);
 
 		VectorStack<Integer> other = new VectorStack<>(2);
 		other.push(4);
 		other.push(5);
 
-		assertThrows(Stack.MaximumCapacity.class, () -> stack.concat(other));
+		assertThrows(MaximumCapacity.class, () -> vectorStack.concat(other));
 	}
 
 	private void assertItems(int... expectedItems) {

@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class VectorStackTest extends StackTest {
+class VectorStackTest extends StackTest {
 
 	@BeforeEach
 	void setup() {
@@ -14,12 +14,12 @@ public class VectorStackTest extends StackTest {
 	
 	@Test
 	void testPushToOutOfBounds() {
-		pushMultiple();
+		pushNineElementsToTheTop();
 		
-		assertThrows(Stack.MaximumCapacity.class, () -> stack.push(1));
+		assertThrows(MaximumCapacity.class, () -> stack.push(1));
 	}
 
-	private void pushMultiple() {
+	private void pushNineElementsToTheTop() {
 		int timesToPush = 9;
 
 		int valueToPush = 1;

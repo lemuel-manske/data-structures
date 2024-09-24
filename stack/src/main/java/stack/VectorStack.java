@@ -32,8 +32,8 @@ public class VectorStack<T> implements Stack<T> {
 	
 	public void push(T e) {
 		if (size == innerList.length)
-			throw new Stack.MaximumCapacity();
-		
+			throw new MaximumCapacity();
+
 		innerList[size++] = e;
 	}
 
