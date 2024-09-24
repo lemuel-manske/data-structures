@@ -132,7 +132,7 @@ class StaticListTest {
 		staticList.removeInRange(2, 4);
 		
 		assertItems(10, 20, 60);
-		assertEquals(staticList.size(), 3);
+		assertEquals(3, staticList.size());
 	}
 
 	@Test
@@ -142,7 +142,7 @@ class StaticListTest {
 		staticList.removeInRange(0, 2);
 		
 		assertItems(40, 50, 60);
-		assertEquals(staticList.size(), 3);
+		assertEquals(3, staticList.size());
 	}
 	
 	@Test
@@ -152,7 +152,7 @@ class StaticListTest {
 		staticList.removeInRange(2, 5);
 		
 		assertItems(10, 20);
-		assertEquals(staticList.size(), 2);
+		assertEquals(2, staticList.size());
 	}
 	
 	@Test
@@ -161,7 +161,7 @@ class StaticListTest {
 	
 		staticList.removeInRange(0, 5);
 		
-		assertEquals(staticList.size(), 0);
+		assertEquals(0, staticList.size());
 	}
 	
 	private void assertItems(int... expectedItems) {
