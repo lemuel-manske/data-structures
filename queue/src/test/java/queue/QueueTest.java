@@ -144,6 +144,11 @@ public abstract class QueueTest {
     }
 
     @Test
+    void whenEmptyThenEmptyString() {
+        assertEquals("", queue.toString());
+    }
+
+    @Test
     void whenElementsArePushStraightThenStringVersion() {
         queue.add(2);
         queue.add(5);

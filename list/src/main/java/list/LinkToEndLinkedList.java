@@ -76,6 +76,21 @@ public class LinkToEndLinkedList<E> {
         }
     }
 
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+
+        Node<E> node = firstNode;
+
+        while(node != null) {
+            sb.append(node.value);
+            node = node.nextNode;
+            if (node != null) sb.append(", ");
+        }
+
+        return sb.toString();
+    }
+
     public static class Node<T> {
 
         private final T value;
