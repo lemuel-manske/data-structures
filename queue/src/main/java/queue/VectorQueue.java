@@ -40,4 +40,21 @@ public class VectorQueue<E> implements Queue<E> {
     public void free() {
         while (!isEmpty()) remove();
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+
+        int indexToPrint = firstElementIndex;
+
+        for (int i = 1; i <= size; i++) {
+            sb.append(elements[indexToPrint]);
+
+            indexToPrint = (firstElementIndex + i) % elements.length;
+
+            if (i < size) sb.append(", ");
+        }
+
+        return sb.toString();
+    }
 }

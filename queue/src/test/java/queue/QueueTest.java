@@ -142,4 +142,33 @@ public abstract class QueueTest {
 
         assertEquals(1, queue.remove());
     }
+
+    @Test
+    void whenElementsArePushStraightThenStringVersion() {
+        queue.add(2);
+        queue.add(5);
+        queue.add(4);
+        queue.add(1);
+
+        assertEquals("2, 5, 4, 1", queue.toString());
+    }
+
+    @Test
+    void whenElementsArePushedThenRemovedThenStringVersion() {
+        queue.add(2);
+        queue.add(5);
+        queue.add(4);
+        queue.add(1);
+        queue.add(3);
+
+        queue.remove();
+        queue.remove();
+        queue.remove();
+        queue.remove();
+
+        queue.add(6);
+        queue.add(7);
+
+        assertEquals("3, 6, 7", queue.toString());
+    }
 }
