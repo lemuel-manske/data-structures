@@ -42,11 +42,6 @@ class LinkToEndLinkedListTest {
     }
 
     @Test
-    void whenFindInEmptyListThenReturnMinusOne() {
-        assertEquals(-1, (Integer) list.find(3));
-    }
-
-    @Test
     void removesAtEmptyListDoesNothing() {
         assertDoesNotThrow(() -> list.remove(3));
     }
@@ -76,17 +71,6 @@ class LinkToEndLinkedListTest {
         list.add(6);
 
         assertEquals(3, list.size());
-    }
-
-    @Test
-    void whenOneTwoAndThreeAreAddedThenFindOneTwoAndThree() {
-        list.add(3);
-        list.add(1);
-        list.add(6);
-
-        assertEquals(0, list.find(3));
-        assertEquals(1, list.find(1));
-        assertEquals(2, list.find(6));
     }
 
     @Test

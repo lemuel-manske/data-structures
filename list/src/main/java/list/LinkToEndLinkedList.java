@@ -21,7 +21,7 @@ public class LinkToEndLinkedList<E> {
     }
 
     /**
-     * Adds an element to the end of the list.
+     * Adds an element to the <strong>end of the list</strong>.
      */
     public void add(E e) {
         Node<E> newNode = new Node<>(e);
@@ -37,22 +37,10 @@ public class LinkToEndLinkedList<E> {
     }
 
     /**
-     * Given an element finds its index.
+     * Gets the first node in the list.
      */
-    public int find(E e) {
-        Node<E> currentNode = firstNode;
-
-        int i = 0;
-
-        while (currentNode != null) {
-            if (currentNode.value().equals(e)) return i;
-
-            currentNode = currentNode.nextNode;
-
-            i++;
-        }
-
-        return -1;
+    public Node<E> getFirst() {
+        return firstNode;
     }
 
     /**
