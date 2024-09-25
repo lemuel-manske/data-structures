@@ -38,7 +38,7 @@ public class RecursiveTree<E> implements Tree<E> {
         return has(root, e);
     }
 
-    public boolean has(Tree.Node<E> node, E e) {
+    public boolean has(Node<E> node, E e) {
         if (node == null) return false;
 
         if (node.getValue().equals(e)) return true;
@@ -48,6 +48,16 @@ public class RecursiveTree<E> implements Tree<E> {
 
     @Override
     public String toString() {
-        return super.toString();
+        if (isEmpty()) return "<>";
+
+        return toString(root);
     }
+
+    private String toString(Node<E> node) {
+        return String.format("<%s%s%s>",
+                node.getValue(),
+                new RecursiveTree<>(node.getLeft()),
+                new RecursiveTree<>(node.getRight()));
+    }
+
 }

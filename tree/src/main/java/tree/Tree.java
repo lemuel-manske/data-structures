@@ -83,5 +83,10 @@ public interface Tree<E> {
         public void setRight(Node<T> right) {
             this.right = right;
         }
+
+        @Override
+        public String toString() {
+            return value.toString();
+        }
     }
 }
