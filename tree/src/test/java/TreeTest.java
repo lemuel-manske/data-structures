@@ -75,4 +75,24 @@ abstract class TreeTest {
         assertTrue(tree.has(12));
         assertTrue(tree.has(18));
     }
+
+    @Test
+    void testShouldEmptyTreeAsString() {
+        assertEquals("<>", tree.toString());
+    }
+
+    @Test
+    void shouldDeepTreeAsString() {
+        RecursiveTree.Node<Integer> thirdLeft = RecursiveTree.Node.of(9, RecursiveTree.Node.of(18), RecursiveTree.Node.of(12));
+
+        RecursiveTree.Node<Integer> secondLeft = RecursiveTree.Node.of(5, thirdLeft);
+
+        RecursiveTree.Node<Integer> leftRootSideNode = RecursiveTree.Node.of(2, secondLeft);
+
+        RecursiveTree.Node<Integer> root = RecursiveTree.Node.of(1, leftRootSideNode);
+
+        tree.updateRoot(root);
+
+        assertEquals("<1<2<5<9<18<><>><12<><>>><>><>><>>", tree.toString());
+    }
 }
