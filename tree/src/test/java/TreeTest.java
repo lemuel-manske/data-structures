@@ -26,7 +26,7 @@ abstract class TreeTest {
     void shouldGetTreeRoot() {
         tree.updateRoot(1);
 
-        assertEquals(1, tree.getRoot().getValue());
+        assertEquals(1, tree.getRoot().value());
     }
 
     @Test

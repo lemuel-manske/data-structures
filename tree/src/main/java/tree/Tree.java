@@ -3,17 +3,17 @@ package tree;
 public interface Tree<E> {
 
     /**
-     * Updates the tree root with the given {@link E value}
+     * Updates the tree root node with the given {@link E value}
      */
     void updateRoot(E e);
 
     /**
-     * Updates the tree root with the given {@link Node<E> node}
+     * Updates the tree root node with the given {@link Node<E> node}
      */
     void updateRoot(Node<E> newRoot);
 
     /**
-     * Gets the tree root.
+     * Gets the root node of the tree.
      */
     Node<E> getRoot();
 
@@ -23,23 +23,29 @@ public interface Tree<E> {
     boolean isEmpty();
 
     /**
-     * Returns whether the tree has the given {@link E element}
+     * Returns whether the tree has a given {@link E value}
      */
     boolean has(E e);
 
+    /**
+     * Represents a tree node.
+     */
     class Node<T> {
 
-        private T value;
-        private Node<T> left;
-        private Node<T> right;
+        private final T value;
+        private final Node<T> left;
+        private final Node<T> right;
 
         private Node(T value) {
             this.value = value;
+            this.left = null;
+            this.right = null;
         }
 
         private Node(T value, Node<T> left) {
             this.value = value;
             this.left = left;
+            this.right = null;
         }
 
         private Node(T value, Node<T> left, Node<T> right) {
@@ -60,28 +66,16 @@ public interface Tree<E> {
             return new Node<>(e, left, right);
         }
 
-        public T getValue() {
+        public T value() {
             return value;
         }
 
-        public void setValue(T value) {
-            this.value = value;
-        }
-
-        public Node<T> getLeft() {
+        public Node<T> leftNode() {
             return left;
         }
 
-        public void setLeft(Node<T> left) {
-            this.left = left;
-        }
-
-        public Node<T> getRight() {
+        public Node<T> rightNode() {
             return right;
-        }
-
-        public void setRight(Node<T> right) {
-            this.right = right;
         }
 
         @Override

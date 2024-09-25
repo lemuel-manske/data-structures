@@ -41,9 +41,9 @@ public class RecursiveTree<E> implements Tree<E> {
     public boolean has(Node<E> node, E e) {
         if (node == null) return false;
 
-        if (node.getValue().equals(e)) return true;
+        if (node.value().equals(e)) return true;
 
-        return has(node.getRight(), e) || has(node.getLeft(), e);
+        return has(node.rightNode(), e) || has(node.leftNode(), e);
     }
 
     @Override
@@ -55,9 +55,9 @@ public class RecursiveTree<E> implements Tree<E> {
 
     private String toString(Node<E> node) {
         return String.format("<%s%s%s>",
-                node.getValue(),
-                new RecursiveTree<>(node.getLeft()),
-                new RecursiveTree<>(node.getRight()));
+                node.value(),
+                new RecursiveTree<>(node.leftNode()),
+                new RecursiveTree<>(node.rightNode()));
     }
 
 }

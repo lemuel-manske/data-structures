@@ -38,13 +38,13 @@ public class StackTree<T> implements Tree<T> {
         while(!stackOfNodes.isEmpty()) {
             Node<T> currNode = stackOfNodes.pop();
 
-            if (currNode.getValue().equals(t)) return true;
+            if (currNode.value().equals(t)) return true;
 
-            if (currNode.getLeft() != null)
-                stackOfNodes.push(currNode.getLeft());
+            if (currNode.leftNode() != null)
+                stackOfNodes.push(currNode.leftNode());
 
-            if (currNode.getRight() != null)
-                stackOfNodes.push(currNode.getRight());
+            if (currNode.rightNode() != null)
+                stackOfNodes.push(currNode.rightNode());
         }
 
         return false;
