@@ -31,5 +31,4 @@ public interface Queue<E> {
      */
     void free();
 
-    class EmptyQueue extends RuntimeException {}
 }

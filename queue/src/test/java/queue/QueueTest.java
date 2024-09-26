@@ -31,12 +31,12 @@ public abstract class QueueTest {
 
     @Test
     void givenNoElementsWhenRemoveThenReturnNull() {
-        assertThrows(Queue.EmptyQueue.class, () -> queue.remove());
+        assertThrows(EmptyQueue.class, () -> queue.remove());
     }
 
     @Test
     void givenNoElementsWhenPeekThenReturnNull() {
-        assertThrows(Queue.EmptyQueue.class, () -> queue.peek());
+        assertThrows(EmptyQueue.class, () -> queue.peek());
     }
 
     @Test
@@ -121,7 +121,7 @@ public abstract class QueueTest {
 
         queue.free();
 
-        assertThrows(Queue.EmptyQueue.class, () -> queue.peek());
+        assertThrows(EmptyQueue.class, () -> queue.peek());
     }
 
     @Test
