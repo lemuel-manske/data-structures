@@ -3,11 +3,10 @@ package list;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.Optional;
-
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -32,12 +31,12 @@ class LinkedListTest {
 	
 	@Test
 	void whenCreatedShouldNotFindByIndex() {
-		assertTrue(linkedList.findByIdx(0).isEmpty());
+		assertNull(linkedList.findByIdx(0));
 	}
 	
 	@Test
 	void whenCreatedShouldNotFindByValue() {
-		assertTrue(linkedList.findByValue(35).isEmpty());
+		assertNull(linkedList.findByValue(35));
 	}
 
 	@Test
@@ -58,11 +57,9 @@ class LinkedListTest {
 	void whenOneElementIsAddedThemFindByIndexZero() {
 		linkedList.add(15);
 
-		Optional<LinkedList.Node<Integer>> firstNode = linkedList.findByIdx(0);
+		LinkedList.Node<Integer> firstNode = linkedList.findByIdx(0);
 		
-		assertTrue(firstNode.isPresent());
-
-		assertEquals(15, firstNode.get().value());
+		assertEquals(15, firstNode.value());
 	}
 	
 	@Test
@@ -83,12 +80,10 @@ class LinkedListTest {
 	void whenFifteenIsAddedThenFindByValueFifteen() {
 		linkedList.add(15);
 
-		Optional<LinkedList.Node<Integer>> firstNode =
+		LinkedList.Node<Integer> firstNode =
 				linkedList.findByValue(15);
 		
-		assertTrue(firstNode.isPresent());
-
-		assertEquals(15, firstNode.get().value());
+		assertEquals(15, firstNode.value());
 	}
 
 	@Test
@@ -237,11 +232,8 @@ class LinkedListTest {
 	}
 	
 	private void assertItems(LinkedList<Integer> list, int... expectedItems) {
-		for (int i = 0; i < expectedItems.length; i++) {
-			Optional<LinkedList.Node<Integer>> aNode = list.findByIdx(i);
-			assertTrue(aNode.isPresent());
-			assertEquals(expectedItems[i], aNode.get().value());
-		}
+		for (int i = 0; i < expectedItems.length; i++)
+			assertEquals(expectedItems[i], list.findByIdx(i).value());
 	}
 
 	private void addMultipleElements(int... elements) {

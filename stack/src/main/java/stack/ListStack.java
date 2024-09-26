@@ -2,8 +2,6 @@ package stack;
 
 import list.LinkedList;
 
-import java.util.Optional;
-
 public class ListStack<T> implements Stack<T> {
 
 	private final LinkedList<T> list;
@@ -29,11 +27,11 @@ public class ListStack<T> implements Stack<T> {
 	}
 	
 	public T peek() {
-		Optional<LinkedList.Node<T>> maybeFirstNode = list.firstNode();
+		LinkedList.Node<T> maybeFirstNode = list.findByIdx(0);
 
-		if (maybeFirstNode.isEmpty()) throw new Stack.Empty();
+		if (maybeFirstNode == null) throw new Stack.Empty();
 
-		return maybeFirstNode.get().value();
+		return maybeFirstNode.value();
 	}
 	
 	public void push(T e) {

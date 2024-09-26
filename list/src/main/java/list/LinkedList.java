@@ -1,27 +1,15 @@
 package list;
 
-import java.util.Iterator;
-import java.util.NoSuchElementException;
-import java.util.Optional;
-import java.util.function.Predicate;
-
 public class LinkedList<T> {
 
 	private int size;
 	private Node<T> firstNode;
 
 	/**
-	 * Gets either the first node or an {@link Optional#empty()} if the list is empty.
-	 */
-	public Optional<Node<T>> firstNode() {
-		return Optional.ofNullable(firstNode);
-	}
-
-	/**
 	 * Returns whether the list is empty.
 	 */
 	public boolean isEmpty() {
-		return firstNode().isEmpty();
+		return firstNode == null;
 	}
 
 	/**
@@ -32,24 +20,28 @@ public class LinkedList<T> {
 	}
 
 	/**
-	 * Returns the node at the given index or else {@link Optional#empty()}
+	 * Returns the node at the given index or else null.
 	 */
-	public Optional<Node<T>> findByIdx(int index) {
-		return findNode(new Predicate<>() {
-			private int currentIndex = index;
-
-			@Override
-			public boolean test(Node<T> node) {
-				return currentIndex-- == 0;
-			}
-		});
+	public Node<T> findByIdx(int index) {
+		Node<T> current = firstNode;
+		for (int i = 0; i < index && current != null; i++) {
+			current = current.nextNode;
+		}
+		return current;
 	}
 
 	/**
-	 * Returns the node with the given value or else {@link Optional#empty()}
+	 * Returns the node with the given value or else null.
 	 */
-	public Optional<Node<T>> findByValue(T value) {
-		return findNode(node -> node.value().equals(value));
+	public Node<T> findByValue(T value) {
+		Node<T> current = firstNode;
+		while (current != null) {
+			if (value != null && value.equals(current.value)) {
+				return current;
+			}
+			current = current.nextNode;
+		}
+		return null;
 	}
 
 	/**
@@ -57,17 +49,15 @@ public class LinkedList<T> {
 	 */
 	public void add(T e) {
 		size++;
-
 		Node<T> newNode = new Node<>(e);
 
 		if (isEmpty()) {
 			firstNode = newNode;
-			return;
+		} else {
+			newNode.nextNode = firstNode;
+			firstNode.previousNode = newNode;
+			firstNode = newNode;
 		}
-
-		newNode.nextNode = firstNode;
-		firstNode.previousNode = newNode;
-		firstNode = newNode;
 	}
 
 	/**
@@ -76,37 +66,32 @@ public class LinkedList<T> {
 	public void remove(T value) {
 		if (isEmpty()) return;
 
-		Optional<Node<T>> maybeNode = findByValue(value);
+		Node<T> nodeToRemove = findByValue(value);
+		if (nodeToRemove == null) return;
 
-		if (maybeNode.isEmpty()) return;
-
-		Node<T> nodeToRemove = maybeNode.get();
-
-		if (nodeToRemove.equals(firstNode))
+		if (nodeToRemove == firstNode) {
 			firstNode = nodeToRemove.nextNode;
-		else
+		} else {
 			nodeToRemove.previousNode.nextNode = nodeToRemove.nextNode;
+		}
 
-		if (nodeToRemove.nextNode != null)
-			nodeToRemove.previousNode = nodeToRemove.nextNode;
+		if (nodeToRemove.nextNode != null) {
+			nodeToRemove.nextNode.previousNode = nodeToRemove.previousNode;
+		}
 
 		size--;
 	}
-	
+
 	/**
 	 * Returns a new list of the reversed items in this list.
 	 */
 	public LinkedList<T> reverseOrder() {
-		Iterator<Node<T>> it = firstNode.iterator();
-		
 		LinkedList<T> newList = new LinkedList<>();
-		
-		while (it.hasNext()) {
-			Node<T> node = it.next();
-
-			newList.add(node.value());
+		Node<T> current = firstNode;
+		while (current != null) {
+			newList.add(current.value());
+			current = current.nextNode;
 		}
-		
 		return newList;
 	}
 
@@ -114,23 +99,16 @@ public class LinkedList<T> {
 	 * Returns a new list of the items in range.
 	 */
 	public LinkedList<T> subList(int startIndex, int endIndex) {
-		boolean invalidIndexes = startIndex > endIndex || startIndex < 0;
-		
-		if (invalidIndexes) throw new IndexOutOfBoundsException();
-		
-		Optional<Node<T>> maybeNode = findByIdx(endIndex);
-		
-		if (maybeNode.isEmpty()) throw new IndexOutOfBoundsException();
-		
+		if (startIndex > endIndex || startIndex < 0) throw new IndexOutOfBoundsException();
+
+		Node<T> node = findByIdx(endIndex);
+		if (node == null) throw new IndexOutOfBoundsException();
+
 		LinkedList<T> newList = new LinkedList<>();
-		
-		Node<T> node = maybeNode.get();
-		
-		for (int i = startIndex;  i <= endIndex; i++) {
+		for (int i = startIndex; i <= endIndex && node != null; i++) {
 			newList.add(node.value());
 			node = node.previousNode;
 		}
-		
 		return newList;
 	}
 
@@ -140,70 +118,25 @@ public class LinkedList<T> {
 	 * <p><strong>Careful</strong>, it will remove all the elements of the list.
 	 */
 	public void free() {
-		Iterator<Node<T>> it = firstNode.iterator();
-
 		firstNode = null;
-		
-		while (it.hasNext()) {
-			Node<T> node = it.next();
-			
-			size--;
-
-			node.previousNode = null;
-		}
+		size = 0;
 	}
-
 
 	@Override
 	public String toString() {
 		if (isEmpty()) return "";
 
-		Object[] elements = getListValues();
-
 		StringBuilder builder = new StringBuilder();
-
-		for (int i = 0; i <= size() -1; i++) {
-			builder.append(elements[i]);
-
-			if (i < size() - 1) builder.append(", ");
+		Node<T> current = firstNode;
+		while (current != null) {
+			builder.append(current.value());
+			if (current.nextNode != null) builder.append(", ");
+			current = current.nextNode;
 		}
-
 		return builder.toString();
 	}
 
-
-	private Object[] getListValues() {
-		Object[] elements = new Object[size];
-
-		int reversedLength = 0;
-		
-		Iterator<Node<T>> it = firstNode.iterator();
-
-		while (it.hasNext()) {
-			Node<T> node = it.next();
-
-			elements[reversedLength++] = node.value;
-		}
-		
-		return elements;
-	}
-
-	private Optional<Node<T>> findNode(Predicate<Node<T>> predicate) {
-		if (isEmpty()) return Optional.empty();
-
-		Iterator<Node<T>> it = firstNode.iterator();
-
-		while (it.hasNext()) {
-			Node<T> node = it.next();
-
-			if (predicate.test(node)) return Optional.of(node);
-		}
-
-		return Optional.empty();
-	}
-
 	public static class Node<T> {
-
 		private Node<T> previousNode;
 		private final T value;
 		private Node<T> nextNode;
@@ -214,26 +147,6 @@ public class LinkedList<T> {
 
 		public T value() {
 			return value;
-		}
-
-		public Iterator<Node<T>> iterator() {
-			return new Iterator<>() {
-
-				private Node<T> current = Node.this;
-
-				@Override
-				public boolean hasNext() {
-					return current != null;
-				}
-
-				@Override
-				public Node<T> next() {
-					if (!hasNext()) throw new NoSuchElementException();
-					Node<T> next = current;
-					current = current.nextNode;
-					return next;
-				}
-			};
 		}
 	}
 }
