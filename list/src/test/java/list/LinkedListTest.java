@@ -149,6 +149,11 @@ class LinkedListTest {
 
 		assertItems(reversed, 15, 42, 65, 32, 62, 24);	
 	}
+
+	@Test
+	void shouldOutputEmptyStringWhenIsEmpty() {
+	    assertEquals("", linkedList.toString());
+	}
 	
 	
 	@Test

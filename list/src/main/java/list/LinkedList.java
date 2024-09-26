@@ -156,6 +156,8 @@ public class LinkedList<T> {
 
 	@Override
 	public String toString() {
+		if (isEmpty()) return "";
+
 		Object[] elements = getListValues();
 
 		StringBuilder builder = new StringBuilder();
@@ -187,6 +189,8 @@ public class LinkedList<T> {
 	}
 
 	private Optional<Node<T>> findNode(Predicate<Node<T>> predicate) {
+		if (isEmpty()) return Optional.empty();
+
 		Iterator<Node<T>> it = firstNode.iterator();
 
 		while (it.hasNext()) {
