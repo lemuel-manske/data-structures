@@ -1,5 +1,6 @@
+package tree;
+
 import org.junit.jupiter.api.BeforeEach;
-import tree.RecursiveTree;
 
 public class RecursiveTreeTest extends TreeTest {
 

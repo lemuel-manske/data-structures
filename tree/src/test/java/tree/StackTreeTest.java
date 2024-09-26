@@ -1,6 +1,6 @@
-import org.junit.jupiter.api.BeforeEach;
+package tree;
 
-import tree.StackTree;
+import org.junit.jupiter.api.BeforeEach;
 
 public class StackTreeTest extends TreeTest {
 
