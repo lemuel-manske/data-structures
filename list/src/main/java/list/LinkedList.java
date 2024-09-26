@@ -35,7 +35,14 @@ public class LinkedList<T> {
 	 * Returns the node at the given index or else {@link Optional#empty()}
 	 */
 	public Optional<Node<T>> findByIdx(int index) {
-		return findNode(byIndex(index));
+		return findNode(new Predicate<>() {
+			private int currentIndex = index;
+
+			@Override
+			public boolean test(Node<T> node) {
+				return currentIndex-- == 0;
+			}
+		});
 	}
 
 	/**
@@ -71,8 +78,7 @@ public class LinkedList<T> {
 
 		Optional<Node<T>> maybeNode = findByValue(value);
 
-		if (maybeNode.isEmpty())
-			return;
+		if (maybeNode.isEmpty()) return;
 
 		Node<T> nodeToRemove = maybeNode.get();
 
@@ -178,17 +184,6 @@ public class LinkedList<T> {
 		}
 		
 		return elements;
-	}
-
-	private Predicate<Node<T>> byIndex(int index) {
-		return new Predicate<>() {
-			private int currentIndex = index;
-
-			@Override
-			public boolean test(Node<T> node) {
-				return currentIndex-- == 0;
-			}
-		};
 	}
 
 	private Optional<Node<T>> findNode(Predicate<Node<T>> predicate) {

@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -15,7 +16,7 @@ class LinkedListTest {
 	private LinkedList<Integer> linkedList;
 	
 	@BeforeEach
-	void createLinkedList() {
+	void setupLinkedList() {
 		linkedList = new LinkedList<>();
 	}
 	
@@ -31,16 +32,12 @@ class LinkedListTest {
 	
 	@Test
 	void whenCreatedShouldNotFindByIndex() {
-		linkedList.add(15);
-		
-		assertTrue(linkedList.findByIdx(3).isEmpty());
+		assertTrue(linkedList.findByIdx(0).isEmpty());
 	}
 	
 	@Test
 	void whenCreatedShouldNotFindByValue() {
-		linkedList.add(64);
-		
-		assertTrue(linkedList.findByValue(3).isEmpty());
+		assertTrue(linkedList.findByValue(35).isEmpty());
 	}
 
 	@Test
@@ -58,7 +55,7 @@ class LinkedListTest {
 	}
 	
 	@Test
-	void mustAddAnElementToTheList() {	
+	void whenOneElementIsAddedThemFindByIndexZero() {
 		linkedList.add(15);
 
 		Optional<LinkedList.Node<Integer>> firstNode = linkedList.findByIdx(0);
@@ -69,21 +66,21 @@ class LinkedListTest {
 	}
 	
 	@Test
-	void mustAddMultipleElementsToTheList() {	
+	void whenMultipleElementsAreAddedThenFindThemByIndex() {
 		addMultipleElements(15, 42, 65, 32, 62, 24);
 
 		assertItems(24, 62, 32, 65, 42, 15);
 	}
 	
 	@Test
-	void mustAddMultipleElementsThenGetSize() {	
+	void whenSixElementsAreAddedThenHaveSizeSix() {
 		addMultipleElements(15, 42, 65, 32, 62, 24);
 
 		assertEquals(6, linkedList.size());
 	}
 	
 	@Test
-	void mustFindElementByItsValue() {
+	void whenFifteenIsAddedThenFindByValueFifteen() {
 		linkedList.add(15);
 
 		Optional<LinkedList.Node<Integer>> firstNode =
@@ -95,7 +92,12 @@ class LinkedListTest {
 	}
 
 	@Test
-	void testRemoveItemThatNotExist() {
+	void whenRemoveWithNoElementsDoNothing() {
+	    assertDoesNotThrow(() -> linkedList.remove(61));
+	}
+
+	@Test
+	void whenRemoveElementThatDoesNotExistsThenSizeKeepsTheSame() {
 		addMultipleElements(22, 18);
 
         linkedList.remove(61);
@@ -104,7 +106,7 @@ class LinkedListTest {
 	}
 
 	@Test
-	void testRemoveItemReducesSize() {
+	void whenRemoveItemThatExistsThenSizeDecreases() {
 		addMultipleElements(61, 15, 22, 18);
 
 		linkedList.remove(22);
@@ -113,7 +115,7 @@ class LinkedListTest {
 	}
 
 	@Test
-	void testRemoveItemRemovesTheItem() {
+	void whenItemIsRemovedThenItDoesNotExistAnymore() {
 		addMultipleElements(61, 15, 22, 18);
 
 		linkedList.remove(22);
@@ -122,7 +124,7 @@ class LinkedListTest {
 	}
 
 	@Test
-	void testRemoveFirstNode() {
+	void shouldRemoveFirstNode() {
 		addMultipleElements(61, 15, 22, 18);
 
 		linkedList.remove(61);
@@ -131,7 +133,7 @@ class LinkedListTest {
 	}
 
 	@Test
-	void testRemoveLast() {
+	void shouldRemoveLastNode() {
 		addMultipleElements(61, 15, 22);
 
 		linkedList.remove(22);
@@ -140,7 +142,7 @@ class LinkedListTest {
 	}
 	
 	@Test
-	void testReverseOrderAsList() {
+	void whenReverseOrderNewListHaveItemsInReverseOrder() {
 		addMultipleElements(15, 42, 65, 32, 62, 24);
 		
 		LinkedList<Integer> reversed = linkedList.reverseOrder();
@@ -150,7 +152,7 @@ class LinkedListTest {
 	
 	
 	@Test
-	void testString() {
+	void shouldOutputStringVersionOfListItems() {
 		addMultipleElements(15, 42, 65, 32, 62, 24);
 		
 		String toString = linkedList.toString();
@@ -159,7 +161,7 @@ class LinkedListTest {
 	}
 	
 	@Test
-	void testSubList() {
+	void shouldCreateSubListOfInnerElements() {
 		addMultipleElements(70, 60, 50, 40, 30, 20, 10);
 		
 		LinkedList<Integer> newList = linkedList.subList(2, 5);
@@ -168,7 +170,7 @@ class LinkedListTest {
 	}
 	
 	@Test
-	void testSubListAtEnd() {
+	void shouldCreateSubListOfLastElements() {
 		addMultipleElements(70, 60, 50, 40, 30, 20, 10);
 		
 		LinkedList<Integer> newList = linkedList.subList(4, 6);
@@ -178,7 +180,7 @@ class LinkedListTest {
 
 	
 	@Test
-	void testSubListAtStart() {
+	void shouldCreateSubListOfStartElements() {
 		addMultipleElements(70, 60, 50, 40, 30, 20, 10);
 		
 		LinkedList<Integer> newList = linkedList.subList(0, 2);
@@ -187,7 +189,7 @@ class LinkedListTest {
 	}
 	
 	@Test
-	void testInvalidSubList() {
+	void shouldThrowForInvalidSubListIndexes() {
 		addMultipleElements(70, 60, 50, 40, 30, 20, 10);
 
 		assertThrows(IndexOutOfBoundsException.class, 
@@ -204,7 +206,7 @@ class LinkedListTest {
 	}
 	
 	@Test
-	void testWhenFreeHasNoItems() {
+	void whenFreedIsEmpty() {
 		linkedList.add(13);
 		linkedList.add(22);
 		linkedList.add(30);
@@ -215,7 +217,7 @@ class LinkedListTest {
 	}
 
 	@Test
-	void testWhenFreeHasSizeZero() {
+	void whenFreedHasSizeZero() {
 		linkedList.add(13);
 		linkedList.add(22);
 		linkedList.add(30);
@@ -226,11 +228,7 @@ class LinkedListTest {
 	}
 	
 	private void assertItems(int... expectedItems) {
-		for (int i = 0; i < expectedItems.length; i++) {
-			Optional<LinkedList.Node<Integer>> aNode = linkedList.findByIdx(i);
-			assertTrue(aNode.isPresent());
-			assertEquals(expectedItems[i], aNode.get().value());
-		}
+		assertItems(linkedList, expectedItems);
 	}
 	
 	private void assertItems(LinkedList<Integer> list, int... expectedItems) {
@@ -242,7 +240,6 @@ class LinkedListTest {
 	}
 
 	private void addMultipleElements(int... elements) {
-		for (int element : elements)
-			linkedList.add(element);
+		for (int element : elements) linkedList.add(element);
 	}
 }
