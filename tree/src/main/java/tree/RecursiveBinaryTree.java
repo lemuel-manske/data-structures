@@ -1,18 +1,18 @@
 package tree;
 
-public class RecursiveTree<E> implements Tree<E> {
+public class RecursiveBinaryTree<E> implements BinaryTree<E> {
 
     private Node<E> root;
 
-    public RecursiveTree() { }
+    public RecursiveBinaryTree() { }
 
-    public RecursiveTree(Node<E> root) {
+    public RecursiveBinaryTree(Node<E> root) {
         this.root = root;
     }
 
     @Override
     public void updateRoot(E e) {
-        root = Tree.Node.of(e);
+        root = BinaryTree.Node.of(e);
     }
 
     @Override
@@ -46,6 +46,16 @@ public class RecursiveTree<E> implements Tree<E> {
         return has(node.rightNode(), e) || has(node.leftNode(), e);
     }
 
+    public int count() {
+        return count(root);
+    }
+
+    private int count(BinaryTree.Node<E> root) {
+        if (root == null) return 0;
+
+        return 1 + count(root.leftNode()) + count(root.rightNode());
+    }
+
     @Override
     public String toString() {
         if (isEmpty()) return "<>";
@@ -56,8 +66,8 @@ public class RecursiveTree<E> implements Tree<E> {
     private String toString(Node<E> node) {
         return String.format("<%s%s%s>",
                 node.value(),
-                new RecursiveTree<>(node.leftNode()),
-                new RecursiveTree<>(node.rightNode()));
+                new RecursiveBinaryTree<>(node.leftNode()),
+                new RecursiveBinaryTree<>(node.rightNode()));
     }
 
 }

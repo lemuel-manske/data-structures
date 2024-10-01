@@ -3,7 +3,7 @@ package tree;
 import stack.ListStack;
 import stack.Stack;
 
-public class StackTree<T> implements Tree<T> {
+public class StackBinaryTree<T> implements BinaryTree<T> {
 
     private Node<T> root;
 
@@ -48,5 +48,10 @@ public class StackTree<T> implements Tree<T> {
         }
 
         return false;
+    }
+
+    @Override
+    public int count() {
+        return 0;
     }
 }

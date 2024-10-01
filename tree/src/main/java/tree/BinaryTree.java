@@ -1,6 +1,6 @@
 package tree;
 
-public interface Tree<E> {
+public interface BinaryTree<E> {
 
     /**
      * Updates the tree root node with the given {@link E value}
@@ -26,6 +26,11 @@ public interface Tree<E> {
      * Returns whether the tree has a given {@link E value}
      */
     boolean has(E e);
+
+    /**
+     * Gets the count of all nodes in the tree.
+     */
+    int count();
 
     /**
      * Represents a tree node.
