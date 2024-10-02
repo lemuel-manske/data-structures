@@ -1,6 +1,6 @@
 package binarytree;
 
-public class RecursiveBinaryTree<E> implements BinaryTree<E> {
+public final class RecursiveBinaryTree<E> implements BinaryTree<E> {
 
     private Node<E> root;
 

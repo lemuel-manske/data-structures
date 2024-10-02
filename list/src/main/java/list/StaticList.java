@@ -1,6 +1,6 @@
 package list;
 
-public class StaticList<T> {
+public final class StaticList<T> {
 
 	private static final int SIZE_TO_INCREASE = 10;
 	private static final int DEFAULT_LIST_SIZE = 10;

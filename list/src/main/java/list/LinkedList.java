@@ -1,6 +1,6 @@
 package list;
 
-public class LinkedList<T> {
+public final class LinkedList<T> {
 
 	private int size;
 	private Node<T> firstNode;

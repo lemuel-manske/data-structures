@@ -3,7 +3,7 @@ package binarytree;
 import stack.ListStack;
 import stack.Stack;
 
-public class StackBinaryTree<T> implements BinaryTree<T> {
+public final class StackBinaryTree<T> implements BinaryTree<T> {
 
     private Node<T> root;
 
