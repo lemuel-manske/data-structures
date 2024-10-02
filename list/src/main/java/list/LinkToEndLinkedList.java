@@ -1,6 +1,6 @@
 package list;
 
-public class LinkToEndLinkedList<E> {
+public final class LinkToEndLinkedList<E> {
 
     private int size;
     private Node<E> firstNode;
