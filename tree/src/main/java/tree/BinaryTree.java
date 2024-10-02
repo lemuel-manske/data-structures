@@ -1,4 +1,4 @@
-package binarytree;
+package tree;
 
 public interface BinaryTree<E> {
 

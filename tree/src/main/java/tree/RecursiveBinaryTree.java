@@ -1,4 +1,4 @@
-package binarytree;
+package tree;
 
 public final class RecursiveBinaryTree<E> implements BinaryTree<E> {
 

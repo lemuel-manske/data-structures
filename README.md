@@ -2,9 +2,9 @@
 
 That repository intends to keep the exercises implementations.
 
-# Lists
+# [Lists](./list)
 
-## Static list
+## [Static list](./list/src/main/java/list/StaticList.java)
 
 Vector manipulation based on basic operations.
 
@@ -14,7 +14,7 @@ Allows creating static lists *only* for primitive integers and provides basic op
 ### 2nd version
 Allows creating static list for *any* object and also provides the additional `reverseOrder()` operation.
 
-## Linked list
+## [Linked list](/list/src/main/java/list/LinkedList.java)
 
 List implementation through a link from node to node, in which each node keeps the element value.
 
@@ -33,14 +33,38 @@ Added `subList(startIdx, endIdx)` to `LinkedList` implementation, so it returns 
 
 Added `removeInRange(startIdx, endIdx)` to `StaticList` implementation, so it remove all the elements in range and set them free.
 
-# Stack
+# [Stack](./stack)
 
-FIFO data structure which allows the client to either add an element to the top and pops the element at the top.
+LIFO data structure which allows the client to either add an element to the top and pops the element at the top.
 
-## Vector Stack
+## [Vector Stack](./stack/src/main/java/stack/VectorStack.java)
 
 Depends upon a vector and has capacity limits.
 
-## ListStack
+## [List Stack](./stack/src/main/java/stack/ListStack.java)
 
 Has no capacity limitation and depend upon a `LinkedList` implementation.
+
+# [Queues](./queue)
+
+FIFO data structure. The name is the intention here: it is a queue!
+
+## [ListQueue](./queue/src/main/java/queue/ListQueue.java)
+
+Implementation for queue with `LinkedList`.
+
+## [VectorQueue](./queue/src/main/java/queue/VectorQueue.java)
+
+Implementation for queue with vectors and also capacity limit.
+
+# [Tree](./tree)
+
+Special data structure to handle data in an hierarchical manner.
+
+## [Binary trees](./tree/src/main/java/tree/BinaryTree.java)
+
+Have at most two nodes per parent node.
+
+## [N-ary trees](./tree/src/main/java/tree/Tree.java)
+
+There is no link limit: a parent node can have n nodes as children. 

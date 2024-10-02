@@ -1,4 +1,4 @@
-package binarytree;
+package tree;
 
 import stack.ListStack;
 import stack.Stack;
