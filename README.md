@@ -35,15 +35,19 @@ Added `removeInRange(startIdx, endIdx)` to `StaticList` implementation, so it re
 
 # [Stack](./stack)
 
-LIFO data structure which allows the client to either add an element to the top and pops the element at the top.
+Stacks are non-iterable data structures that allow the removal of only the top element at a time. 
+They follow the LIFO (Last In, First Out) principle, meaning the last item added is the first to be removed.
+Stacks have numerous applications in other data structures, such as graph traversal, tree processing, and more.
+
+The operations are: push -to add- and pop -to remove.
 
 ## [Vector Stack](./stack/src/main/java/stack/VectorStack.java)
 
-Depends upon a vector and has capacity limits.
+Depends upon a vector and has limited capacity.
 
 ## [List Stack](./stack/src/main/java/stack/ListStack.java)
 
-Has no capacity limitation and depend upon a `LinkedList` implementation.
+Has no capacity limit and depend upon a linked list implementation.
 
 # [Queues](./queue)
 

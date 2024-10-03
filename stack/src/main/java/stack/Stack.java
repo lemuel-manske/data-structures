@@ -1,7 +1,5 @@
 package stack;
 
-import java.io.Serial;
-
 public interface Stack<T> {
 
 	/**
@@ -10,14 +8,14 @@ public interface Stack<T> {
 	void push(T e);
 	
 	/**
-	 * Pops an element by removing it and returning its value.
+	 * Pops the top element and returns it.
 	 * 
-	 * <p>Throws {@link Empty} when no element to pop.
+	 * <p>Throws {@link EmptyStack} when no element to pop.
 	 */
 	T pop();
 	
 	/**
-	 * Peeks the stack top element.
+	 * Peeks the top element of the stack.
 	 */
 	T peek();
 	
@@ -27,7 +25,7 @@ public interface Stack<T> {
 	boolean isEmpty();
 	
 	/**
-	 * Sets free all the stack's elements. 
+	 * Resets the stack to its original state.
 	 */
 	void free();
 
@@ -36,9 +34,6 @@ public interface Stack<T> {
 	 */
 	void concat(Stack<T> stackToConcat);
 	
-	class Empty extends RuntimeException {
-
-		@Serial
-		private static final long serialVersionUID = 1651844929494254362L;
+	class EmptyStack extends RuntimeException {
 	}
 }

@@ -2,44 +2,44 @@ package stack;
 
 public class VectorStack<T> implements Stack<T> {
 
-	private final Object[] innerList; // innerList.length is the limit
+	// the objects length is the stack limit (initial capacity)
+	private final T[] objects;
 	private int size;
 	
+	@SuppressWarnings("unchecked")
 	public VectorStack (int initialCapacity) {
-		innerList = new Object[initialCapacity];
-		size = 0;
+		objects = (T[]) new Object[initialCapacity];
 	}
 
 	public boolean isEmpty() {
 		return size == 0;
 	}
-	
+
 	public T pop() {
 		T valueToPop = peek();
-		
+
 		size--;
-		
+
 		return valueToPop;
 	}
-	
-	@SuppressWarnings("unchecked")
+
 	public T peek() {
 		if (isEmpty()) 
-			throw new Stack.Empty();
+			throw new EmptyStack();
 		
-		return (T) innerList[size-1];
+		return objects[size-1];
 	}
 	
 	public void push(T e) {
-		if (size == innerList.length)
+		if (size == limit())
 			throw new MaximumCapacity();
 
-		innerList[size++] = e;
+		objects[size++] = e;
 	}
 
 	public void free() {
 		if (isEmpty()) return;
-		
+
 		for (int i = 0; i <= size; i++) pop();
 	}
 
@@ -59,10 +59,14 @@ public class VectorStack<T> implements Stack<T> {
 		StringBuilder sb = new StringBuilder();
 
 		for (int i = size - 1; i  > 0; i--)
-			sb.append(innerList[i]).append(", ");
+			sb.append(objects[i]).append(", ");
 
-		sb.append(innerList[0]);
+		sb.append(objects[0]);
 
 		return sb.toString();
+	}
+
+	private int limit() {
+		return objects.length;
 	}
 }

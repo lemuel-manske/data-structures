@@ -18,7 +18,7 @@ public abstract class StackTest {
 	
 	@Test
 	void testPopWithNoItems() {
-		assertThrows(Stack.Empty.class, () -> stack.pop());
+		assertThrows(Stack.EmptyStack.class, () -> stack.pop());
 	}
 
 	@Test

@@ -9,11 +9,7 @@ public class ListStack<T> implements Stack<T> {
 	public ListStack() {
 		list = new LinkedList<>();
 	}
-	
-	public int size() {
-		return list.size();
-	}
-	
+
 	public boolean isEmpty() {
 		return list.isEmpty();
 	}
@@ -27,11 +23,10 @@ public class ListStack<T> implements Stack<T> {
 	}
 	
 	public T peek() {
-		LinkedList.Node<T> maybeFirstNode = list.findByIdx(0);
+		if (isEmpty())
+			throw new EmptyStack();
 
-		if (maybeFirstNode == null) throw new Stack.Empty();
-
-		return maybeFirstNode.value();
+		return list.findByIdx(0).value();
 	}
 	
 	public void push(T e) {
