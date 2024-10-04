@@ -51,15 +51,18 @@ Has no capacity limit and depend upon a linked list implementation.
 
 # [Queues](./queue)
 
+Queues are non-iterable data structures that allow the removal of only the first element at a time: elements are 
+pushed to the end and pop at the start of the queue. Queues follow the FIFO approach (First in, First out).
+
 FIFO data structure. The name is the intention here: it is a queue!
-
-## [ListQueue](./queue/src/main/java/queue/ListQueue.java)
-
-Implementation for queue with `LinkedList`.
 
 ## [VectorQueue](./queue/src/main/java/queue/VectorQueue.java)
 
-Implementation for queue with vectors and also capacity limit.
+Implementation for queue with vectors which imply capacity limit.
+
+## [ListQueue](./queue/src/main/java/queue/ListQueue.java)
+
+Implementation for queue with linked list without capacity limit.
 
 # [Tree](./tree)
 

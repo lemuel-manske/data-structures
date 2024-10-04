@@ -4,7 +4,7 @@ import list.LinkToEndLinkedList;
 
 public class ListQueue<E> implements Queue<E> {
 
-    private LinkToEndLinkedList<E> list;
+    private final LinkToEndLinkedList<E> list;
 
     public ListQueue() {
         this.list = new LinkToEndLinkedList<>();

@@ -3,7 +3,7 @@ package queue;
 public interface Queue<E> {
 
     /**
-     * Adds an element to the queue.
+     * Adds an element to the start of the queue.
      */
     void add(E e);
 
@@ -13,14 +13,14 @@ public interface Queue<E> {
     boolean isEmpty();
 
     /**
-     * Gets the first element of the queue.
+     * Gets the start element of the queue.
      *
      * <p>Throws {@link EmptyQueue} if the queue is empty.
      */
     E peek();
 
     /**
-     * Removes the first queue element.
+     * Removes the start element of the queue.
      *
      * <p>Throws {@link EmptyQueue} if the queue is empty.
      */
@@ -30,5 +30,4 @@ public interface Queue<E> {
      * Returns the queue to its original state.
      */
     void free();
-
 }

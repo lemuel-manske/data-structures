@@ -2,18 +2,30 @@ package queue;
 
 public class VectorQueue<E> implements Queue<E> {
 
-    private final Object[] elements;
-    private int firstElementIndex;
+    // objects.length is queue limit (initial size)
+    private final Object[] objects;
+    private int start;
     private int size;
 
     public VectorQueue(final int initialSize) {
-        elements = new Object[initialSize];
+        objects = new Object[initialSize];
     }
 
     @Override
     public void add(E o) {
-        if (size == elements.length) throw new FullQueue();
-        elements[(firstElementIndex + size++) % elements.length] = o;
+        if (size == objects.length)
+            throw new FullQueue();
+
+        // Modular arithmetic is a system of arithmetic in which numbers "reset"
+        // or "wrap around" upon reaching a certain value, called the modulus.
+        // In simple terms, instead of numbers increasing indefinitely,
+        // they are "reduced" to a fixed range, starting again
+        // from zero when they reach the modulus.
+
+        // the start + size is where we need to insert,
+        // whereas objects.length is by which to "wrap around.
+
+        objects[(start + size++) % objects.length] = o;
     }
 
     @Override
@@ -24,15 +36,17 @@ public class VectorQueue<E> implements Queue<E> {
     @Override
     @SuppressWarnings("unchecked")
     public E peek() {
-        if (isEmpty()) throw new EmptyQueue();
-        return (E) elements[firstElementIndex];
+        if (isEmpty())
+            throw new EmptyQueue();
+
+        return (E) objects[start];
     }
 
     @Override
     public E remove() {
         E e = peek();
         size--;
-        firstElementIndex = (firstElementIndex + 1) % elements.length;
+        start = (start + 1) % objects.length;
         return e;
     }
 
@@ -45,12 +59,12 @@ public class VectorQueue<E> implements Queue<E> {
     public String toString() {
         StringBuilder sb = new StringBuilder();
 
-        int indexToPrint = firstElementIndex;
+        int indexToPrint = start;
 
         for (int i = 1; i <= size; i++) {
-            sb.append(elements[indexToPrint]);
+            sb.append(objects[indexToPrint]);
 
-            indexToPrint = (firstElementIndex + i) % elements.length;
+            indexToPrint = (start + i) % objects.length;
 
             if (i < size) sb.append(", ");
         }
