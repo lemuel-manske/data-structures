@@ -41,9 +41,7 @@ public final class RecursiveBinaryTree<E> implements BinaryTree<E> {
     public boolean has(Node<E> node, E e) {
         if (node == null) return false;
 
-        if (node.value().equals(e)) return true;
-
-        return has(node.rightNode(), e) || has(node.leftNode(), e);
+        return node.value().equals(e) || has(node.rightNode(), e) || has(node.leftNode(), e);
     }
 
     public int count() {
@@ -58,16 +56,15 @@ public final class RecursiveBinaryTree<E> implements BinaryTree<E> {
 
     @Override
     public String toString() {
-        if (isEmpty()) return "<>";
-
         return toString(root);
     }
 
     private String toString(Node<E> node) {
+        if (node == null) return "<>";
+
         return String.format("<%s%s%s>",
                 node.value(),
-                new RecursiveBinaryTree<>(node.leftNode()),
-                new RecursiveBinaryTree<>(node.rightNode()));
+                toString(node.leftNode()),
+                toString(node.rightNode()));
     }
-
 }
