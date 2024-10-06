@@ -1,5 +1,7 @@
 package stack;
 
+import java.util.Iterator;
+
 public interface Stack<T> {
 
 	/**
@@ -29,11 +31,10 @@ public interface Stack<T> {
 	 */
 	void free();
 
+	Iterator<T> iterator();
+
 	/**
 	 * Concatenate another stack into that stack.
 	 */
 	void concat(Stack<T> stackToConcat);
-	
-	class EmptyStack extends RuntimeException {
-	}
 }

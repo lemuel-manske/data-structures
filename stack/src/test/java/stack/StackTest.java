@@ -7,29 +7,29 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public abstract class StackTest {
+abstract class StackTest {
 	
 	protected Stack<Integer> stack;
 
 	@Test
-	void testWhenCreatedIsEmpty() {
+	void shouldBeEmptyWhenCreated() {
 		assertTrue(stack.isEmpty());
 	}
 	
 	@Test
-	void testPopWithNoItems() {
-		assertThrows(Stack.EmptyStack.class, () -> stack.pop());
+	void shouldThrowWhenPopWithNoItems() {
+		assertThrows(EmptyStack.class, () -> stack.pop());
 	}
 
 	@Test
-	void testPushThenIsNotEmpty() {
+	void shouldPushThenStackIsNotEmptyAnymore() {
 		stack.push(1);
 		
 		assertFalse(stack.isEmpty());
 	}
 
 	@Test
-	void testPushThenPop() {
+	void shouldPushOneNTwoThenPopTwoNOne() {
 		stack.push(1);
 		stack.push(2);
 		
@@ -41,7 +41,7 @@ public abstract class StackTest {
 	}
 
 	@Test
-	void testPeek() {
+	void shouldPeek() {
 		stack.push(1);
 		
 		Integer peeked = stack.peek();
@@ -50,7 +50,7 @@ public abstract class StackTest {
 	}
 	
 	@Test
-	void testFreeMakesTheStackEmpty() {
+	void shouldReturnStackToItsOriginalState() {
 		stack.push(1);
 		stack.push(2);
 		
@@ -60,7 +60,7 @@ public abstract class StackTest {
 	}
 	
 	@Test
-	void testString() {
+	void shouldReturnAlLStackItemsSeparatedByComma() {
 		stack.push(12);
 		stack.push(52);
 		stack.push(32);
@@ -68,65 +68,11 @@ public abstract class StackTest {
 		assertEquals("32, 52, 12", stack.toString());
 	}
 
-	@Test
-	void testConcatPushesStackIntoStack() {
-		stack.push(1);
-		stack.push(2);
-		stack.push(3);
-
-		Stack<Integer> other = new VectorStack<>(2);
-		other.push(4);
-		other.push(5);
-
-		stack.concat(other);
-
-		assertItems(5, 4, 3, 2, 1);
+	protected void assertItems(int... expectedItems) {
+		assertItems(stack, expectedItems);
 	}
 
-	@Test
-	void testConcatListStack() {
-		stack.push(1);
-		stack.push(2);
-		stack.push(3);
-
-		Stack<Integer> other = new ListStack<>();
-		other.push(4);
-		other.push(5);
-
-		stack.concat(other);
-
-		assertItems(5, 4, 3, 2, 1);
-	}
-
-
-	@Test
-	void concatEmptyStackKeepsTheSame() {
-		stack.push(1);
-		stack.push(2);
-		stack.push(3);
-
-		Stack<Integer> other = new VectorStack<>(2);
-
-		stack.concat(other);
-
-		assertItems(3, 2, 1);
-	}
-
-	@Test
-	void concatStackToMaximumCapacity() {
-		VectorStack<Integer> vectorStack = new VectorStack<>(3);
-		vectorStack.push(1);
-		vectorStack.push(2);
-		vectorStack.push(3);
-
-		VectorStack<Integer> other = new VectorStack<>(2);
-		other.push(4);
-		other.push(5);
-
-		assertThrows(MaximumCapacity.class, () -> vectorStack.concat(other));
-	}
-
-	private void assertItems(int... expectedItems) {
+	protected void assertItems(Stack<Integer> stack, int... expectedItems) {
 		for (int expectedItem : expectedItems)
 			assertEquals(expectedItem, stack.pop());
 	}

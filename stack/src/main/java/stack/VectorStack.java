@@ -1,5 +1,8 @@
 package stack;
 
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 public class VectorStack<T> implements Stack<T> {
 
 	// the objects length is the stack limit (initial capacity)
@@ -31,25 +34,23 @@ public class VectorStack<T> implements Stack<T> {
 	}
 	
 	public void push(T e) {
-		if (size == limit())
+		if (size == objects.length)
 			throw new MaximumCapacity();
 
 		objects[size++] = e;
 	}
 
 	public void free() {
-		if (isEmpty()) return;
-
-		for (int i = 0; i <= size; i++) pop();
+		while(!isEmpty()) pop();
 	}
 
 	public void concat(Stack<T> stackToConcat) {
 		if (stackToConcat.isEmpty())
 			return;
 
-		T elementToPush = stackToConcat.pop();
-		concat(stackToConcat);
-		push(elementToPush);
+		Iterator<T> it = stackToConcat.iterator();
+
+		while (it.hasNext()) push(it.next());
 	}
 
 	@Override
@@ -66,7 +67,21 @@ public class VectorStack<T> implements Stack<T> {
 		return sb.toString();
 	}
 
-	private int limit() {
-		return objects.length;
+	@Override
+	public Iterator<T> iterator() {
+		return new Iterator<>() {
+			private int current = 0;
+
+			@Override
+			public boolean hasNext() {
+				return current < size;
+			}
+
+			@Override
+			public T next() {
+				if (!hasNext()) throw new NoSuchElementException();
+				return objects[current++];
+			}
+		};
 	}
 }
