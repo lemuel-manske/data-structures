@@ -60,7 +60,7 @@ abstract class StackTest {
 	}
 	
 	@Test
-	void shouldReturnAlLStackItemsSeparatedByComma() {
+	void shouldReturnAllStackItemsSeparatedByComma() {
 		stack.push(12);
 		stack.push(52);
 		stack.push(32);

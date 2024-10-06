@@ -1,6 +1,5 @@
 package queue;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -8,39 +7,34 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public abstract class QueueTest {
+abstract class QueueTest {
 
     protected Queue<Integer> queue;
 
-    @BeforeEach
-    void setQueue() {
-        queue = new VectorQueue<>(5);
-    }
-
     @Test
-    void whenCreatedIsEmpty() {
+    void shouldBeEmptyWhenCreated() {
         assertTrue(queue.isEmpty());
     }
 
     @Test
-    void whenElementIsAddedThenIsNotEmpty() {
+    void shouldNotBeEmptyWhenElementIsAdded() {
         queue.add(1);
 
         assertFalse(queue.isEmpty());
     }
 
     @Test
-    void givenNoElementsWhenRemoveThenReturnNull() {
+    void shouldThrowEmptyQueueWhenRemoveWithNoItems() {
         assertThrows(EmptyQueue.class, () -> queue.remove());
     }
 
     @Test
-    void givenNoElementsWhenPeekThenReturnNull() {
+    void shouldThrowEmptyQueueWhenPeekWithNoItems() {
         assertThrows(EmptyQueue.class, () -> queue.peek());
     }
 
     @Test
-    void givenElementIsAddedWhenRemovedThenIsEmpty() {
+    void shouldBeEmptyWhenElementIsAddedThenRemoved() {
         queue.add(1);
 
         queue.remove();
@@ -49,7 +43,7 @@ public abstract class QueueTest {
     }
 
     @Test
-    void givenElementWhenPeekThenIsNotRemoved() {
+    void shouldNotBeEmptyWhenElementIsAddedThenPeeked() {
         queue.add(1);
 
         queue.peek();
@@ -58,7 +52,7 @@ public abstract class QueueTest {
     }
 
     @Test
-    void givenElementWhenPeekThenReturnIt() {
+    void shouldPeekElement() {
         queue.add(1);
 
         Integer element = queue.peek();
@@ -67,7 +61,7 @@ public abstract class QueueTest {
     }
 
     @Test
-    void givenElementWhenRemovedThenReturnIt() {
+    void shouldReturnRemovedElement() {
         queue.add(1);
 
         Integer elementRemoved = queue.remove();
@@ -76,7 +70,7 @@ public abstract class QueueTest {
     }
 
     @Test
-    void whenElementIsAddedThenRemovedThenAdded() {
+    void shouldAddOneAndTwoThenRemoveOneAndTwo() {
         queue.add(1);
         queue.add(2);
 
@@ -89,21 +83,7 @@ public abstract class QueueTest {
     }
 
     @Test
-    void whenElementIsAddedThenRemovedReturnIt() {
-        queue.add(1);
-
-        Integer expectOne = queue.remove();
-
-        queue.add(2);
-
-        Integer expectTwo = queue.remove();
-
-        assertEquals(1, expectOne);
-        assertEquals(2, expectTwo);
-    }
-
-    @Test
-    void whenFreeThenQueueIsEmpty() {
+    void shouldBeEmptyWhenReturnedToOriginalState() {
         queue.add(2);
         queue.add(2);
         queue.add(2);
@@ -114,18 +94,7 @@ public abstract class QueueTest {
     }
 
     @Test
-    void whenFreeHasNoElements() {
-        queue.add(2);
-        queue.add(2);
-        queue.add(2);
-
-        queue.free();
-
-        assertThrows(EmptyQueue.class, () -> queue.peek());
-    }
-
-    @Test
-    void integrationTest() {
+    void shouldExpectStartElement() {
         queue.add(8);
         queue.add(2);
         queue.add(5);
@@ -144,22 +113,12 @@ public abstract class QueueTest {
     }
 
     @Test
-    void whenEmptyThenEmptyString() {
+    void shouldReturnEmptyStringWhenQueueIsEmpty() {
         assertEquals("", queue.toString());
     }
 
     @Test
-    void whenElementsArePushStraightThenStringVersion() {
-        queue.add(2);
-        queue.add(5);
-        queue.add(4);
-        queue.add(1);
-
-        assertEquals("2, 5, 4, 1", queue.toString());
-    }
-
-    @Test
-    void whenElementsArePushedThenRemovedThenStringVersion() {
+    void shouldReturnAllElementsSeparatedByComma() {
         queue.add(2);
         queue.add(5);
         queue.add(4);

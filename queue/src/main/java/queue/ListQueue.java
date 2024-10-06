@@ -37,6 +37,12 @@ public class ListQueue<E> implements Queue<E> {
     }
 
     @Override
+    public Queue<E> concat(Queue<E> queueToConcat) {
+        // TODO;
+        return null;
+    }
+
+    @Override
     public void free() {
         while (!isEmpty()) remove();
     }

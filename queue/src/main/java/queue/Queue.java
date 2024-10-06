@@ -27,6 +27,11 @@ public interface Queue<E> {
     E remove();
 
     /**
+     * Concat a queue to this and returns the concatenated queue.
+     */
+    Queue<E> concat(Queue<E> queueToConcat);
+
+    /**
      * Returns the queue to its original state.
      */
     void free();
