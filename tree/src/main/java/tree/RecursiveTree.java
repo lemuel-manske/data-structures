@@ -43,8 +43,7 @@ public final class RecursiveTree<E> implements Tree<E> {
 
         AtomicInteger count = new AtomicInteger(1);
 
-        rootNode.children().forEachRemaining(
-                (_node) -> count.incrementAndGet());
+        rootNode.children().forEachRemaining(ignored -> count.incrementAndGet());
 
         return count.get();
     }
@@ -61,7 +60,7 @@ public final class RecursiveTree<E> implements Tree<E> {
 
         sb.append("<").append(node.value());
 
-        node.children().forEachRemaining((currNode) ->
+        node.children().forEachRemaining(currNode ->
                 sb.append(toString(currNode)));
 
         sb.append(">");
