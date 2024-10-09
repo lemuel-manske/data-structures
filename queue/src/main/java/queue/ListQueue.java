@@ -48,6 +48,11 @@ public class ListQueue<E> implements Queue<E> {
     }
 
     @Override
+    public void shrink() {
+        // TODO;
+    }
+
+    @Override
     public String toString() {
         return list.toString();
     }

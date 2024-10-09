@@ -3,7 +3,7 @@ package queue;
 public class VectorQueue<E> implements Queue<E> {
 
     // objects.length is queue limit (initial size)
-    private final Object[] objects;
+    private Object[] objects;
     private int start;
     private int size;
 
@@ -60,6 +60,21 @@ public class VectorQueue<E> implements Queue<E> {
     public void free() {
         while (!isEmpty()) remove();
     }
+
+    @Override
+    public void shrink() {
+        if (isEmpty()) throw new EmptyQueue();
+
+        Object[] newObjects = new Object[size];
+
+        for (int i = 0; i < size; i++)
+            newObjects[i] = objects[(start + i) % objects.length];
+
+        start = 0;
+        objects = newObjects;
+    }
+
+
 
     @Override
     public String toString() {

@@ -35,4 +35,6 @@ public interface Queue<E> {
      * Returns the queue to its original state.
      */
     void free();
+
+    void shrink();
 }
