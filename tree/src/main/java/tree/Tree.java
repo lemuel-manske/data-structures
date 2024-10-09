@@ -29,6 +29,11 @@ public interface Tree<E> {
      */
     int count();
 
+    /**
+     * Counts all leaves.
+     */
+    int countLeaves();
+
     class Node<E> {
 
         private Node<E> firstNode;

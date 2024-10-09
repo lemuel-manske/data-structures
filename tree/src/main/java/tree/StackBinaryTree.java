@@ -52,11 +52,13 @@ public final class StackBinaryTree<T> implements BinaryTree<T> {
 
     @Override
     public int count() {
+        // TODO;
         return 0;
     }
 
     @Override
     public boolean isDegenerated() {
+        // TODO;
         return false;
     }
 }
