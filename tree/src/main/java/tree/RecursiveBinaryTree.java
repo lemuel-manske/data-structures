@@ -48,6 +48,22 @@ public final class RecursiveBinaryTree<E> implements BinaryTree<E> {
         return count(root);
     }
 
+    @Override
+    public boolean isDegenerated() {
+        if (isEmpty() || count() == 1) return false;
+
+        return isDegenerated(root);
+    }
+
+    private boolean isDegenerated(Node<E> node) {
+        if (node == null) return true;
+
+        if (node.leftNode() != null && node.rightNode() != null) return false;
+
+        return isDegenerated(node.leftNode())
+                && isDegenerated(node.rightNode());
+    }
+
     private int count(BinaryTree.Node<E> root) {
         if (root == null) return 0;
 

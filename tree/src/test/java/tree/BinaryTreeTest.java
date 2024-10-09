@@ -110,4 +110,43 @@ abstract class BinaryTreeTest {
 
         assertEquals("<1<2<5<9<18<><>><12<><>>><>><>><>>", binaryTree.toString());
     }
+
+
+    @Test
+    void whenEmptyIsDegenerated() {
+        assertFalse(binaryTree.isDegenerated());
+    }
+
+    @Test
+    void whenOnlyOneNodeThenIsDegenerated() {
+        binaryTree.updateRoot(1);
+
+        assertFalse(binaryTree.isDegenerated());
+    }
+
+    @Test
+    void whenHasOnlyOneChildNodesThenIsDegenerated() {
+        BinaryTree.Node<Integer> leaf = BinaryTree.Node.of(3);
+
+        BinaryTree.Node<Integer> leftFromRoot = BinaryTree.Node.of(2, BinaryTree.Node.of(4, leaf));
+
+        BinaryTree.Node<Integer> root = BinaryTree.Node.of(1, leftFromRoot);
+
+        binaryTree.updateRoot(root);
+
+        assertTrue(binaryTree.isDegenerated());
+    }
+
+    @Test
+    void whenHasNodeWithMoreThanOneChildThenIsNotDegenerated() {
+        BinaryTree.Node<Integer> leftFromRoot = BinaryTree.Node.of(2,
+                BinaryTree.Node.of(4),
+                BinaryTree.Node.of(7));
+
+        BinaryTree.Node<Integer> root = BinaryTree.Node.of(1, leftFromRoot);
+
+        binaryTree.updateRoot(root);
+
+        assertFalse(binaryTree.isDegenerated());
+    }
 }

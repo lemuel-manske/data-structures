@@ -74,8 +74,6 @@ public class VectorQueue<E> implements Queue<E> {
         objects = newObjects;
     }
 
-
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
