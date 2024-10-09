@@ -186,7 +186,7 @@ abstract class QueueTest {
     }
 
     @Test
-    void shouldShrinkQueue() {
+    void shouldShrinkInBetween() {
         queue.add(1);
         queue.add(2);
         queue.add(3);
