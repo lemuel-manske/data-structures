@@ -31,12 +31,12 @@ class LinkedListTest {
 	
 	@Test
 	void whenCreatedShouldNotFindByIndex() {
-		assertNull(linkedList.findByIdx(0));
+		assertNull(linkedList.getByIndex(0));
 	}
 	
 	@Test
 	void whenCreatedShouldNotFindByValue() {
-		assertNull(linkedList.findByValue(35));
+		assertNull(linkedList.getByValue(35));
 	}
 
 	@Test
@@ -57,7 +57,7 @@ class LinkedListTest {
 	void whenOneElementIsAddedThemFindByIndexZero() {
 		linkedList.add(15);
 
-		LinkedList.Node<Integer> firstNode = linkedList.findByIdx(0);
+		LinkedList.Node<Integer> firstNode = linkedList.getByIndex(0);
 		
 		assertEquals(15, firstNode.value());
 	}
@@ -81,8 +81,8 @@ class LinkedListTest {
 		linkedList.add(15);
 
 		LinkedList.Node<Integer> firstNode =
-				linkedList.findByValue(15);
-		
+				linkedList.getByValue(15);
+
 		assertEquals(15, firstNode.value());
 	}
 
@@ -233,7 +233,7 @@ class LinkedListTest {
 	
 	private void assertItems(LinkedList<Integer> list, int... expectedItems) {
 		for (int i = 0; i < expectedItems.length; i++)
-			assertEquals(expectedItems[i], list.findByIdx(i).value());
+			assertEquals(expectedItems[i], list.getByIndex(i).value());
 	}
 
 	private void addMultipleElements(int... elements) {

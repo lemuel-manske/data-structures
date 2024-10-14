@@ -1,29 +1,19 @@
 package queue;
 
-public class VectorQueue<E> implements Queue<E> {
+public final class VectorQueue<E> implements Queue<E> {
 
-    // objects.length is queue limit (initial size)
     private Object[] objects;
     private int start;
     private int size;
 
-    public VectorQueue(final int initialSize) {
-        objects = new Object[initialSize];
+    public VectorQueue(final int capacity) {
+        objects = new Object[capacity];
     }
 
     @Override
     public void add(E o) {
         if (size == objects.length)
             throw new FullQueue();
-
-        // Modular arithmetic is a system of arithmetic in which numbers "reset"
-        // or "wrap around" upon reaching a certain value, called the modulus.
-        // In simple terms, instead of numbers increasing indefinitely,
-        // they are "reduced" to a fixed range, starting again
-        // from zero when they reach the modulus.
-
-        // the start + size is where we need to insert,
-        // whereas objects.length is by which to "wrap around.
 
         objects[(start + size++) % objects.length] = o;
     }
@@ -51,19 +41,14 @@ public class VectorQueue<E> implements Queue<E> {
     }
 
     @Override
-    public Queue<E> concat(Queue<E> queueToConcat) {
-        // TODO;
-        return null;
-    }
-
-    @Override
     public void free() {
         while (!isEmpty()) remove();
     }
 
     @Override
     public void shrink() {
-        if (isEmpty()) throw new EmptyQueue();
+        if (isEmpty())
+            throw new EmptyQueue();
 
         Object[] newObjects = new Object[size];
 
