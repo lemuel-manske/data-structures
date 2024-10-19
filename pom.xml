@@ -11,6 +11,7 @@
         <module>queue</module>
         <module>list</module>
         <module>stack</module>
+        <module>tree</module>
     </modules>
 
     <dependencies>
