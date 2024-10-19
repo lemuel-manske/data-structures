@@ -1,13 +1,13 @@
 package queue;
 
-import list.LinkToEndLinkedList;
+import list.DoubleAccessList;
 
-public class ListQueue<E> implements Queue<E> {
+public final class ListQueue<E> implements Queue<E> {
 
-    private final LinkToEndLinkedList<E> list;
+    private final DoubleAccessList<E> list;
 
     public ListQueue() {
-        this.list = new LinkToEndLinkedList<>();
+        this.list = new DoubleAccessList<>();
     }
 
     @Override
@@ -22,7 +22,8 @@ public class ListQueue<E> implements Queue<E> {
 
     @Override
     public E peek() {
-        if (isEmpty()) throw new EmptyQueue();
+        if (isEmpty())
+            throw new EmptyQueue();
 
         return list.getFirst().value();
     }
@@ -34,17 +35,26 @@ public class ListQueue<E> implements Queue<E> {
         list.remove(value);
 
         return value;
-    }
-
-    @Override
-    public Queue<E> concat(Queue<E> queueToConcat) {
-        // TODO;
-        return null;
-    }
+   }
 
     @Override
     public void free() {
         while (!isEmpty()) remove();
+    }
+
+    @Override
+    public void shrink() {
+        if (isEmpty())
+            throw new EmptyQueue();
+
+        DoubleAccessList.Node<E> first = list.getFirst();
+
+        while (first != null) {
+            if (first.value() == null)
+                list.remove(first.value());
+
+            first = first.nextNode();
+        }
     }
 
     @Override

@@ -8,13 +8,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class LinkToEndLinkedListTest {
+class DoubleAccessListTest {
 
-    private LinkToEndLinkedList<Integer> list;
+    private DoubleAccessList<Integer> list;
 
     @BeforeEach
     void setList() {
-        list = new LinkToEndLinkedList<>();
+        list = new DoubleAccessList<>();
     }
 
     @Test

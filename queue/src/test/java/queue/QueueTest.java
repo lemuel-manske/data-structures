@@ -135,4 +135,108 @@ abstract class QueueTest {
 
         assertEquals("3, 6, 7", queue.toString());
     }
+
+    @Test
+    void shouldThrowEmptyQueueWhenShrinkEmptyQueue() {
+        assertThrows(EmptyQueue.class, () -> queue.shrink());
+    }
+
+    @Test
+    void shouldShrinkAtEnd() {
+        queue.add(1);
+        queue.add(2);
+        queue.add(3);
+        queue.add(4);
+        queue.add(5);
+
+        queue.remove();
+        queue.remove();
+
+        queue.shrink();
+
+        assertEquals(3, queue.remove());
+        assertEquals(4, queue.remove());
+        assertEquals(5, queue.remove());
+    }
+
+    @Test
+    void shouldShrinkAtStart() {
+        queue.add(1);
+        queue.add(2);
+        queue.add(3);
+        queue.add(4);
+        queue.add(5);
+
+        queue.remove();
+        queue.remove();
+        queue.remove();
+        queue.remove();
+
+        queue.add(6);
+        queue.add(7);
+        queue.add(8);
+
+        queue.remove();
+
+        queue.shrink();
+
+        assertEquals(6, queue.remove());
+        assertEquals(7, queue.remove());
+        assertEquals(8, queue.remove());
+    }
+
+    @Test
+    void shouldShrinkInBetween() {
+        queue.add(1);
+        queue.add(2);
+        queue.add(3);
+        queue.add(4);
+        queue.add(5);
+
+        queue.remove();
+        queue.remove();
+        queue.remove();
+        queue.remove();
+
+        queue.add(6);
+        queue.add(7);
+        queue.add(8);
+        queue.add(9);
+
+        queue.remove();
+        queue.remove();
+        queue.remove();
+
+        queue.shrink();
+
+        assertEquals(8, queue.remove());
+        assertEquals(9, queue.remove());
+    }
+
+    @Test
+    void shouldShrinkAndReturnStringRepresentation() {
+        queue.add(1);
+        queue.add(2);
+        queue.add(3);
+        queue.add(4);
+        queue.add(5);
+
+        queue.remove();
+        queue.remove();
+        queue.remove();
+        queue.remove();
+
+        queue.add(6);
+        queue.add(7);
+        queue.add(8);
+        queue.add(9);
+
+        queue.remove();
+        queue.remove();
+        queue.remove();
+
+        queue.shrink();
+
+        assertEquals("8, 9", queue.toString());
+    }
 }

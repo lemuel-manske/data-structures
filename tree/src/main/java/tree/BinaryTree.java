@@ -32,6 +32,8 @@ public interface BinaryTree<E> {
      */
     int count();
 
+    boolean isDegenerated();
+
     /**
      * Represents a tree node.
      */

@@ -1,6 +1,9 @@
 package list;
 
-public final class LinkToEndLinkedList<E> {
+/**
+ * Linked list with access to the first and last elements.
+ */
+public final class DoubleAccessList<E> {
 
     private int size;
     private Node<E> firstNode;
@@ -44,7 +47,7 @@ public final class LinkToEndLinkedList<E> {
     }
 
     /**
-     * Removes an element if it is found by its value.
+     * Removes the first element with the given value.
      */
     public void remove(E e) {
         if (isEmpty()) return;
@@ -102,6 +105,10 @@ public final class LinkToEndLinkedList<E> {
 
         public T value() {
             return value;
+        }
+
+        public Node<T> nextNode() {
+            return nextNode;
         }
     }
 }

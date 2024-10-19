@@ -12,7 +12,7 @@ public final class RecursiveBinaryTree<E> implements BinaryTree<E> {
 
     @Override
     public void updateRoot(E e) {
-        root = BinaryTree.Node.of(e);
+        root = Node.of(e);
     }
 
     @Override
@@ -48,7 +48,23 @@ public final class RecursiveBinaryTree<E> implements BinaryTree<E> {
         return count(root);
     }
 
-    private int count(BinaryTree.Node<E> root) {
+    @Override
+    public boolean isDegenerated() {
+        if (isEmpty() || count() == 1) return false;
+
+        return isDegenerated(root);
+    }
+
+    private boolean isDegenerated(Node<E> node) {
+        if (node == null) return true;
+
+        if (node.leftNode() != null && node.rightNode() != null) return false;
+
+        return isDegenerated(node.leftNode())
+                && isDegenerated(node.rightNode());
+    }
+
+    private int count(Node<E> root) {
         if (root == null) return 0;
 
         return 1 + count(root.leftNode()) + count(root.rightNode());

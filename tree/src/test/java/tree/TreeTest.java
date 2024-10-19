@@ -104,4 +104,41 @@ public abstract class TreeTest {
 
         assertEquals("<root<2><15>>", tree.toString());
     }
+
+    @Test
+    void whenEmptyCountOfLeavesIsZero() {
+        assertEquals(0, tree.countLeaves());
+    }
+
+    @Test
+    void whenHasJustOneLeaveThenCountIsOne() {
+        tree.updateRoot(new Tree.Node<>("3"));
+
+        assertEquals(1, tree.countLeaves());
+    }
+
+    @Test
+    void shouldCountLeaves() {
+        Tree.Node<String> five = new Tree.Node<>("5");
+        five.append(new Tree.Node<>("10"));
+        five.append(new Tree.Node<>("11"));
+
+        Tree.Node<String> two = new Tree.Node<>("2");
+        two.append(new Tree.Node<>("4"));
+        two.append(five);
+        two.append(new Tree.Node<>("6"));
+
+        Tree.Node<String> three = new Tree.Node<>("3");
+        three.append(new Tree.Node<>("7"));
+        three.append(new Tree.Node<>("8"));
+        three.append(new Tree.Node<>("9"));
+
+        Tree.Node<String> root = new Tree.Node<>("1");
+        root.append(two);
+        root.append(three);
+
+        tree.updateRoot(root);
+
+        assertEquals(7, tree.countLeaves());
+    }
 }

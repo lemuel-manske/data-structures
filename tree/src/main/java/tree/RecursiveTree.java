@@ -49,6 +49,30 @@ public final class RecursiveTree<E> implements Tree<E> {
     }
 
     @Override
+    public int countLeaves() {
+        if (isEmpty()) return 0;
+
+        return countLeaves(rootNode);
+    }
+
+    private int countLeaves(Node<E> node) {
+        int count = 0;
+
+        boolean isLeave = node.firstNode() == null;
+
+        if (isLeave) count++;
+
+        Node<E> currNode = node.firstNode();
+
+        while(currNode != null) {
+            count += countLeaves(currNode);
+            currNode = currNode.nextNode();
+        }
+
+        return count;
+    }
+
+    @Override
     public String toString() {
         if (isEmpty()) return "<>";
 
