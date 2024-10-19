@@ -1,4 +1,3 @@
 package stack;
 
-public class EmptyStack extends RuntimeException {
-}
+public class EmptyStack extends RuntimeException { }
