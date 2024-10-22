@@ -9,12 +9,12 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class VectorQueueTest extends QueueTest {
 
     @BeforeEach
-    void setQueue() {
+    void setVectorQueue() {
         queue = new VectorQueue<>(5);
     }
 
     @Test
-    void shouldPushUntilFullQueue() {
+    void shouldThrowFullQueueWhenAddingElementToA_FullQueue() {
         queue.add(15);
         queue.add(5);
         queue.add(9);

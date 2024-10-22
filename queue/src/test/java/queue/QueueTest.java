@@ -24,12 +24,12 @@ abstract class QueueTest {
     }
 
     @Test
-    void shouldThrowEmptyQueueWhenRemoveWithNoItems() {
+    void shouldThrowEmptyQueueWhenRemovingElementForAnEmptyQueue() {
         assertThrows(EmptyQueue.class, () -> queue.remove());
     }
 
     @Test
-    void shouldThrowEmptyQueueWhenPeekWithNoItems() {
+    void shouldThrowEmptyQueueWhenPeekingElementForAnEmptyQueue() {
         assertThrows(EmptyQueue.class, () -> queue.peek());
     }
 
@@ -43,6 +43,15 @@ abstract class QueueTest {
     }
 
     @Test
+    void shouldPeekAnElement() {
+        queue.add(1);
+
+        Integer element = queue.peek();
+
+        assertEquals(1, element);
+    }
+
+    @Test
     void shouldNotBeEmptyWhenElementIsAddedThenPeeked() {
         queue.add(1);
 
@@ -52,21 +61,10 @@ abstract class QueueTest {
     }
 
     @Test
-    void shouldPeekElement() {
+    void shouldReturnTheElementWhenItIsRemoved() {
         queue.add(1);
 
-        Integer element = queue.peek();
-
-        assertEquals(1, element);
-    }
-
-    @Test
-    void shouldReturnRemovedElement() {
-        queue.add(1);
-
-        Integer elementRemoved = queue.remove();
-
-        assertEquals(1, elementRemoved);
+        assertEquals(1, queue.remove());
     }
 
     @Test
@@ -83,7 +81,7 @@ abstract class QueueTest {
     }
 
     @Test
-    void shouldBeEmptyWhenReturnedToOriginalState() {
+    void shouldBeEmptyWhenFreed() {
         queue.add(2);
         queue.add(2);
         queue.add(2);
@@ -94,7 +92,7 @@ abstract class QueueTest {
     }
 
     @Test
-    void shouldExpectStartElement() {
+    void shouldExpectFifthElementToBeRemovedAfterFifthAdditionsFourRemovesAndTwoAdditions() {
         queue.add(8);
         queue.add(2);
         queue.add(5);
@@ -113,12 +111,12 @@ abstract class QueueTest {
     }
 
     @Test
-    void shouldReturnEmptyStringWhenQueueIsEmpty() {
+    void shouldOutputEmptyStringWhenQueueIsEmpty() {
         assertEquals("", queue.toString());
     }
 
     @Test
-    void shouldReturnAllElementsSeparatedByComma() {
+    void shouldOutputAllElementsSeparatedByComma() {
         queue.add(2);
         queue.add(5);
         queue.add(4);
@@ -137,12 +135,12 @@ abstract class QueueTest {
     }
 
     @Test
-    void shouldThrowEmptyQueueWhenShrinkEmptyQueue() {
+    void shouldThrowEmptyQueueWhenShrinkingEmptyQueue() {
         assertThrows(EmptyQueue.class, () -> queue.shrink());
     }
 
     @Test
-    void shouldShrinkAtEnd() {
+    void shouldShrinkElementsAtEnd() {
         queue.add(1);
         queue.add(2);
         queue.add(3);
@@ -160,7 +158,7 @@ abstract class QueueTest {
     }
 
     @Test
-    void shouldShrinkAtStart() {
+    void shouldShrinkElementsAtStart() {
         queue.add(1);
         queue.add(2);
         queue.add(3);
@@ -214,7 +212,7 @@ abstract class QueueTest {
     }
 
     @Test
-    void shouldShrinkAndReturnStringRepresentation() {
+    void shouldOutputOnlyLeftElementsAfterShrinking() {
         queue.add(1);
         queue.add(2);
         queue.add(3);

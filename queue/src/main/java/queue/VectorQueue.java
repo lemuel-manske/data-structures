@@ -12,7 +12,7 @@ public final class VectorQueue<E> implements Queue<E> {
 
     @Override
     public void add(E o) {
-        if (size == objects.length)
+        if (isFull())
             throw new FullQueue();
 
         objects[(start + size++) % objects.length] = o;
@@ -26,8 +26,7 @@ public final class VectorQueue<E> implements Queue<E> {
     @Override
     @SuppressWarnings("unchecked")
     public E peek() {
-        if (isEmpty())
-            throw new EmptyQueue();
+        requireNotEmptyQueue();
 
         return (E) objects[start];
     }
@@ -47,8 +46,7 @@ public final class VectorQueue<E> implements Queue<E> {
 
     @Override
     public void shrink() {
-        if (isEmpty())
-            throw new EmptyQueue();
+        requireNotEmptyQueue();
 
         Object[] newObjects = new Object[size];
 
@@ -74,5 +72,14 @@ public final class VectorQueue<E> implements Queue<E> {
         }
 
         return sb.toString();
+    }
+
+    private boolean isFull() {
+        return size == objects.length;
+    }
+
+    private void requireNotEmptyQueue() {
+        if (isEmpty())
+            throw new EmptyQueue();
     }
 }

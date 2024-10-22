@@ -22,8 +22,7 @@ public final class ListQueue<E> implements Queue<E> {
 
     @Override
     public E peek() {
-        if (isEmpty())
-            throw new EmptyQueue();
+        requireNotEmptyQueue();
 
         return list.first().value();
     }
@@ -44,8 +43,7 @@ public final class ListQueue<E> implements Queue<E> {
 
     @Override
     public void shrink() {
-        if (isEmpty())
-            throw new EmptyQueue();
+        requireNotEmptyQueue();
 
         DoubleAccessLinkedList.Node<E> first = list.first();
 
@@ -60,5 +58,10 @@ public final class ListQueue<E> implements Queue<E> {
     @Override
     public String toString() {
         return list.toString();
+    }
+
+    private void requireNotEmptyQueue() {
+        if (isEmpty())
+            throw new EmptyQueue();
     }
 }
