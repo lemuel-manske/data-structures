@@ -8,10 +8,14 @@
     <version>0.0.1-SNAPSHOT</version>
 
     <modules>
+        <!-- data structures -->
         <module>queue</module>
         <module>list</module>
         <module>stack</module>
         <module>tree</module>
+
+        <!-- algorithms -->
+        <module>sort</module>
     </modules>
 
     <properties>
