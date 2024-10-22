@@ -3,10 +3,8 @@ package sort;
 public class InsertionSort<T extends Comparable<T>> implements Sortable<T> {
 
     @Override
-    public T[] sort(final T[] source) {
-        if (source.length <= 1) return source;
-
-        T[] list = source.clone();
+    public T[] sort(final T[] list) {
+        if (list.length <= 1) return list;
 
         for (int i = 1; i < list.length; i++) {
             T key = list[i];
