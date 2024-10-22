@@ -2,6 +2,9 @@ package queue;
 
 import list.DoubleAccessLinkedList;
 
+/**
+ * A queue implementation that uses a {@link DoubleAccessLinkedList} to store its elements.
+ */
 public final class ListQueue<E> implements Queue<E> {
 
     private final DoubleAccessLinkedList<E> list;

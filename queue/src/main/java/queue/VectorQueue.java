@@ -1,5 +1,8 @@
 package queue;
 
+/**
+ * A queue implementation that uses a vector to store its elements.
+ */
 public final class VectorQueue<E> implements Queue<E> {
 
     private Object[] objects;
