@@ -1,12 +1,15 @@
 package list;
 
+/**
+ * A linked list implementation.
+ */
 public final class LinkedList<T> {
 
 	private int size;
 	private Node<T> firstNode;
 
 	/**
-	 * Returns whether the list is empty.
+	 * Returns whether the list is empty or not.
 	 */
 	public boolean isEmpty() {
 		return firstNode == null;
@@ -66,11 +69,13 @@ public final class LinkedList<T> {
 	 * Removes the first node with the given value.
 	 */
 	public void remove(T value) {
-		if (isEmpty()) return;
+		if (isEmpty())
+			return;
 
 		Node<T> nodeToRemove = getByValue(value);
 
-		if (nodeToRemove == null) return;
+		if (nodeToRemove == null)
+			return;
 
 		if (nodeToRemove == firstNode)
 			firstNode = nodeToRemove.nextNode;
@@ -164,6 +169,14 @@ public final class LinkedList<T> {
 
 		public T value() {
 			return value;
+		}
+
+		public Node<T> previous() {
+			return previousNode;
+		}
+
+		public Node<T> next() {
+			return nextNode;
 		}
 	}
 }

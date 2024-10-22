@@ -1,5 +1,8 @@
 package list;
 
+/**
+ * A static list implementation.
+ */
 public final class StaticList<T> {
 
 	private static final int SIZE_TO_INCREASE = 10;
@@ -17,7 +20,7 @@ public final class StaticList<T> {
 	}
 
 	/**
-	 * Returns whether the list is empty.
+	 * Returns whether the list is empty or not.
 	 */
 	public boolean isEmpty() {
 		return size() == 0;
@@ -47,6 +50,8 @@ public final class StaticList<T> {
 
 	/**
 	 * Adds an element to the list.
+	 *
+	 * <p>When not enough size, resizes the list by copying its elements to a new list, with ten more spaces.
 	 */
 	public void add(T element) {
 		if (size == list.length)

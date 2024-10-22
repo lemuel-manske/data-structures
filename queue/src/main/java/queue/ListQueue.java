@@ -1,13 +1,13 @@
 package queue;
 
-import list.DoubleAccessList;
+import list.DoubleAccessLinkedList;
 
 public final class ListQueue<E> implements Queue<E> {
 
-    private final DoubleAccessList<E> list;
+    private final DoubleAccessLinkedList<E> list;
 
     public ListQueue() {
-        this.list = new DoubleAccessList<>();
+        this.list = new DoubleAccessLinkedList<>();
     }
 
     @Override
@@ -25,7 +25,7 @@ public final class ListQueue<E> implements Queue<E> {
         if (isEmpty())
             throw new EmptyQueue();
 
-        return list.getFirst().value();
+        return list.first().value();
     }
 
     @Override
@@ -47,13 +47,13 @@ public final class ListQueue<E> implements Queue<E> {
         if (isEmpty())
             throw new EmptyQueue();
 
-        DoubleAccessList.Node<E> first = list.getFirst();
+        DoubleAccessLinkedList.Node<E> first = list.first();
 
         while (first != null) {
             if (first.value() == null)
                 list.remove(first.value());
 
-            first = first.nextNode();
+            first = first.next();
         }
     }
 

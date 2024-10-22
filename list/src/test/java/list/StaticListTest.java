@@ -12,29 +12,29 @@ class StaticListTest {
 	private StaticList<Integer> staticList;
 	
 	@BeforeEach
-	void createStaticList() {
+	void setStaticList() {
 		staticList = new StaticList<>();
 	}
 	
 	@Test
-	void whenCreatedShouldBeEmpty() {
+	void shouldBeEmptyWhenCreated() {
 		assertTrue(staticList.isEmpty());
 	}
 	
 	@Test
-	void whenCreatedShouldHaveSizeZero() {
+	void shouldHaveSizeZeroWhenCreated() {
 		assertEquals(0, staticList.size());
 	}
 	
 	@Test
-	void whenCreatedShouldNotHaveElements() {
+	void shouldHaveNoElementsWhenCreated() {
 		assertEquals(ELEMENT_NOT_FOUND, staticList.find(3));
 		assertEquals(ELEMENT_NOT_FOUND, staticList.find(0));
 		assertEquals(ELEMENT_NOT_FOUND, staticList.find(15));
 	}
 
 	@Test
-	void whenGetElementThatNotExistsThrowException() {
+	void shouldThrowIndexOutOfBoundsExceptionForElementThatDoesNotExists() {
 		assertThrows(IndexOutOfBoundsException.class,
 				() -> staticList.get(15));
 		assertThrows(IndexOutOfBoundsException.class,
@@ -44,10 +44,15 @@ class StaticListTest {
 	}
 	
 	@Test
-	void mustAddElementsToTheList() {	
+	void shouldAddAnElementToTheListThenIsNotEmpty() {
 		addMultipleElements(15, 42, 23);
 
 		assertFalse(staticList.isEmpty());
+	}
+
+	@Test
+	void shouldAddThreeElementsToTheListAndGetThemAll() {
+		addMultipleElements(15, 42, 23);
 
 		assertEquals(15, staticList.get(0));
 		assertEquals(42, staticList.get(1));
@@ -55,7 +60,7 @@ class StaticListTest {
 	}
 	
 	@Test
-	void whenFreeThenResetListOriginalState() {
+	void shouldReturnListToItsOriginalStateWhenFreed() {
 		addMultipleElements(661, 422);
 		
 		staticList.free();
@@ -65,7 +70,7 @@ class StaticListTest {
 	}
 
 	@Test
-	void testOutput() {
+	void shouldOutputEachElementSplitByAnEmptySpace() {
 	    addMultipleElements(15, 2, 162);
 
 		String asString = staticList.toString();
@@ -74,14 +79,14 @@ class StaticListTest {
 	}
 
 	@Test
-	void testListSize() {
+	void shouldHaveSizeN_ForAListWithN_Elements() {
 		addMultipleElements(15, 61, 22, 18);
 
 		assertEquals(4, staticList.size());
 	}
 
 	@Test
-	void testRemoveItemThatNotExist() {
+	void shouldNotRemoveAnItemThatDoesNotExists() {
 		addMultipleElements(22, 18);
 
         staticList.remove(61);
@@ -90,7 +95,7 @@ class StaticListTest {
 	}
 
 	@Test
-	void testRemoveItem() {
+	void shouldRemoveAnItem() {
 		addMultipleElements(61, 15, 22, 18);
 
 		staticList.remove(61);
@@ -101,14 +106,14 @@ class StaticListTest {
 	}
 
 	@Test
-	void testResizeWhenAddingMultipleElements() {
+	void shouldResizeToAddMoreFreeSpaceWhenAddingElementsBeyondTheInitialLength() {
 		addMultipleElements(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13);
 
 		assertEquals(13, staticList.size());
 	}
 
 	@Test
-	void testReverseOrderOdd() {
+	void shouldReverseListOrderForOddAmountOfElements() {
 	    addMultipleElements(12, 23, 51, 69, 40);
 
 		staticList.reverseOrder();
@@ -117,7 +122,7 @@ class StaticListTest {
 	}
 
 	@Test
-	void testReverseOrderEven() {
+	void shouldReverseListOrderForEvenAmountOfElements() {
 		addMultipleElements(12, 23, 51, 69, 40, 29);
 
 		staticList.reverseOrder();
@@ -126,7 +131,7 @@ class StaticListTest {
 	}
 	
 	@Test
-	void testRemoveInBetween() {
+	void shouldRemoveInBetween() {
 		addMultipleElements(10, 20, 30, 40, 50, 60);
 		
 		staticList.removeInRange(2, 4);
@@ -136,7 +141,7 @@ class StaticListTest {
 	}
 
 	@Test
-	void testRemoveAtStart() {
+	void shouldRemoveElementsAtStart() {
 		addMultipleElements(10, 20, 30, 40, 50, 60);
 		
 		staticList.removeInRange(0, 2);
@@ -146,7 +151,7 @@ class StaticListTest {
 	}
 	
 	@Test
-	void testRemoveAtEnd() {
+	void shouldRemoveElementsAtEnd() {
 		addMultipleElements(10, 20, 30, 40, 50, 60);
 		
 		staticList.removeInRange(2, 5);
@@ -156,7 +161,7 @@ class StaticListTest {
 	}
 	
 	@Test
-	void testRemoveAllElements() {
+	void shouldRemoveAllElements() {
 		addMultipleElements(10, 20, 30, 40, 50, 60);
 	
 		staticList.removeInRange(0, 5);

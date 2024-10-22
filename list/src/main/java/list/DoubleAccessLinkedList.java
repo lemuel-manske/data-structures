@@ -1,11 +1,12 @@
 package list;
 
 /**
- * Linked list with access to the first and last elements.
+ * Linked list with access to the first and last {@link Node nodes}.
  */
-public final class DoubleAccessList<E> {
+public final class DoubleAccessLinkedList<E> {
 
     private int size;
+
     private Node<E> firstNode;
     private Node<E> lastNode;
 
@@ -17,7 +18,7 @@ public final class DoubleAccessList<E> {
     }
 
     /**
-     * Returns whether the list is empty.
+     * Returns whether the list is empty or not.
      */
     public boolean isEmpty() {
         return firstNode == null;
@@ -42,7 +43,7 @@ public final class DoubleAccessList<E> {
     /**
      * Gets the first node in the list.
      */
-    public Node<E> getFirst() {
+    public Node<E> first() {
         return firstNode;
     }
 
@@ -53,11 +54,13 @@ public final class DoubleAccessList<E> {
         if (isEmpty()) return;
 
         if (firstNode.value().equals(e)) {
-            if (firstNode == lastNode) {
-                firstNode = null;
-                lastNode = null;
-            } else firstNode = firstNode.nextNode;
+            if (firstNode == lastNode)
+                firstNode = lastNode = null;
+            else
+                firstNode = firstNode.nextNode;
+
             size--;
+
             return;
         }
 
@@ -67,6 +70,7 @@ public final class DoubleAccessList<E> {
         while (currentNode != null) {
             if (currentNode.value().equals(e)) {
                 previousNode.nextNode = currentNode.nextNode;
+
                 size--;
 
                 if (currentNode == lastNode) lastNode = previousNode;
@@ -107,7 +111,7 @@ public final class DoubleAccessList<E> {
             return value;
         }
 
-        public Node<T> nextNode() {
+        public Node<T> next() {
             return nextNode;
         }
     }
