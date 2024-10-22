@@ -13,7 +13,7 @@ class VectorStackTest extends StackTest {
 	}
 	
 	@Test
-	void whenItemsArePushedToTheStackLimitThenThrowMaximumCapacity() {
+	void shouldThrowMaximumCapacityWhenPushElementsBeyondTheLimit() {
 		pushNineElementsToTheTop();
 		
 		assertThrows(MaximumCapacity.class, () -> stack.push(1));

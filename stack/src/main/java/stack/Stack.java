@@ -31,6 +31,9 @@ public interface Stack<T> {
 	 */
 	void free();
 
+	/**
+	 * Returns an {@link Iterator} implementation for the stack
+	 */
 	Iterator<T> iterator();
 
 	/**

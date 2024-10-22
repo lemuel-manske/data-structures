@@ -43,10 +43,8 @@ abstract class StackTest {
 	@Test
 	void shouldPeek() {
 		stack.push(1);
-		
-		Integer peeked = stack.peek();
-		
-		assertEquals(1, peeked);
+
+        assertEquals(1, stack.peek());
 	}
 	
 	@Test
