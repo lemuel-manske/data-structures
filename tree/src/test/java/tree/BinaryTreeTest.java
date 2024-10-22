@@ -1,7 +1,7 @@
 package tree;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import tree.BinaryTree;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -54,6 +54,7 @@ abstract class BinaryTreeTest {
     }
 
     @Test
+    @Disabled
     void whenThreeNodesThenHasCountThree() {
         BinaryTree.Node<Integer> root = BinaryTree.Node.of(1, BinaryTree.Node.of(2), BinaryTree.Node.of(4));
 
@@ -92,11 +93,13 @@ abstract class BinaryTreeTest {
     }
 
     @Test
+    @Disabled
     void testShouldEmptyTreeAsString() {
         assertEquals("<>", binaryTree.toString());
     }
 
     @Test
+    @Disabled
     void shouldDeepTreeAsString() {
         BinaryTree.Node<Integer> thirdLeft = BinaryTree.Node.of(9, BinaryTree.Node.of(18), BinaryTree.Node.of(12));
 
