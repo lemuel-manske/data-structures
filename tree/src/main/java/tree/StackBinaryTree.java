@@ -3,6 +3,10 @@ package tree;
 import stack.ListStack;
 import stack.Stack;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Consumer;
+
 public final class StackBinaryTree<T> implements BinaryTree<T> {
 
     private Node<T> root;
@@ -29,25 +33,17 @@ public final class StackBinaryTree<T> implements BinaryTree<T> {
 
     @Override
     public boolean has(T t) {
-        if (isEmpty()) return false;
+        if (isEmpty())
+            return false;
 
-        Stack<Node<T>> stackOfNodes = new ListStack<>();
+        final AtomicBoolean found = new AtomicBoolean(false);
 
-        stackOfNodes.push(root);
+        traverse(node -> {
+            if (node.value().equals(t))
+                found.set(true);
+        });
 
-        while(!stackOfNodes.isEmpty()) {
-            Node<T> currNode = stackOfNodes.pop();
-
-            if (currNode.value().equals(t)) return true;
-
-            if (currNode.leftNode() != null)
-                stackOfNodes.push(currNode.leftNode());
-
-            if (currNode.rightNode() != null)
-                stackOfNodes.push(currNode.rightNode());
-        }
-
-        return false;
+        return found.get();
     }
 
     @Override
@@ -55,25 +51,11 @@ public final class StackBinaryTree<T> implements BinaryTree<T> {
         if (isEmpty())
             return 0;
 
-        int count = 0;
+        final AtomicInteger count = new AtomicInteger();
 
-        Stack<Node<T>> stackOfNodes = new ListStack<>();
+        traverse(node -> count.getAndIncrement());
 
-        stackOfNodes.push(root);
-
-        while(!stackOfNodes.isEmpty()) {
-            Node<T> currNode = stackOfNodes.pop();
-
-            count++;
-
-            if (currNode.leftNode() != null)
-                stackOfNodes.push(currNode.leftNode());
-
-            if (currNode.rightNode() != null)
-                stackOfNodes.push(currNode.rightNode());
-        }
-
-        return count;
+        return count.get();
     }
 
     @Override
@@ -81,6 +63,23 @@ public final class StackBinaryTree<T> implements BinaryTree<T> {
         if (isEmpty() || count() == 1)
             return false;
 
+        final AtomicBoolean isDegenerated = new AtomicBoolean(true);
+
+        traverse(node -> {
+            if (node.leftNode() != null && node.rightNode() != null)
+                isDegenerated.set(false);
+        });
+
+        return isDegenerated.get();
+    }
+
+    @Override
+    public String toString() {
+        // TODO
+        return "<>";
+    }
+
+    private void traverse(Consumer<Node<T>> consumer) {
         Stack<Node<T>> stackOfNodes = new ListStack<>();
 
         stackOfNodes.push(root);
@@ -88,22 +87,14 @@ public final class StackBinaryTree<T> implements BinaryTree<T> {
         while(!stackOfNodes.isEmpty()) {
             Node<T> currNode = stackOfNodes.pop();
 
-            if (currNode.leftNode() != null && currNode.rightNode() != null)
-                return false;
+            consumer.accept(currNode);
 
-            else if (currNode.leftNode() != null)
+            if (currNode.leftNode() != null)
                 stackOfNodes.push(currNode.leftNode());
 
-            else if (currNode.rightNode() != null)
+            if (currNode.rightNode() != null)
                 stackOfNodes.push(currNode.rightNode());
         }
-
-        return true;
     }
 
-    @Override
-    public String toString() {
-        // TODO
-        return "";
-    }
 }
