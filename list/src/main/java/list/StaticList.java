@@ -10,7 +10,15 @@ public final class StaticList<T> {
 	public static final int NO_ELEMENT_EXCEPTION_CODE = -1;
 
 	private int size = 0;
-	private Object[] list = new Object[DEFAULT_LIST_SIZE];
+	private Object[] list;
+
+	public StaticList() {
+		list = new Object[DEFAULT_LIST_SIZE];
+	}
+
+	public StaticList(final int initialSize) {
+		list = new Object[initialSize];
+	}
 
 	/**
 	 * Returns the current size of the list.
