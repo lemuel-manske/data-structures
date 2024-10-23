@@ -52,13 +52,58 @@ public final class StackBinaryTree<T> implements BinaryTree<T> {
 
     @Override
     public int count() {
-        // TODO;
-        return 0;
+        if (isEmpty())
+            return 0;
+
+        int count = 0;
+
+        Stack<Node<T>> stackOfNodes = new ListStack<>();
+
+        stackOfNodes.push(root);
+
+        while(!stackOfNodes.isEmpty()) {
+            Node<T> currNode = stackOfNodes.pop();
+
+            count++;
+
+            if (currNode.leftNode() != null)
+                stackOfNodes.push(currNode.leftNode());
+
+            if (currNode.rightNode() != null)
+                stackOfNodes.push(currNode.rightNode());
+        }
+
+        return count;
     }
 
     @Override
     public boolean isDegenerated() {
-        // TODO;
-        return false;
+        if (isEmpty() || count() == 1)
+            return false;
+
+        Stack<Node<T>> stackOfNodes = new ListStack<>();
+
+        stackOfNodes.push(root);
+
+        while(!stackOfNodes.isEmpty()) {
+            Node<T> currNode = stackOfNodes.pop();
+
+            if (currNode.leftNode() != null && currNode.rightNode() != null)
+                return false;
+
+            else if (currNode.leftNode() != null)
+                stackOfNodes.push(currNode.leftNode());
+
+            else if (currNode.rightNode() != null)
+                stackOfNodes.push(currNode.rightNode());
+        }
+
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        // TODO
+        return "";
     }
 }
