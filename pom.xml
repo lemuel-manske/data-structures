@@ -13,6 +13,7 @@
         <module>list</module>
         <module>stack</module>
         <module>tree</module>
+        <module>map</module>
 
         <!-- algorithms -->
         <module>sort</module>
