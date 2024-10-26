@@ -13,12 +13,4 @@
     <groupId>list</groupId>
     <artifactId>list</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-
-    <dependencies>
-        <dependency>
-            <groupId>sort</groupId>
-            <artifactId>sort</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-    </dependencies>
 </project>
