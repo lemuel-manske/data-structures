@@ -15,7 +15,7 @@ public final class StaticList<T extends Comparable<T>> {
 	private Object[] list;
 
 	public StaticList() {
-		list = new Object[DEFAULT_LIST_SIZE];
+		list = new Comparable[DEFAULT_LIST_SIZE];
 	}
 
 	public StaticList(final int initialSize) {

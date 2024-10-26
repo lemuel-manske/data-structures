@@ -2,6 +2,7 @@ package list;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
+import sort.QuickSort;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -167,6 +168,15 @@ class StaticListTest {
 		staticList.removeInRange(0, 5);
 		
 		assertEquals(0, staticList.size());
+	}
+
+	@Test
+	void shouldSort() {
+		addMultipleElements(60, 10, 50, 20, 40, 30, 70, 80, 90, 100);
+
+		staticList.sort(new QuickSort<>());
+
+		assertItems(10, 20, 30, 40, 50, 60, 70, 80, 90, 100);
 	}
 	
 	private void assertItems(int... expectedItems) {
