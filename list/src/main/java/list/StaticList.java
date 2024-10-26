@@ -1,9 +1,11 @@
 package list;
 
+import sort.Sortable;
+
 /**
  * A static list implementation.
  */
-public final class StaticList<T> {
+public final class StaticList<T extends Comparable<T>> {
 
 	private static final int SIZE_TO_INCREASE = 10;
 	private static final int DEFAULT_LIST_SIZE = 10;
@@ -129,6 +131,14 @@ public final class StaticList<T> {
 			size--;
 			nextToRemove++;
 		}
+	}
+
+	/**
+	 * Sorts the list using the given ${@link Sortable} strategy.
+	 */
+	@SuppressWarnings("unchecked")
+	public void sort(final Sortable<T> sortStrategy) {
+		sortStrategy.sort((T[]) list);
 	}
 
 	@Override
