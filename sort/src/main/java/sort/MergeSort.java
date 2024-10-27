@@ -2,7 +2,6 @@ package sort;
 
 public class MergeSort<T extends Comparable<T>> implements Sortable<T> {
 
-
     @Override
     public T[] sort(final T[] list) {
         if (list.length <= 1) return list;
@@ -12,7 +11,7 @@ public class MergeSort<T extends Comparable<T>> implements Sortable<T> {
         return list;
     }
 
-    public void sort(final T[] list, int begin, int end) {
+    private void sort(final T[] list, int begin, int end) {
         if (begin >= end)
             return;
 
@@ -21,62 +20,46 @@ public class MergeSort<T extends Comparable<T>> implements Sortable<T> {
         sort(list, begin, mid);
         sort(list, mid + 1, end);
 
-        merge(list, begin, end, mid);
+        merge(list, begin, mid, end);
     }
 
-    private void merge(T[] list, int begin, int end, int mid) {
+    private void merge(T[] list, int begin, int mid, int end) {
         T[] left = createLeft(list, begin, mid);
-        T[] right = createRight(list, begin, end, mid);
+        T[] right = createRight(list, mid, end);
 
         int compareLeft = 0;
         int compareRight = 0;
 
-        int stopAt = 0;
+        int i = begin;
 
-        for (int i = begin; i <= end; i++) {
-            if (compareLeft < left.length && compareRight < right.length) {
-                if (left[compareLeft].compareTo(right[compareRight]) < 0) {
-                    list[i] = left[compareLeft];
-                    compareLeft +=1;
-                }
-                else {
-                    list[i] = right[compareRight];
-                    compareRight += 1;
-                }
+        while (compareLeft < left.length && compareRight < right.length) {
+            if (left[compareLeft].compareTo(right[compareRight]) <= 0) {
+                list[i++] = left[compareLeft++];
             } else {
-                stopAt = i;
-                break;
+                list[i++] = right[compareRight++];
             }
         }
 
         while (compareLeft < left.length) {
-            list[stopAt] = left[compareLeft];
-            compareLeft += 1;
-            stopAt += 1;
+            list[i++] = left[compareLeft++];
         }
 
         while (compareRight < right.length) {
-            list[stopAt] = right[compareRight];
-            compareRight += 1;
-            stopAt += 1;
+            list[i++] = right[compareRight++];
         }
     }
 
+    @SuppressWarnings("unchecked")
     private T[] createLeft(T[] list, int begin, int mid) {
         T[] left = (T[]) new Comparable[mid - begin + 1];
-
-        for (int i = 0; i < left.length; i++)
-            left[i] = list[begin +i];
-
+        System.arraycopy(list, begin, left, 0, left.length);
         return left;
     }
 
-    private T[] createRight(T[] list, int begin, int end, int mid) {
+    @SuppressWarnings("unchecked")
+    private T[] createRight(T[] list, int mid, int end) {
         T[] right = (T[]) new Comparable[end - mid];
-
-        for (int i = 0; i < right.length; i++)
-            right[i] = list[begin + i + 1];
-
+        System.arraycopy(list, mid + 1, right, 0, right.length);
         return right;
     }
 }
