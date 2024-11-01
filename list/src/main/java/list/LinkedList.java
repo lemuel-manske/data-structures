@@ -53,9 +53,9 @@ public final class LinkedList<T> {
 	/**
 	 * Adds a new element to the list.
 	 */
-	public void add(T e) {
+	public void add(T value) {
 		size++;
-		Node<T> newNode = new Node<>(e);
+		Node<T> newNode = new Node<>(value);
 
         if (!isEmpty()) {
             newNode.nextNode = firstNode;
@@ -98,7 +98,7 @@ public final class LinkedList<T> {
 		Node<T> current = firstNode;
 
 		while (current != null) {
-			newList.add(current.value());
+			newList.add(current.getValue());
 			current = current.nextNode;
 		}
 
@@ -120,7 +120,7 @@ public final class LinkedList<T> {
 		LinkedList<T> newList = new LinkedList<>();
 
 		for (int i = startIndex; i <= endIndex && node != null; i++) {
-			newList.add(node.value());
+			newList.add(node.getValue());
 			node = node.previousNode;
 		}
 
@@ -146,7 +146,7 @@ public final class LinkedList<T> {
 		Node<T> current = firstNode;
 
 		while (current != null) {
-			builder.append(current.value());
+			builder.append(current.getValue());
 
 			if (current.nextNode != null)
 				builder.append(", ");
@@ -167,15 +167,15 @@ public final class LinkedList<T> {
 			this.value = value;
 		}
 
-		public T value() {
+		public T getValue() {
 			return value;
 		}
 
-		public Node<T> previous() {
+		public Node<T> getPreviousNode() {
 			return previousNode;
 		}
 
-		public Node<T> next() {
+		public Node<T> getNextNode() {
 			return nextNode;
 		}
 	}

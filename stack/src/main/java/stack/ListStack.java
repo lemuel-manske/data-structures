@@ -29,7 +29,7 @@ public class ListStack<T> implements Stack<T> {
 		if (isEmpty())
 			throw new EmptyStack();
 
-		return list.getByIndex(0).value();
+		return list.getByIndex(0).getValue();
 	}
 	
 	public void push(T e) {
@@ -68,7 +68,7 @@ public class ListStack<T> implements Stack<T> {
 			@Override
 			public T next() {
 				if (!hasNext()) throw new NoSuchElementException();
-				return list.getByIndex(current--).value();
+				return list.getByIndex(current--).getValue();
 			}
 		};
 	}

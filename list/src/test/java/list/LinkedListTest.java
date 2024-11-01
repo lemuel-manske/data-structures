@@ -59,7 +59,7 @@ class LinkedListTest {
 
 		LinkedList.Node<Integer> firstNode = linkedList.getByIndex(0);
 		
-		assertEquals(15, firstNode.value());
+		assertEquals(15, firstNode.getValue());
 	}
 	
 	@Test
@@ -83,7 +83,7 @@ class LinkedListTest {
 		LinkedList.Node<Integer> firstNode =
 				linkedList.getByValue(15);
 
-		assertEquals(15, firstNode.value());
+		assertEquals(15, firstNode.getValue());
 	}
 
 	@Test
@@ -231,7 +231,7 @@ class LinkedListTest {
 	
 	private void assertItems(LinkedList<Integer> list, int... expectedItems) {
 		for (int i = 0; i < expectedItems.length; i++)
-			assertEquals(expectedItems[i], list.getByIndex(i).value());
+			assertEquals(expectedItems[i], list.getByIndex(i).getValue());
 	}
 
 	private void addMultipleElements(int... elements) {

@@ -41,7 +41,7 @@ public class HashMap<T> {
          if (bucketNode == null)
              return null;
 
-        return bucketNode.value().getValue();
+        return bucketNode.getValue().getValue();
     }
 
     private int calculateHash(final int key) {
