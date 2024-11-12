@@ -2,7 +2,7 @@ package sort;
 
 import org.junit.jupiter.api.BeforeEach;
 
-public class QuickSortTest extends SortableTest {
+public class QuickSortTest extends SortStrategyTest {
 
     @BeforeEach
     void setSortStrategy() {

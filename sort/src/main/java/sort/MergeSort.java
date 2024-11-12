@@ -1,6 +1,6 @@
 package sort;
 
-public class MergeSort<T extends Comparable<T>> implements Sortable<T> {
+public class MergeSort<T extends Comparable<T>> implements SortStrategy<T> {
 
     @Override
     public T[] sort(final T[] list) {

@@ -1,6 +1,6 @@
 package sort;
 
-public class QuickSort<T extends Comparable<T>> implements Sortable<T> {
+public class QuickSort<T extends Comparable<T>> implements SortStrategy<T> {
 
     @Override
     public T[] sort(final T[] list) {
@@ -26,13 +26,9 @@ public class QuickSort<T extends Comparable<T>> implements Sortable<T> {
 
         int i = begin - 1;
 
-        for (int j = begin; j < end; j++) {
-            if (list[j].compareTo(pivot) <= 0) {
-                i++;
-
-                swap(list, i, j);
-            }
-        }
+        for (int j = begin; j < end; j++)
+            if (list[j].compareTo(pivot) <= 0)
+                swap(list, ++i, j);
 
         swap(list, i+1, end);
 

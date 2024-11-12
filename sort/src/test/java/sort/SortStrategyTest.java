@@ -4,9 +4,9 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
-public abstract class SortableTest {
+public abstract class SortStrategyTest {
 
-    protected Sortable<Integer> sortStrategy;
+    protected SortStrategy<Integer> sortStrategy;
 
     @Test
     void shouldReturnEmptyArrayWhenSortingEmptyArray() {
