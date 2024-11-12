@@ -17,6 +17,7 @@
 
         <!-- algorithms -->
         <module>sort</module>
+        <module>search</module>
     </modules>
 
     <properties>

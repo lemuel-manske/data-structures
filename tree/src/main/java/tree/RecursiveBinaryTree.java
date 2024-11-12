@@ -20,7 +20,6 @@ public final class RecursiveBinaryTree<E> implements BinaryTree<E> {
         root = newRoot;
     }
 
-
     @Override
     public Node<E> getRoot() {
         return root;
