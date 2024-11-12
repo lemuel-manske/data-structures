@@ -4,7 +4,7 @@ import list.LinkedList;
 
 public class HashMap<T> {
 
-    private final LinkedList<MapNode<T>>[] buckets;
+    private final LinkedList<Node<T>>[] buckets;
 
     public HashMap(final int size) {
         buckets = new LinkedList[size];
@@ -16,7 +16,7 @@ public class HashMap<T> {
         if (buckets[index] == null)
             buckets[index] = new LinkedList<>();
 
-        final MapNode<T> node = new MapNode<>(key, value);
+        final Node<T> node = new Node<>(key, value);
 
         buckets[index].add(node);
     }
@@ -25,7 +25,7 @@ public class HashMap<T> {
         if (buckets[key] == null)
             return;
 
-        final MapNode<T> node = new MapNode<>(key);
+        final Node<T> node = new Node<>(key);
 
         buckets[key].remove(node);
     }
@@ -34,9 +34,9 @@ public class HashMap<T> {
         if (buckets[key] == null)
             return null;
 
-        final MapNode<T> node = new MapNode<>(key);
+        final Node<T> node = new Node<>(key);
 
-         LinkedList.Node<MapNode<T>> bucketNode = buckets[key].getByValue(node);
+         LinkedList.Node<Node<T>> bucketNode = buckets[key].getByValue(node);
 
          if (bucketNode == null)
              return null;
@@ -46,5 +46,41 @@ public class HashMap<T> {
 
     private int calculateHash(final int key) {
         return key % buckets.length;
+    }
+
+    public static class Node<T> {
+
+        private final int key;
+        private final T value;
+
+        public Node(final int key, final T value) {
+            this.key = key;
+            this.value = value;
+        }
+
+        public Node(int key) {
+            this.key = key;
+            this.value = null;
+        }
+
+        public int getKey() {
+            return key;
+        }
+
+        public T getValue() {
+            return value;
+        }
+
+        @Override
+        public boolean equals(final Object obj) {
+            if (this == obj) {
+                return true;
+            }
+            if (obj == null || getClass() != obj.getClass()) {
+                return false;
+            }
+            final Node<?> node = (Node<?>) obj;
+            return key == node.key;
+        }
     }
 }
