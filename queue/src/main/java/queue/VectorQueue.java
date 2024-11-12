@@ -27,7 +27,6 @@ public final class VectorQueue<E> implements Queue<E> {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public E peek() {
         requireNotEmptyQueue();
 

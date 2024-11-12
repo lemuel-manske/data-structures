@@ -5,11 +5,9 @@ import java.util.NoSuchElementException;
 
 public class VectorStack<T> implements Stack<T> {
 
-	// the objects length is the stack limit (initial capacity)
 	private final T[] objects;
 	private int size;
 	
-	@SuppressWarnings("unchecked")
 	public VectorStack (int initialCapacity) {
 		objects = (T[]) new Object[initialCapacity];
 	}
