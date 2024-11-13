@@ -15,12 +15,14 @@ public class BinarySearch<T extends Comparable<T>> implements SearchStrategy<T> 
 
         int pivot = end + (start - end) / 2;
 
-        if (elementToFind.compareTo(items[pivot]) == 0)
+        T found = items[pivot];
+
+        if (found != null && elementToFind.compareTo(found) == 0)
             return pivot;
 
-        if (elementToFind.compareTo(items[pivot]) > 0)
+        if (found != null && elementToFind.compareTo(found) > 0)
             return search(items, start, pivot - 1, elementToFind);
 
-        return  search(items, pivot + 1, end, elementToFind);
+        return search(items, pivot + 1, end, elementToFind);
     }
 }

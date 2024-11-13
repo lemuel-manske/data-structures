@@ -13,6 +13,11 @@ public interface BinaryTree<E> {
     void updateRoot(Node<E> newRoot);
 
     /**
+     * Adds a node.
+     */
+    void add(E e);
+
+    /**
      * Gets the root node of the tree.
      */
     Node<E> getRoot();

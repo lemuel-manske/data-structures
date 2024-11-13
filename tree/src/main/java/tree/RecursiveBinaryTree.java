@@ -21,6 +21,15 @@ public final class RecursiveBinaryTree<E> implements BinaryTree<E> {
     }
 
     @Override
+    public void add(E e) {
+        if (isEmpty()) updateRoot(e);
+
+        add(e, root);
+    }
+
+    private void add(E e, Node<E> node) { }
+
+    @Override
     public Node<E> getRoot() {
         return root;
     }
