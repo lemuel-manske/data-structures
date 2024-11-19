@@ -2,7 +2,7 @@ package tree;
 
 import org.junit.jupiter.api.BeforeEach;
 
-class RecursiveBinaryTreeTest extends BinaryTreeTest {
+class RecursiveBinaryTreeTest extends AbstractBinaryTreeTest {
 
     @BeforeEach
     void setTree() {
