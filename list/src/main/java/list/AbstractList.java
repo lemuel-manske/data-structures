@@ -10,7 +10,7 @@ public abstract class AbstractList<T> {
 	public static final int NO_ELEMENT_EXCEPTION_CODE = -1;
 
 	protected int size = 0;
-	protected Comparable[] list;
+	protected Comparable<T>[] list;
 
 	public AbstractList() {
 		list = new Comparable[DEFAULT_LIST_SIZE];
@@ -74,7 +74,7 @@ public abstract class AbstractList<T> {
 
 		if (index == NO_ELEMENT_EXCEPTION_CODE) return;
 
-		for (int i = index; i < size() - 1; i++)
+		for (int i = index; i < size(); i++)
 			list[i] = list[i + 1];
 
 		size--;

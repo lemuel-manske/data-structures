@@ -17,27 +17,23 @@ public class SortedStaticList<T extends Comparable<T>> extends AbstractList<T> {
         if (size == list.length)
             resizeList();
 
-        int p = 0;
+        int pos = findRightPosFor(element);
 
-        // 61 null null null
-        //
-
-        while (p < size) {
-            T e = get(p); // 61
-
-            if (e != null)
-                if (e.compareTo(element) < 0)
-                    p++;
-
-                else if (e.compareTo(element) > 0) {
-                    list[p + 1] = e;
-                    break;
-                }
+        for (int i = size(); i > pos; i--) {
+            list[i] = list[i-1];
         }
 
-        list[p] = element;
-
+        list[pos] = element;
         size++;
     }
-}
 
+    private int findRightPosFor(T e) {
+        int i;
+
+        for (i = 0; i < size(); i++)
+            if (list[i].compareTo(e) > 0)
+                break;
+
+        return i;
+    }
+}

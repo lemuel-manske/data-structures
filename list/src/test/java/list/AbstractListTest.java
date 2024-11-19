@@ -89,13 +89,41 @@ abstract class AbstractListTest {
 	}
 
 	@Test
-	void shouldRemoveAnItem() {
-		add(61, 15, 22, 18);
+	void shouldRemoveAnItemThenDecreaseSize() {
+		add(15, 18, 22, 61);
 
 		list.remove(61);
 
         assertEquals(3, list.size());
-		assertEquals(15, list.get(0)); // fifty is the new element at 0
+	}
+
+	@Test
+	void shouldRemoveAnItem() {
+		add(15, 18, 22, 61);
+
+		list.remove(22);
+
+		assertEquals(3, list.size());
+		assertEquals(ELEMENT_NOT_FOUND, list.find(22));
+	}
+
+	@Test
+	void shouldRemoveAnItemAtTheStart() {
+		add(15, 18, 22, 61);
+
+		list.remove(15);
+
+		assertEquals(3, list.size());
+		assertEquals(ELEMENT_NOT_FOUND, list.find(15));
+	}
+
+	@Test
+	void shouldRemoveAnItemAtTheEnd() {
+		add(15, 18, 22, 61);
+
+		list.remove(61);
+
+		assertEquals(3, list.size());
 		assertEquals(ELEMENT_NOT_FOUND, list.find(61));
 	}
 
@@ -163,12 +191,12 @@ abstract class AbstractListTest {
 		assertEquals(0, list.size());
 	}
 	
-	private void assertItems(int... expectedItems) {
+	protected void assertItems(int... expectedItems) {
 		for (int i = 0; i < expectedItems.length; i++)
 			assertEquals(expectedItems[i], list.get(i));
 	}
 
-	private void add(int... elements) {
+	protected void add(int... elements) {
 		for (int element : elements)
 			list.add(element);
 	}
