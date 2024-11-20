@@ -3,7 +3,7 @@ package list;
 import search.BinarySearch;
 import search.SearchStrategy;
 
-public class SortedStaticList<T extends Comparable<T>> extends AbstractList<T> {
+public class SortedArrayList<T extends Comparable<T>> extends AbstractArrayList<T> {
 
     private final SearchStrategy<T> searchStrategy = new BinarySearch<>();
 
@@ -19,9 +19,8 @@ public class SortedStaticList<T extends Comparable<T>> extends AbstractList<T> {
 
         int pos = findRightPosFor(element);
 
-        for (int i = size(); i > pos; i--) {
+        for (int i = size(); i > pos; i--)
             list[i] = list[i-1];
-        }
 
         list[pos] = element;
         size++;

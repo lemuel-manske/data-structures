@@ -1,8 +1,5 @@
 package list;
 
-/**
- * A linked list implementation.
- */
 public final class LinkedList<T> {
 
 	private int size;

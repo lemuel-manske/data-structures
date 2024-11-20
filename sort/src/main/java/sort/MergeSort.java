@@ -49,14 +49,12 @@ public class MergeSort<T extends Comparable<T>> implements SortStrategy<T> {
         }
     }
 
-    @SuppressWarnings("unchecked")
     private T[] createLeft(T[] list, int begin, int mid) {
         T[] left = (T[]) new Comparable[mid - begin + 1];
         System.arraycopy(list, begin, left, 0, left.length);
         return left;
     }
 
-    @SuppressWarnings("unchecked")
     private T[] createRight(T[] list, int mid, int end) {
         T[] right = (T[]) new Comparable[end - mid];
         System.arraycopy(list, mid + 1, right, 0, right.length);

@@ -21,11 +21,6 @@ public abstract class SortStrategyTest {
 
         assertArrayEquals(oneElementArray, sortStrategy.sort(oneElementArray));
     }
-    
-    @Test
-    void shouldSortTwoElementsArray() {
-        
-    }
 
     @Test
     void shouldSortThreeElementsArray() {

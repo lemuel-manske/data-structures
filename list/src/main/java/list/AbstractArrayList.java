@@ -1,9 +1,6 @@
 package list;
 
-/**
- * A static list implementation.
- */
-public abstract class AbstractList<T> {
+public abstract class AbstractArrayList<T> {
 
 	private static final int SIZE_TO_INCREASE = 10;
 	private static final int DEFAULT_LIST_SIZE = 10;
@@ -12,11 +9,11 @@ public abstract class AbstractList<T> {
 	protected int size = 0;
 	protected Comparable<T>[] list;
 
-	public AbstractList() {
+	public AbstractArrayList() {
 		list = new Comparable[DEFAULT_LIST_SIZE];
 	}
 
-	public AbstractList(final int initialSize) {
+	public AbstractArrayList(final int initialSize) {
 		list = new Comparable[initialSize];
 	}
 

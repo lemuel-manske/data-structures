@@ -1,8 +1,5 @@
 package list;
 
-/**
- * Linked list with access to the first and last {@link Node nodes}.
- */
 public final class DoubleAccessLinkedList<E> {
 
     private int size;

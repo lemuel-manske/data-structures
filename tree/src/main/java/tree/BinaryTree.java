@@ -1,21 +1,33 @@
 package tree;
 
-public abstract class AbstractBinaryTree<E> {
+public class BinaryTree<E extends Comparable<E>> {
 
     private Node<E> root;
 
-    public AbstractBinaryTree() { }
+    public BinaryTree() { }
 
-    public AbstractBinaryTree(Node<E> root) {
+    public BinaryTree(Node<E> root) {
         this.root = root;
     }
 
-    protected void updateRoot(E e) {
-        root = Node.of(e);
+    protected void updateRoot(Node<E> e) {
+        if (isEmpty())
+            root = e;
+        else
+            updateRoot(root, e);
     }
 
-    protected void updateRoot(Node<E> newRoot) {
-        root = newRoot;
+    private void updateRoot(Node<E> node, Node<E> e) {
+        if (node.value().compareTo(e.value()) > 0)
+            if (node.leftNode() == null)
+                node.setL(e);
+            else
+                updateRoot(node.leftNode(), e);
+        else
+            if (node.rightNode() == null)
+                node.setR(e);
+            else
+                updateRoot(node.rightNode(), e);
     }
 
     /**
@@ -64,9 +76,31 @@ public abstract class AbstractBinaryTree<E> {
     }
 
     /**
+     * Adds an element to the tree.
+     */
+    public void add(E e) {
+        updateRoot(Node.of(e));
+    }
+
+    /**
      * Finds a {@link Node} with the given value in the tree.
      */
-    public abstract Node<E> find(E e);
+    public Node<E> find(E e) {
+        if (isEmpty()) return null;
+
+        return find(getRoot(), e);
+    }
+
+    private Node<E> find(Node<E> node, E e) {
+        if (node == null) return null;
+
+        if (node.value().equals(e)) return node;
+
+        if (e.compareTo(node.value()) < 0)
+            return find(node.left, e);
+        else
+            return find(node.right, e);
+    }
 
     private boolean isDegenerated(Node<E> node) {
         if (node == null) return true;
@@ -97,13 +131,20 @@ public abstract class AbstractBinaryTree<E> {
     }
 
     /**
+     * Removes a node in the tree by matching its value.
+     */
+    public void remove(E e) {
+
+    }
+
+    /**
      * Represents a tree node.
      */
     public static class Node<T> {
 
         private final T value;
-        private final Node<T> left;
-        private final Node<T> right;
+        private Node<T> left;
+        private Node<T> right;
 
         private Node(T value) {
             this.value = value;
@@ -150,6 +191,14 @@ public abstract class AbstractBinaryTree<E> {
         @Override
         public String toString() {
             return value.toString();
+        }
+
+        public void setL(Node<T> e) {
+            left = e;
+        }
+
+        public void setR(Node<T> e) {
+            right = e;
         }
     }
 }

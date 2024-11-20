@@ -5,9 +5,9 @@ import list.LinkedList;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class ListStack<T> implements Stack<T> {
+public class ListStack<E> implements Stack<E> {
 
-	private final LinkedList<T> list;
+	private final LinkedList<E> list;
 	
 	public ListStack() {
 		list = new LinkedList<>();
@@ -17,22 +17,22 @@ public class ListStack<T> implements Stack<T> {
 		return list.isEmpty();
 	}
 	
-	public T pop() {
-		T valueToPop = peek();
+	public E pop() {
+		E valueToPop = peek();
 		
 		list.remove(valueToPop);
 		
 		return valueToPop;
 	}
 	
-	public T peek() {
+	public E peek() {
 		if (isEmpty())
 			throw new EmptyStack();
 
 		return list.getByIndex(0).getValue();
 	}
 	
-	public void push(T e) {
+	public void push(E e) {
 		list.add(e);
 	}
 
@@ -41,11 +41,11 @@ public class ListStack<T> implements Stack<T> {
 	}
 
 
-	public void concat(Stack<T> stackToConcat) {
+	public void concat(Stack<E> stackToConcat) {
 		if (stackToConcat.isEmpty())
 			return;
 
-		Iterator<T> it = stackToConcat.iterator();
+		Iterator<E> it = stackToConcat.iterator();
 
 		while (it.hasNext()) push(it.next());
 	}
@@ -56,7 +56,7 @@ public class ListStack<T> implements Stack<T> {
 	}
 
 	@Override
-	public Iterator<T> iterator() {
+	public Iterator<E> iterator() {
 		return new Iterator<>() {
 			private int current = list.size() - 1;
 
@@ -66,7 +66,7 @@ public class ListStack<T> implements Stack<T> {
 			}
 
 			@Override
-			public T next() {
+			public E next() {
 				if (!hasNext()) throw new NoSuchElementException();
 				return list.getByIndex(current--).getValue();
 			}

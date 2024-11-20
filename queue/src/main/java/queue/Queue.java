@@ -1,11 +1,5 @@
 package queue;
 
-/**
- * Contract for queue implementations.
- *
- * @see ListQueue
- * @see VectorQueue
- */
 public interface Queue<E> {
 
     /**

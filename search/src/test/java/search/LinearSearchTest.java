@@ -1,21 +1,15 @@
 package search;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class LinearSearchTest {
-
-    private SearchStrategy<Integer> strategy;
-
-    @BeforeEach
-    void setSearch() {
-        strategy = new LinearSearch<>();
-    }
+class LinearSearchTest {
 
     @Test
     void searchTest() {
+        SearchStrategy<Integer> strategy = new LinearSearch<>();
+
         assertEquals(-1, strategy.search(new Integer[]{ }, 1));
         assertEquals(-1, strategy.search(new Integer[]{ 4, 2, 3 }, 1));
         assertEquals(-1, strategy.search(new Integer[]{ null, null, null }, 9));

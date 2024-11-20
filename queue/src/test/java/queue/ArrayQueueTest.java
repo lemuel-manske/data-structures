@@ -6,11 +6,11 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class VectorQueueTest extends QueueTest {
+class ArrayQueueTest extends QueueTest {
 
     @BeforeEach
     void setVectorQueue() {
-        queue = new VectorQueue<>(5);
+        queue = new ArrayQueue<>(5);
     }
 
     @Test

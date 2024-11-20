@@ -2,24 +2,24 @@ package stack;
 
 import java.util.Iterator;
 
-public interface Stack<T> {
+public interface Stack<E> {
 
 	/**
 	 * Pushes an element to top of the stack.
 	 */
-	void push(T e);
+	void push(E e);
 	
 	/**
 	 * Pops the top element and returns it.
 	 * 
 	 * <p>Throws {@link EmptyStack} when no element to pop.
 	 */
-	T pop();
+	E pop();
 	
 	/**
 	 * Peeks the top element of the stack.
 	 */
-	T peek();
+	E peek();
 	
 	/**
 	 * Returns whether the stack is empty.
@@ -34,10 +34,10 @@ public interface Stack<T> {
 	/**
 	 * Returns an {@link Iterator} implementation for the stack
 	 */
-	Iterator<T> iterator();
+	Iterator<E> iterator();
 
 	/**
 	 * Concatenate another stack into that stack.
 	 */
-	void concat(Stack<T> stackToConcat);
+	void concat(Stack<E> stackToConcat);
 }

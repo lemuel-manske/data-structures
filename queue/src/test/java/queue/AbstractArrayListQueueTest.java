@@ -2,7 +2,7 @@ package queue;
 
 import org.junit.jupiter.api.BeforeEach;
 
-class ListQueueTest extends QueueTest {
+class AbstractArrayListQueueTest extends QueueTest {
 
     @BeforeEach
     void setListQueue() {

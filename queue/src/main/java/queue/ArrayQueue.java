@@ -1,15 +1,12 @@
 package queue;
 
-/**
- * A queue implementation that uses a vector to store its elements.
- */
-public final class VectorQueue<E> implements Queue<E> {
+public final class ArrayQueue<E> implements Queue<E> {
 
     private Object[] objects;
     private int start;
     private int size;
 
-    public VectorQueue(final int capacity) {
+    public ArrayQueue(final int capacity) {
         objects = new Object[capacity];
     }
 

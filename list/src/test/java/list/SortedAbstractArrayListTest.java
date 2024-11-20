@@ -3,11 +3,11 @@ package list;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class SortedListTest extends AbstractListTest {
+public class SortedAbstractArrayListTest extends AbstractArrayListTest {
 
     @BeforeEach
     void setStaticList() {
-        list = new SortedStaticList<>();
+        abstractArrayList = new SortedArrayList<>();
     }
 
     @Test

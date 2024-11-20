@@ -5,11 +5,11 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class VectorStackTest extends StackTest {
+class ArrayStackTest extends StackTest {
 
 	@BeforeEach
 	void setup() {
-		stack = new VectorStack<>(10);
+		stack = new ArrayStack<>(10);
 	}
 	
 	@Test
@@ -25,7 +25,7 @@ class VectorStackTest extends StackTest {
 		stack.push(2);
 		stack.push(3);
 
-		Stack<Integer> other = new VectorStack<>(2);
+		Stack<Integer> other = new ArrayStack<>(2);
 
 		stack.concat(other);
 
@@ -34,12 +34,12 @@ class VectorStackTest extends StackTest {
 
 	@Test
 	void shouldThrowMaximumCapacityWhenConcatStackToLimit() {
-		Stack<Integer> vectorStack = new VectorStack<>(4);
+		Stack<Integer> vectorStack = new ArrayStack<>(4);
 		vectorStack.push(1);
 		vectorStack.push(2);
 		vectorStack.push(3);
 
-		Stack<Integer> other = new VectorStack<>(2);
+		Stack<Integer> other = new ArrayStack<>(2);
 		other.push(4);
 		other.push(5);
 
@@ -52,7 +52,7 @@ class VectorStackTest extends StackTest {
 		stack.push(15);
 		stack.push(4);
 
-		Stack<Integer> other = new VectorStack<>(2);
+		Stack<Integer> other = new ArrayStack<>(2);
 		other.push(4);
 		other.push(5);
 
@@ -67,7 +67,7 @@ class VectorStackTest extends StackTest {
 		stack.push(2);
 		stack.push(3);
 
-		Stack<Integer> other = new VectorStack<>(2);
+		Stack<Integer> other = new ArrayStack<>(2);
 		other.push(4);
 		other.push(5);
 

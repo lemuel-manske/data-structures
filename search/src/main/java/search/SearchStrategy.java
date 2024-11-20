@@ -3,8 +3,8 @@ package search;
 public interface SearchStrategy<T extends Comparable<T>> {
 
     /**
-     * Searches an {@code elementToFind} in {@code items}
+     * Searches an element {@code e} in the {@code items} array and returns
+     * the element index.
      */
-    int search(T[] items, T elementToFind);
-
+    int search(T[] items, T e);
 }

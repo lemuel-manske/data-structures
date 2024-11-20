@@ -3,35 +3,35 @@ package stack;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class VectorStack<T> implements Stack<T> {
+public class ArrayStack<E> implements Stack<E> {
 
-	private final T[] objects;
+	private final E[] objects;
 	private int size;
 	
-	public VectorStack (int initialCapacity) {
-		objects = (T[]) new Object[initialCapacity];
+	public ArrayStack(int initialCapacity) {
+		objects = (E[]) new Object[initialCapacity];
 	}
 
 	public boolean isEmpty() {
 		return size == 0;
 	}
 
-	public T pop() {
-		T valueToPop = peek();
+	public E pop() {
+		E valueToPop = peek();
 
 		size--;
 
 		return valueToPop;
 	}
 
-	public T peek() {
+	public E peek() {
 		if (isEmpty()) 
 			throw new EmptyStack();
 		
 		return objects[size-1];
 	}
 	
-	public void push(T e) {
+	public void push(E e) {
 		if (size == objects.length)
 			throw new MaximumCapacity();
 
@@ -42,11 +42,11 @@ public class VectorStack<T> implements Stack<T> {
 		while(!isEmpty()) pop();
 	}
 
-	public void concat(Stack<T> stackToConcat) {
+	public void concat(Stack<E> stackToConcat) {
 		if (stackToConcat.isEmpty())
 			return;
 
-		Iterator<T> it = stackToConcat.iterator();
+		Iterator<E> it = stackToConcat.iterator();
 
 		while (it.hasNext()) push(it.next());
 	}
@@ -66,7 +66,7 @@ public class VectorStack<T> implements Stack<T> {
 	}
 
 	@Override
-	public Iterator<T> iterator() {
+	public Iterator<E> iterator() {
 		return new Iterator<>() {
 			private int current = 0;
 
@@ -76,7 +76,7 @@ public class VectorStack<T> implements Stack<T> {
 			}
 
 			@Override
-			public T next() {
+			public E next() {
 				if (!hasNext()) throw new NoSuchElementException();
 				return objects[current++];
 			}

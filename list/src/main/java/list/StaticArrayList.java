@@ -3,7 +3,7 @@ package list;
 import search.LinearSearch;
 import search.SearchStrategy;
 
-public class StaticList<T extends Comparable<T>> extends AbstractList<T> {
+public class StaticArrayList<T extends Comparable<T>> extends AbstractArrayList<T> {
 
     private final SearchStrategy<T> searchStrategy = new LinearSearch<>();
 

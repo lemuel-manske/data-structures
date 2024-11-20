@@ -2,21 +2,21 @@ package map;
 
 import list.LinkedList;
 
-public class HashMap<T> {
+public class HashMap<E> {
 
-    private final LinkedList<Node<T>>[] buckets;
+    private final LinkedList<Node<E>>[] buckets;
 
     public HashMap(final int size) {
         buckets = new LinkedList[size];
     }
 
-    public void add(final int key, final T value) {
+    public void add(final int key, final E value) {
         final int index = calculateHash(key);
 
         if (buckets[index] == null)
             buckets[index] = new LinkedList<>();
 
-        final Node<T> node = new Node<>(key, value);
+        final Node<E> node = new Node<>(key, value);
 
         buckets[index].add(node);
     }
@@ -25,23 +25,23 @@ public class HashMap<T> {
         if (buckets[key] == null)
             return;
 
-        final Node<T> node = new Node<>(key);
+        final Node<E> node = new Node<>(key);
 
         buckets[key].remove(node);
     }
 
-    public T get(final int key) {
+    public E get(final int key) {
         if (buckets[key] == null)
             return null;
 
-        final Node<T> node = new Node<>(key);
+        final Node<E> node = new Node<>(key);
 
-         LinkedList.Node<Node<T>> bucketNode = buckets[key].getByValue(node);
+         LinkedList.Node<Node<E>> bucketNode = buckets[key].getByValue(node);
 
          if (bucketNode == null)
              return null;
 
-        return bucketNode.getValue().getValue();
+        return bucketNode.getValue().v();
     }
 
     private int calculateHash(final int key) {
@@ -50,37 +50,33 @@ public class HashMap<T> {
 
     public static class Node<T> {
 
-        private final int key;
-        private final T value;
+        private final int k;
+        private final T v;
 
-        public Node(final int key, final T value) {
-            this.key = key;
-            this.value = value;
+        public Node(final int k, final T v) {
+            this.k = k;
+            this.v = v;
         }
 
-        public Node(int key) {
-            this.key = key;
-            this.value = null;
+        public Node(int k) {
+            this.k = k;
+            this.v = null;
         }
 
-        public int getKey() {
-            return key;
+        public int k() {
+            return k;
         }
 
-        public T getValue() {
-            return value;
+        public T v() {
+            return v;
         }
 
         @Override
         public boolean equals(final Object obj) {
-            if (this == obj) {
-                return true;
-            }
-            if (obj == null || getClass() != obj.getClass()) {
-                return false;
-            }
-            final Node<?> node = (Node<?>) obj;
-            return key == node.key;
+            if (this == obj) return true;
+            if (obj == null || getClass() != obj.getClass()) return false;
+            Node<?> node = (Node<?>) obj;
+            return k == node.k;
         }
     }
 }
